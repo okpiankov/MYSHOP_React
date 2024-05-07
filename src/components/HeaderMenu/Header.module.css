@@ -1,0 +1,23 @@
+.headerMenu {
+    width: 100%;
+    background-color: rgb(208, 208, 208);
+}
+.container {
+    width: 1140px;
+    margin: 0 auto;
+    
+    /* Лучше для адаптации через фикс. или %? */
+    /* width: 90%;
+    max-width: 1440px;
+    margin: 0 auto; */
+}
+.headerMenuWrap {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 70px;
+    height: 70px;
+    background-color: rgb(190, 187, 187);
+    border: 1px black solid;   
+}
+

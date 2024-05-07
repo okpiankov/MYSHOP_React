@@ -1,0 +1,33 @@
+.mainWrap {
+    display: flex;
+    flex-direction: column;
+    /* Зачем flex-direction если меняется только ось? */
+}
+.container {
+    width: 1140px;
+    margin: 0 auto;
+    
+    /* Лучше для адаптации через фикс. или %? */
+    /* width: 90%;
+    max-width: 1440px;
+    margin: 0 auto; */
+    /* height: 90%; */
+
+}
+.innerWrap {
+    /* реализация через флекс-бокс */
+    /* display: flex; */
+    /* flex-direction: row; ??? */
+    
+    /* реализация через грид-бокс */
+    display: grid;
+    grid-template-columns: 150px auto;
+    grid-template-rows: auto auto;
+    
+}
+.mainContentWrap {
+    /* flex: 1; */
+    background-color: rgb(149, 247, 149);
+    height: 100%;
+    
+}

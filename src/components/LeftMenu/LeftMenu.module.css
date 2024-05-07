@@ -1,0 +1,49 @@
+.leftMenuWrap {
+    /* width: 150px; */
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    justify-content: flex-start;
+    gap: 100px;
+    background-color: rgb(173, 171, 171);
+    height: 777px;
+    padding-top: 20px;
+    /* border: 1px black solid; */
+}
+.popUpMenu {
+    height: 135px;
+    width: 150px;
+    background: rgb(3, 160, 3);
+    /* border: 1px solid red; */
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    padding-top: 20px;
+    gap: 30px;
+    text-decoration: none;
+    
+    position: absolute;
+    top: 71px;
+    transform: translateX(150px);
+    
+    opacity: 0.5;
+    pointer-events: none;
+    transition: opacity 0.5s ease-in-out;
+    
+}
+.link {
+    height: 30px;
+}
+.link:hover {
+    background-color: rgb(131, 129, 129);
+}
+.link:hover ~ .popUpMenu {
+    opacity: 1;
+    pointer-events: auto;
+    
+}
+.popUpMenu:hover {
+    opacity: 1;
+    pointer-events: auto;
+    
+}
