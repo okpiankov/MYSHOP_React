@@ -1,58 +1,77 @@
-/* eslint-disable no-undef */
-import { NavLink } from 'react-router-dom';
 import { useEffect, useState } from 'react';
-import Apple from '../../assets/images/iPhone.jpg';
-import styles from './ProductCard.module.css';
+import { NavLink } from 'react-router-dom';
 import { ROUTES } from '../../router/routes';
-
+import styles from './ProductCard.module.css';
 
 export const ProductCard = () => {
-  const [products, setProducts] = useState(null);
+  // В Компоненте будет 2 рендера:
+  console.log('СТАРТ');
 
-  // // 3й вариант:
-  // useEffect(() => {
-  //   fetch("https://8a705e193c725f80.mokky.dev/product")
-  //     .then(response => response.json())
-  //     .then(data => setProducts(data));
-  //     // console.log(data)
-  // }, []);
+  const [products, setProducts] = useState([]);
 
+  console.log('После useState массив products:');
+  console.log(products);
 
+  console.log('До useEffect');
   useEffect(() => {
-    const fetchData = async () => {
-      const respons = await fetch("https://8a705e193c725f80.mokky.dev/product");
-      const data = await respons.json();
-      // console.log(data);
-      setProducts(data);
-    };
-    fetchData();
-  }, []);
+    console.log('ВНУТРИ useEffect');
 
+    fetch('https://8a705e193c725f80.mokky.dev/product')
+      .then(response => {
+        console.log('Первый then');
+        return response.json();
+      })
+      // .then(data => console.log(data))
+      .then(data => {
+        console.log('Второй then + setProducts');
+
+        // setProducts([]);
+        setProducts(data);
+      })
+      .catch(console.error);
+
+    console.log('В useEffect после fetch');
+  }, []);
+  console.log('После useEffect');
+
+  console.log('До return');
   return (
     <>
       <strong>ProductCard</strong>
+
+      {console.log('РЕНДЕР ВЕРСТКИ после return')}
+
+      {/*  Чтобы map 1 раз проходился по [] можно указать проверку на пустоту .length > 0 && products */}
       <div className={styles.productsWrap}>
-        {products?.map(({ id, image, name, description, price }) => (
-          <div key={id} className={styles.cardWrap}>
-<NavLink to={`${ROUTES.productID}/${id}`}>
-            <img src={image} className={styles.image}></img>
-</NavLink>            
-            <span>{name}</span>
-            <span>{description}</span>
-            <span>
-              <strong>{price}</strong>
-            </span>
-            <button className={styles.button}>Купить</button>
-          </div>
-        ))}
+        {products.length > 0 &&
+          products.map(({ id, image, name, description, price }) => (
+            <div key={id} className={styles.cardWrap}>
+              <NavLink to={`${ROUTES.productID}/${id}`}>
+                <img src={image} className={styles.image}></img>
+              </NavLink>
+              <span>{name}</span>
+              <span>{description}</span>
+              <span>
+                <strong>{price}</strong>
+              </span>
+              <button className={styles.button}>Купить</button>
+            </div>
+          ))}
       </div>
     </>
   );
 };
 
-
-
-
+// 3й вариант:
+// useEffect(() => {
+//   const fetchData = async () => {
+//     const respons = await fetch("https://8a705e193c725f80.mokky.dev/product");
+//     const data = await respons.json();
+//     // console.log(data);
+//     setProducts(data);
+//   };
+//   fetchData();
+// }, []);
 
 // // 2й вариант:
 // const products = [

@@ -41,5 +41,12 @@ module.exports = {
         '@typescript-eslint/no-var-requires': 'off',
       },
     },
+    {
+      // Отключил eslint проверки для проекта на JSX:
+      files: ['*.js','*.jsx',], 
+      rules: {
+        'no-undef': 'off',
+      },
+    },
   ],
 };

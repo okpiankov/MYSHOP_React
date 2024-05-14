@@ -1,0 +1,23 @@
+.basketWrap {
+    display: grid;
+    grid-template-columns: 670px 250px;
+    grid-template-rows: auto auto;
+    gap: 30px;
+    margin: 20px;
+}
+.cardWrap {
+    background-color: #d8d8d8;
+    border: 1px white solid;
+    border-radius: 20px;
+    height: 700px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+.buyWrap {
+    background-color: #d8d8d8;
+    border: 1px white solid;
+    border-radius: 20px;
+    height: 250px;
+}

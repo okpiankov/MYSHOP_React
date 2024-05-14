@@ -32,6 +32,7 @@
     height: 40px;
     width: 170px;
     border-radius: 10px;
+    align-self: center;
 }
 .selectАctive {
     font-size: 25px;

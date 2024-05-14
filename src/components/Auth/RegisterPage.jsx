@@ -1,4 +1,3 @@
-/* eslint-disable no-undef */
 
 import { useState, useEffect } from 'react';
 import styles from './RegisterPage.module.css';
@@ -103,41 +102,3 @@ export const RegisterPage = () => {
   );
 };
 
-// import { useState, useEffect } from 'react';
-// import styles from './RegisterPage.module.css';
-// import { NavLink, useNavigate } from 'react-router-dom';
-// import { ROUTES } from '../../router/routes';
-
-// export const RegisterPage = () => {
-
-//   const navigate = useNavigate();
-
-//   return (
-//     <div className={styles.authWrap}>
-//       <button className={styles.close} onClick={() => navigate('/')}>
-//         &times;
-//       </button>
-//       {/* <div className={styles.close}>&times;</div> */}
-//       <div>
-//         <NavLink to={ROUTES.auth}>
-//           <span className={styles.selectАctive}>Вход / </span>
-//         </NavLink>
-//         <span className={styles.select}>Регистрация</span>
-//       </div>
-
-//       <form className={styles.inputWrap}>
-//         <input className={styles.input} type="text" name="text" placeholder="Ваше имя*"></input>
-
-//         <input className={styles.input} type="email" name="email" placeholder="Email*"></input>
-
-//         <input className={styles.input} type="tel" name="tel" placeholder="Телефон*"></input>
-
-//         <input className={styles.input} type="password" name="password" placeholder="Придумайте пароль*"></input>
-
-//         <button type="submit" className={styles.buttonSubmit}>
-//           Зарегистрироваться
-//         </button>
-//       </form>
-//     </div>
-//   );
-// };

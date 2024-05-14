@@ -1,5 +1,3 @@
-/* eslint-disable no-undef */
-
 import { useEffect, useState } from 'react';
 import styles from './ProductCard.module.css';
 import { useSearchParams, Link, NavLink } from 'react-router-dom';
@@ -11,25 +9,20 @@ export const ProductCardType = () => {
 
   useEffect(() => {
     const type = search.get('type');
-    const fetchData = async () => {
-      const respons = await fetch(`https://8a705e193c725f80.mokky.dev/product?type=${type}`);
-      const data = await respons.json();
-      console.log(data);
-      setProducts(data);
-    };
-    fetchData();
+    fetch(`https://8a705e193c725f80.mokky.dev/product?type=${type}`)
+      .then(response => response.json())
+      .then(data => setProducts(data));
   }, [search]);
 
-  
   return (
     <>
       <strong>ProductCard</strong>
       <div className={styles.productsWrap}>
         {products?.map(({ id, image, name, description, price }) => (
           <div key={id} className={styles.cardWrap}>
-<NavLink to={`${ROUTES.productID}/${id}`}>
-            <img src={image} className={styles.image}></img>
-</NavLink>            
+            <NavLink to={`${ROUTES.productID}/${id}`}>
+              <img src={image} className={styles.image}></img>
+            </NavLink>
             <span>{name}</span>
             <span>{description}</span>
             <span>
@@ -43,4 +36,13 @@ export const ProductCardType = () => {
   );
 };
 
-  /* <NavLink to={`${ROUTES.productID}/${id}`}></NavLink> */
+// useEffect(() => {
+//   const type = search.get('type');
+//   const fetchData = async () => {
+//     const respons = await fetch(`https://8a705e193c725f80.mokky.dev/product?type=${type}`);
+//     const data = await respons.json();
+//     console.log(data);
+//     setProducts(data);
+//   };
+//   fetchData();
+// }, [search]);

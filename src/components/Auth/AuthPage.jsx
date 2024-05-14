@@ -1,9 +1,7 @@
-/* eslint-disable no-undef */
-
 import { useState } from 'react';
-import styles from './AuthPage.module.css';
 import { NavLink, useNavigate } from 'react-router-dom';
 import { ROUTES } from '../../router/routes';
+import styles from './AuthPage.module.css';
 
 export const AuthPage = () => {
   const navigate = useNavigate();
@@ -14,6 +12,7 @@ export const AuthPage = () => {
   });
 
   const handleChange = e => {
+    console.log(e.target.value);
     const { name, value } = e.target;
     setFormData(prevState => ({
       ...prevState,
@@ -24,25 +23,16 @@ export const AuthPage = () => {
   const handleSubmit = e => {
     e.preventDefault();
 
-    // useEffect(() => {
-
-    const fetchData = async () => {
-      const res = await fetch('https://8a705e193c725f80.mokky.dev/auth', {
-        method: 'POST',
-        headers: {
-          Accept: 'application/json',
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(formData),
-      });
-      const data = await res.json();
-      console.log(res);
-      console.log(data);
-    };
-    fetchData();
-
-    //   fetchData();
-    // }, []);
+    fetch('https://8a705e193c725f80.mokky.dev/auth', {
+      method: 'POST',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(formData),
+    })
+      .then(res => res.json())
+      .then(res => console.log(res));
   };
 
   return (
@@ -58,15 +48,15 @@ export const AuthPage = () => {
         </NavLink>
       </div>
 
-      <form className={styles.inputWrap} onSubmit={handleSubmit}>
+      <form className={styles.inputWrap} onSubmit={handleSubmit} noValidate>
         <input
           className={styles.input}
           type="email"
           value={formData.email}
           name="email"
           onChange={handleChange}
-          placeholder="Email* user@test.com">
-        </input>
+          placeholder="Email* user@test.com"
+        ></input>
 
         <input
           className={styles.input}
@@ -74,8 +64,8 @@ export const AuthPage = () => {
           value={formData.password}
           name="password"
           onChange={handleChange}
-          placeholder="Пароль* 123">
-        </input>
+          placeholder="Пароль* 123"
+        ></input>
 
         <button type="submit" className={styles.buttonSubmit}>
           Войти
@@ -84,34 +74,3 @@ export const AuthPage = () => {
     </div>
   );
 };
-
-
-// import { useState } from 'react';
-// import styles from './AuthPage.module.css';
-// import { NavLink, useNavigate } from 'react-router-dom';
-// import { ROUTES } from '../../router/routes';
-
-// export const AuthPage = () => {
-//   const navigate = useNavigate();
-
-//   return (
-//     <div className={styles.authWrap}>
-//       <button className={styles.close} onClick={() => navigate('/')}>
-//         &times;
-//       </button>
-//       {/* <div className={styles.close}>&times;</div> */}
-//       <div>
-//         <span className={styles.select}>Вход</span>
-//         <NavLink to={ROUTES.register}>
-//           <span className={styles.selectАctive}> / Регистрация</span>
-//         </NavLink>
-//       </div>
-
-//       <form className={styles.inputWrap}>
-//         <input className={styles.input} type="email" placeholder="Email* user@test.com"></input>
-//         <input className={styles.input} type="password" placeholder="Пароль* 123456"></input>
-//         <button className={styles.buttonSubmit}>Войти</button>
-//       </form>
-//     </div>
-//   );
-// };
