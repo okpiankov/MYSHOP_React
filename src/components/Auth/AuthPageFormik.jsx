@@ -1,11 +1,10 @@
-import { useState } from 'react';
 import styles from './AuthPage.module.css';
-import { NavLink, useNavigate } from 'react-router-dom';
-import { ROUTES } from '../../router/routes';
 import { ErrorMessage, Field, Form, Formik } from 'formik';
 
-export const AuthPageFormik = () => {
+export const AuthPageFormik = ({setForm}) => {
    
+  // в values хранятся поля со значениями которые мы определили в initialValues
+  // значения полей автоматически сохраняются при вводе символов в эти инпуты
   const handleSubmit = values => {
     // e.preventDefault(); не нужно
     console.log(values);
@@ -24,15 +23,12 @@ export const AuthPageFormik = () => {
 
   return (
     <div className={styles.authWrap}>
-      <button className={styles.close} onClick={() => navigate('/')}>
-        &times;
-      </button>
-      {/* <div className={styles.close}>&times;</div> */}
       <div>
         <span className={styles.select}>Вход</span>
-        <NavLink to={ROUTES.register}>
-          <span className={styles.selectАctive}> / Регистрация</span>
-        </NavLink>
+        {/* В setForm можно передавать любую строку например: 'register' */}
+        <button className={styles.selectАctive} onClick={() => setForm('register')}>
+          / Регистрация{' '}
+        </button>
       </div>
 
       <Formik initialValues={{ email: '', password: '', }} onSubmit={handleSubmit}>

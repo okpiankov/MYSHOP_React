@@ -36,18 +36,18 @@ export const router = createBrowserRouter([
         path: `${ROUTES.productID}/:id`,
         element: <ProductCardID />,
       },
-      {
-        path: ROUTES.auth,
-        element: <AuthPage />,
-      },
+      // {
+      //   path: ROUTES.auth,
+      //   element: <AuthPage />,
+      // },
       // {
       //   path: ROUTES.authFormik,
       //   element: <AuthPageFormik />,
       // },
-      {
-        path: ROUTES.register,
-        element: <RegisterPage />,
-      },
+      // {
+      //   path: ROUTES.register,
+      //   element: <RegisterPage />,
+      // },
       {
         path: ROUTES.basket,
         element: <BasketPage />,

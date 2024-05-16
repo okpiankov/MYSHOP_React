@@ -20,4 +20,18 @@
     border: 1px white solid;
     border-radius: 20px;
     height: 250px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+}
+.total {
+   display: flex;
+   justify-content: space-evenly;
+   font-size: 25px;
+}
+.button {
+    height: 40px;
+    width: 230px;
+    border-radius: 10px;
+    align-self: center;
 }

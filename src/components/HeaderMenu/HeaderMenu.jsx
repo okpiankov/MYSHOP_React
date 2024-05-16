@@ -2,7 +2,10 @@ import { Link, NavLink } from 'react-router-dom';
 import styles from './Header.module.css';
 import { ROUTES } from '../../router/routes';
 
-export const HeaderMenu = () => {
+export const HeaderMenu = ({setPopUpAuth}) => {
+  //передача пропса {setPopUpAuth} через скобки{}
+  const handleVisiblePopUp = () => setPopUpAuth(true);
+
   return (
     <header className={styles.headerMenu}>
       <div className={`${styles.container} ${styles.headerMenuWrap}`}>
@@ -12,13 +15,13 @@ export const HeaderMenu = () => {
         <div>Доставка</div>
         <div>Поиск</div>
 
-        <NavLink to={ROUTES.auth}>Войти</NavLink>
+        {/* <NavLink to={ROUTES.auth}>Войти</NavLink> */}
 
         {/* <NavLink to={ROUTES.authFormik}>Войти</NavLink> */}
 
-        {/* <button type="button" >
+        <button type="button" onClick={handleVisiblePopUp}>
           Войти
-        </button> */}
+        </button>
 
         <NavLink to={ROUTES.basket}>Корзина</NavLink>
         <div>Телефон</div>
