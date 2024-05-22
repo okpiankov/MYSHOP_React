@@ -22,7 +22,7 @@ export const validateEmail = (value, setEmailError) => {
 };
 
 export const validatePassword = (value, setPasswordError) => {
-  const isValid = value.length > 3 && value.length < 8;
+  const isValid = value.length > 2 && value.length < 8;
   if (isValid) {
     setPasswordError('');
   } else {

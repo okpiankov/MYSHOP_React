@@ -5,45 +5,61 @@
     flex-direction: column;
     justify-content: flex-start;
     gap: 100px;
-    background-color: rgb(173, 171, 171);
+    background-color: var(--background-color-contentMedium);
     height: 777px;
+    margin-top: 4px;
     padding-top: 20px;
     /* border: 1px black solid; */
+    box-shadow:  var(--box-shadow-content); 
+    font-size: 21px;
+    
+
 }
 .popUpMenu {
-    height: 135px;
+    height: 777px;
     width: 150px;
-    background: rgb(3, 160, 3);
+    background: var(--background-color-contentMedium);
     /* border: 1px solid red; */
+    box-shadow:  var(--box-shadow-content);
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
+    margin-left: 5px;
     padding-top: 20px;
-    gap: 30px;
-    text-decoration: none;
+    gap: 50px;
+    
     
     position: absolute;
-    top: 71px;
-    transform: translateX(150px);
+    top: 84px;
     
-    opacity: 0.5;
+    
+    opacity: 0;
     pointer-events: none;
     transition: opacity 0.5s ease-in-out;
     
+     transform: translateX(300%);
+     transition: transform .3s ease-in-out;
 }
 .link {
-    height: 30px;
+    text-indent: 10px;
+    
 }
 .link:hover {
-    background-color: rgb(131, 129, 129);
+    background-color: var(--background-color-contentLarge);
+    border-radius: 7px;
+    color: #FFFFFF;
+    transform: scale(1.1);
 }
 .link:hover ~ .popUpMenu {
     opacity: 1;
     pointer-events: auto;
-    
+    transform: translateX(150px);
 }
 .popUpMenu:hover {
     opacity: 1;
     pointer-events: auto;
-    
+    transform: translateX(150px);
+}
+.phone,.laptop,.tv,.all {
+    text-indent: 10px;
 }

@@ -57,22 +57,27 @@ export const ProductCardID = () => {
     <div className={styles.productsWrap}>
       <div className={styles.cardWrapID}>
         <img src={product.image} className={styles.image}></img>
-        <span>
-          <strong>{product.name}</strong>
-        </span>
-        <span>
-          {product.description}
+        <div className={styles.description}>
+          <h3>{product.name}</h3>
+
+          <span>Технические характеристики:</span>
+          <p>
+            <strong>{product.description}</strong>
+          </p>
           <p>
             Lorem ipsum dolor sit amet consectetur, adipisicing elit. Debitis sunt ipsum inventore impedit voluptate
             dolorum quidem ratione ea eligendi iste eaque, quibusdam nam laudantium. Libero nisi aliquam magni odit qui?
+            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Debitis sunt ipsum inventore impedit voluptate
+            dolorum quidem ratione ea eligendi iste eaque, quibusdam nam laudantium. Libero nisi aliquam magni odit qui?
           </p>
-        </span>
-        <span>
-          <strong>{product.price}</strong>
-        </span>
-        <button className={styles.button} onClick={handleAddItem}>
-          Купить
-        </button>
+
+          <span> Цена:</span>
+          <strong className={styles.price}>{product.price}</strong>
+
+          <button className={styles.button} onClick={handleAddItem}>
+          Добавить в корзину
+          </button>
+        </div>
       </div>
     </div>
   );
@@ -89,7 +94,6 @@ export const ProductCardID = () => {
 //    ВАЖНО в useState(" "); указать либо null но тогда нужно прописывать проверку: {product?.name} через ?
 //    либо тот тип данных который ожидается через fetch() т.е. объект  { }
 //    в fetch() через setProduct(data)  изменить состояние product
-
 
 // const handleAddItem = () => {
 //   // При записи в LS обязательно переводим в формат JSON.stringify(что записываем)

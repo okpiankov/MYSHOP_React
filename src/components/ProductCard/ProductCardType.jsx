@@ -16,7 +16,6 @@ export const ProductCardType = () => {
 
   return (
     <>
-      <strong>ProductCard</strong>
       <div className={styles.productsWrap}>
         {products?.map(({ id, image, name, description, price }) => (
           <div key={id} className={styles.cardWrap}>
@@ -24,7 +23,7 @@ export const ProductCardType = () => {
               <img src={image} className={styles.image}></img>
             </NavLink>
             <span>{name}</span>
-            <span>{description}</span>
+            <span className={styles.center}>{description}</span>
             <span>
               <strong>{price}</strong>
             </span>

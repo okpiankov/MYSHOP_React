@@ -1,23 +1,52 @@
 .headerMenu {
     width: 100%;
-    background-color: rgb(208, 208, 208);
+    background-color: var(--background-color-contentLight);
+    font-size: 21px;
+    box-shadow:  1px 1px 1px var(--background-color-contentLarge); 
 }
 .container {
-    width: 1140px;
-    margin: 0 auto;
+    /* width: 1140px;
+    margin: 0 auto; */
     
     /* Лучше для адаптации через фикс. или %? */
-    /* width: 90%;
+    width: 90%;
     max-width: 1440px;
-    margin: 0 auto; */
+    margin: 0 auto;
 }
 .headerMenuWrap {
     display: flex;
-    justify-content: center;
+    justify-content: space-evenly;
     align-items: center;
-    gap: 70px;
-    height: 70px;
-    background-color: rgb(190, 187, 187);
-    border: 1px black solid;   
+    /* gap: 70px; */
+    height: 80px;
+    background-color: var(--background-color-contentMedium);
+    /* border: 1px black solid; */
+    box-shadow:  var(--box-shadow-content)  
 }
-
+.svgCart {
+    height: 45px;
+    width: 45px;
+    color: white;
+}
+.svgButton {
+    height: 30px;
+    width: 30px;
+    color: white;
+    
+}
+.button {
+    outline: none;
+    border: none;
+    background: transparent;
+}
+.svgTel {
+    height: 28px;
+    width: 28px;
+    color: red;
+}
+.link {
+     
+}
+.link:hover {
+    color: #FFFFFF;
+}

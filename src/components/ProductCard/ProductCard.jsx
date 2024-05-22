@@ -37,8 +37,6 @@ export const ProductCard = () => {
   console.log('До return');
   return (
     <>
-      <strong>ProductCard</strong>
-
       {console.log('РЕНДЕР ВЕРСТКИ после return')}
 
       {/*  Чтобы map 1 раз проходился по [] можно указать проверку на пустоту .length > 0 && products */}
@@ -49,12 +47,12 @@ export const ProductCard = () => {
               <NavLink to={`${ROUTES.productID}/${id}`}>
                 <img src={image} className={styles.image}></img>
               </NavLink>
-              <span>{name}</span>
-              <span>{description}</span>
+              <strong>{name}</strong>
+              <span className={styles.center}>{description}</span>
               <span>
                 <strong>{price}</strong>
               </span>
-              <button className={styles.button}>Купить</button>
+              <button className={styles.button}>Добавить в корзину</button>
             </div>
           ))}
       </div>

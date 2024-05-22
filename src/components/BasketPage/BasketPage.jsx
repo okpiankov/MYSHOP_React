@@ -21,11 +21,11 @@ export const BasketPage = () => {
     <>
       <div className={styles.basketWrap}>
         <div className={styles.cardWrap}>
-          <strong>Корзина</strong>
+          <strong className={styles.title}>Корзина</strong>
           {/* Не забывай map в скобках { }  
           map возвращает компонент => (<Компонент />) */}
           {items.map(item => (
-            <BasketCard key={item.id} name={item.name} description={item.description} image={item.image} id={item.id} />
+            <BasketCard key={item.id} name={item.name} description={item.description} image={item.image} id={item.id} price={item.price} />
           ))}
         </div>
         <div className={styles.buyWrap}>
@@ -33,7 +33,7 @@ export const BasketPage = () => {
             <span>Итого:</span>
             <span>150 000 Р</span>
           </div>
-          <button className={styles.button}>Купить</button>
+          <button className={styles.button}>Оформить</button>
         </div>
       </div>
     </>

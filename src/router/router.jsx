@@ -10,6 +10,8 @@ import { ProductCard } from '../components/ProductCard/ProductCard';
 import { ProductCardID } from '../components/ProductCard/ProductCardID';
 import { ProductCardType } from '../components/ProductCard/ProductCardType';
 import { ROUTES } from './routes';
+import { PlugPage } from '../components/PlugPage/PlugPage';
+import { DeliveryPage } from '../components/DeliveryPage/DeliveryPage';
 
 export const router = createBrowserRouter([
   {
@@ -23,6 +25,10 @@ export const router = createBrowserRouter([
       {
         path: ROUTES.pay,
         element: <PayPage />,
+      },
+      {
+        path: ROUTES.delivery,
+        element: <DeliveryPage />,
       },
       {
         path: ROUTES.productsAll,
@@ -48,6 +54,10 @@ export const router = createBrowserRouter([
       //   path: ROUTES.register,
       //   element: <RegisterPage />,
       // },
+      {
+        path: ROUTES.plug,
+        element: <PlugPage />,
+      },
       {
         path: ROUTES.basket,
         element: <BasketPage />,

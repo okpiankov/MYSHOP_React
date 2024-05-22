@@ -8,5 +8,7 @@ export const ROUTES = {
   authFormik: '/authFormik',
   register: '/register',
   basket: '/basket',
-
+  plug: '/plug',
+  delivery: '/delivery',
+  
 };

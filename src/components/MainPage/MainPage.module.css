@@ -1,3 +1,76 @@
 .mainPageWrap {
-    background-color: rgb(50, 230, 50);    
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    gap: 7px;
+    /* margin-left: 4px;     */
 }
+.contentBox{
+    width: 100%;
+    background-color: var(--background-color-contentLight);
+    /* border: 1px black solid; */
+    box-shadow:  var(--box-shadow-content); 
+    border-radius: 10px;
+    margin-top: 10px;
+    padding-left: 10px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    font-size: 20px;
+}
+.bannerWrap {
+    width: 100%;
+    height: 170px;
+    /* border: 1px black solid; */
+    box-shadow:  var(--box-shadow-content); 
+    border-radius: 15px;
+    background-color: #febff1;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-items: center;
+    font-size: 55px;
+    color: rgb(83, 83, 245);
+    font-weight: 700; 
+    
+}
+.privilegeImageWrap {
+    display: flex;
+    gap: 7px;
+}
+.privilege {
+    width: 50%;
+    height: 520px;
+    background-color: var(--background-color-contentLight);
+    border-radius: 15px;
+    padding-left: 10px;
+    /* border: 1px black solid; */
+    box-shadow:  var(--box-shadow-content); 
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    font-size: 19px;
+    
+}
+.image {
+    width: 50%;
+    height: 500px;
+    /* border: 1px black solid; */
+    box-shadow:  var(--box-shadow-content); 
+    border-radius: 15px;
+}
+@keyframes banner {
+    70% { transform: rotateY(360deg); }
+    100% { transform: scale(1.1); }
+    
+  }
+  
+.banner {
+    animation: banner 7s infinite;
+    font-size: 55px;
+    color: rgb(83, 83, 245);
+    font-weight: 700; 
+}
+
+
+

@@ -4,14 +4,15 @@
     justify-content: center;
     /* flex-direction: row; */
     text-decoration: none;
+    margin-top: 10px;
     
 }
 .cardWrap {
     height: 377px;
-    width: 250px;
+    width: 255px;
     margin: 5px;
-    background-color: rgb(208, 208, 208);
-    border: 1px black solid;
+    background-color: var(--background-color-contentLight);
+    border: var(--border-content);
     border-radius: 15px;
     display: flex;
     flex-direction: column;
@@ -21,15 +22,24 @@
     text-decoration: none;
 }
 .image {
-    height: 240px;
-    width: 240px;
-    border: 1px black solid;
+    height: 255px;
+    width: 255px;
+    border: var(--border-content);
     border-radius: 15px;
     text-decoration: none;
+    
 }
  .button {
     height: 30px;
     width: 240px;
-    border-radius: 7px;
+    border-radius: 10px;
     text-decoration: none;
+    background-color: var(--background-color-contentMedium);
+    border: var(--border-content);
+    color: white;
+    font-size: 20px;
+    font-weight: 700;
+}
+.center {
+    text-align: center;
 }

@@ -4,13 +4,12 @@
     /* Зачем flex-direction если меняется только ось? */
 }
 .container {
-    width: 1140px;
-    margin: 0 auto;
-    
+    /* width: 1140px;
+    margin: 0 auto;*/
     /* Лучше для адаптации через фикс. или %? */
-    /* width: 90%;
+    width: 90%;
     max-width: 1440px;
-    margin: 0 auto; */
+    margin: 0 auto;
     /* height: 90%; */
 
 }
@@ -27,7 +26,8 @@
 }
 .mainContentWrap {
     /* flex: 1; */
-    background-color: rgb(149, 247, 149);
+    background-color: rgb(127, 255, 127);
+    margin-top: 4px;
+    margin-left: 4px;
     height: 100%;
-    
 }

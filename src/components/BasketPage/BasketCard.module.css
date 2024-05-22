@@ -1,19 +1,25 @@
 .basketCardWrap {
     height: 170px;
-    width: 630px;
+    width: 780px;
     display: flex;
     justify-content: flex-start;
     align-items: center;
-    gap: 20px;
-    background-color: #bebebe;
-    border: 1px white solid;
+    gap: 35px;
+    background-color: var(--background-color-contentMedium);
+    /* border: var(--border-content); */
     border-radius: 20px;
+}
+.descriptionWrap {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    width: 270px;
 }
 .image {
     height: 160px;
     width: 160px;
-    background-color: #d8d8d8;
-    border: 1px white solid;
+    background-color: var(--background-color-contentMedium);
+    /* border: var(--border-content); */
     border-radius: 20px;
     margin-left: 5px;
     margin-top: 5px;
@@ -29,7 +35,21 @@
    height: 30px;
    width: 30px;
    font-size: 23px;
+   color: white;
+   font-weight: 900;
    border-style: none;
-   background-color: rgb(158, 157, 157);
+   border: 3px var(--background-color-contentLarge) solid;
+   border-radius: 7px;
+   background-color: var(--background-color-contentMedium);
    
+}
+.svgDelete {
+    height: 30px;
+    width: 30px;
+    color: white;  
+}
+.svgButton {
+    outline: none;
+    border: none;
+    background: transparent;
 }
