@@ -35,7 +35,7 @@ export const RegisterPage = ({ setForm }) => {
     if (name === 'tel' && value !== ' ') {
        validateTel(value, setTelError);
     }
-  };
+  }; 
 
   const handleSubmit = event => {
     event.preventDefault();

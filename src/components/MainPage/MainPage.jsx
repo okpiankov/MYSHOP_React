@@ -4,16 +4,20 @@ import Shoppers from '../../assets/images/shoppers.jpg';
 export const MainPage = () => {
   return (
     <div className={styles.mainPageWrap}>
-      <div className={styles.contentBox}><strong>Наша компания является одним из лидеров рынка по продаже цифровой техники в России</strong>
-      <span>
-        Наша цель изменить жизнь людей, сделав простым доступ к большому количеству качественных и недорогих товаров,
-        предоставляя лучший сервис
-      </span></div>
-      
+      <div className={styles.contentBox}>
+        <strong>Наша компания является одним из лидеров рынка по продаже цифровой техники в России</strong>
+        <span>
+          Наша цель изменить жизнь людей, сделав простым доступ к большому количеству качественных и недорогих товаров,
+          предоставляя лучший сервис
+        </span>
+      </div>
+
       <div className={styles.bannerWrap}>
         <span>Мы:</span>
-        <div className={styles.banner}>Только оригинальная продукция</div>
-        {/* <h1>Баннер</h1> */}
+
+        <div className={`${styles.banner1} ${styles.visible}`}>Только оригинальная продукция</div>
+        <div className={`${styles.banner2} ${styles.visible}`}>2 года гарантии</div>
+
       </div>
       <div className={styles.privilegeImageWrap}>
         <div className={styles.privilege}>

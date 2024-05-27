@@ -1,0 +1,65 @@
+.orderCardWrap {
+    height: 230px;
+    width: 970px;
+    display: flex;
+    flex-direction: column;
+    background-color: var(--background-color-contentMedium);
+    border: var(--border-content);
+    border-radius: 20px; 
+}
+.contentBox1 {
+    height: 100px;
+    width: 970px;
+    background-color: var(--background-color-contentMedium);
+    border-radius: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 19px;
+   
+}
+.contentBox2 {
+    height: 130px;
+    width: 970px;
+    background-color: var(--background-color-contentLight);
+    border-bottom-right-radius: 20px;
+    border-bottom-left-radius: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 19px;
+}
+.order {
+    display: flex;
+    flex-direction: column;
+    padding-left: 15px;
+    color: blue;
+}
+.name {
+    display: flex;
+    flex-direction: column;
+    padding-right: 15px;
+}
+.delivery {
+    display: flex;
+    flex-direction: column;
+    padding-left: 15px;
+    
+}
+.link {
+    font-size: 17px;
+    color: blue;
+}
+.status {
+    height: 22px;
+    width: 200px;
+    background-color: var(--background-color-contentLarge);
+    border-radius: 10px;
+    color: white;
+    font-size: 17px;
+    font-weight: 600;
+    text-align: center;
+}
+.date {
+    font-size: 17px;
+}

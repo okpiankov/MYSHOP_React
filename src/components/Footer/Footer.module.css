@@ -2,6 +2,8 @@
     width: 100%;
     height: 310px;
     background-color: var(--background-color-contentMedium);
+    border-top: 2px var(--background-color-contentLarge) solid;
+    margin-top: 3px;
     
 }
 .container {

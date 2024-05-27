@@ -10,5 +10,17 @@ export const ROUTES = {
   basket: '/basket',
   plug: '/plug',
   delivery: '/delivery',
-  
+  order: '/order',
+  // личный кабинет:
+  cabinet: '/cabinet',
+  // order: '/cabinet/order',
+ 
+  // админка:
+  admin: '/admin',
+  addProduct: '/admin/addProduct', // Почему /admin ?
+  // addProduct: 'addProduct',
+  // deleteProduct: '/admin/deleteProduct',
+  editProduct: '/admin/editProduct',
+  addUser: '/admin/addUser',
+  editUser: '/admin/editUser',
 };

@@ -62,4 +62,7 @@
 }
 .phone,.laptop,.tv,.all {
     text-indent: 10px;
+    border-radius: 10px;
+    box-shadow: inset 3px -3px 2px var(--background-color-contentLarge),
+    inset 3px 3px 2px var(--background-color-contentLarge);
 }

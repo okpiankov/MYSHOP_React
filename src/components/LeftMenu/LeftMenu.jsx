@@ -3,9 +3,12 @@ import styles from './LeftMenu.module.css';
 import { ROUTES } from '../../router/routes';
 
 export const LeftMenu = () => {
+
+  // console.log("http://localhost:3000")
+
   return (
     <nav className={styles.leftMenuWrap}>
-      <div className={styles.link}>Категории</div>
+      <div className={`${styles.all} ${styles.link}`}>Категории</div>
       <div className={styles.popUpMenu}>
         <NavLink to={ROUTES.productsAll} className={`${styles.all} ${styles.link}`}>Все</NavLink>
 

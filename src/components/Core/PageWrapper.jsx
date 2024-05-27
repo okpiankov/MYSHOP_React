@@ -13,7 +13,8 @@ const [popUpAuth, setPopUpAuth ] = useState (false)
     <div className={styles.mainWrap}>
       <HeaderMenu setPopUpAuth={setPopUpAuth}/>
       <div className={`${styles.container} ${styles.innerWrap}`}>
-        <LeftMenu />
+      <LeftMenu />
+        {/* {!"http://localhost:3000/cabinet" && <LeftMenu />} */}
         <MainContent>{children}</MainContent>
       </div>
       <Footer />

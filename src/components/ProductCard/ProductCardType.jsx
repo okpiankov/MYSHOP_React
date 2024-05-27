@@ -27,7 +27,7 @@ export const ProductCardType = () => {
             <span>
               <strong>{price}</strong>
             </span>
-            <button className={styles.button}>Купить</button>
+            <button className={styles.button}>Добавить в корзину</button>
           </div>
         ))}
       </div>

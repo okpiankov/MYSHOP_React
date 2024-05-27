@@ -29,7 +29,7 @@
     flex-direction: column;
     flex-wrap: wrap;
     align-items: center;
-    font-size: 55px;
+    font-size: 35px;
     color: rgb(83, 83, 245);
     font-weight: 700; 
     
@@ -59,18 +59,82 @@
     box-shadow:  var(--box-shadow-content); 
     border-radius: 15px;
 }
-@keyframes banner {
-    70% { transform: rotateY(360deg); }
-    100% { transform: scale(1.1); }
-    
+@keyframes banner1 {
+    50% { 
+          transform: rotateY(90deg);
+          opacity: 0;
+        }
   }
-  
-.banner {
-    animation: banner 7s infinite;
-    font-size: 55px;
-    color: rgb(83, 83, 245);
-    font-weight: 700; 
-}
+  .banner1 {
+      animation: banner1 8s infinite;
+    
+      font-size: 55px;
+      color: rgb(83, 83, 245);
+      font-weight: 700;
+  }
+  @keyframes banner2 {
+      50% {
+            transform: rotateY(90deg);
+            opacity: 0; 
+          }
+    }
+  .banner2 {
+      animation: banner2 8s infinite;
+      animation-delay: 4s;
+      
+      font-size: 55px;
+      color: rgb(255, 145, 0);
+      font-weight: 700;
+      
+      position: absolute;
+      margin-top: 42px;
+      
+  }   
+  .visible {
+      opacity: 1;
+  }
+
+
+
+  /* @keyframes banner1 {
+    50% { 
+          transform: rotateY(90deg);
+          opacity: 0;
+        }
+  }
+  .banner1 {
+      animation: banner1 8s infinite;
+    
+      font-size: 55px;
+      color: rgb(83, 83, 245);
+      font-weight: 700;
+  }
+  @keyframes banner2 {
+      50% {
+            transform: rotateY(90deg);
+            opacity: 0; 
+          }
+    }
+  .banner2 {
+      animation: banner2 8s infinite;
+      animation-delay: 4s;
+      
+      font-size: 55px;
+      color: rgb(255, 145, 0);
+      font-weight: 700;
+      
+      position: absolute;
+      margin-top: 42px;
+      
+  }   
+  .visible {
+      opacity: 1;
+  } */
+
+
+
+
+
 
 
 

@@ -1,8 +1,12 @@
 import { useState } from 'react';
 import styles from './AuthPage.module.css';
-import { emailRegex, validateEmail, validatePassword } from './validate';
+import { validateEmail, validatePassword } from './validate';
+import { Navigate, redirect, useNavigate } from 'react-router-dom';
+import { ROUTES } from '../../router/routes';
 
 export const AuthPage = ({ setForm }) => {
+  const navigate = useNavigate();
+
   const [formData, setFormData] = useState({
     email: '',
     password: '',
@@ -12,7 +16,7 @@ export const AuthPage = ({ setForm }) => {
   const [passwordError, setPasswordError] = useState('');
 
   const handleChange = event => {
-    console.log(event.target.value);
+    // console.log(event.target.value);
     const { name, value } = event.target;
     setFormData(prevState => ({
       ...prevState,
@@ -20,28 +24,10 @@ export const AuthPage = ({ setForm }) => {
     }));
 
     if (name === 'email' && value !== ' ') {
-      validateEmail(value);
+      validateEmail(value, setEmailError);
     }
     if (name === 'password' && value !== ' ') {
-      validatePassword(value);
-    }
-  };
-
-  const validateEmail = value => {
-    const isValid = value.match(emailRegex);
-    if (isValid) {
-      setEmailError('');
-    } else {
-      setEmailError('Это не похоже на емейл');
-    }
-  };
-
-  const validatePassword = value => {
-    const isValid = value.length > 3 && value.length < 8;
-    if (isValid) {
-      setPasswordError('');
-    } else {
-      setPasswordError('Это не похоже на пароль');
+      validatePassword(value, setPasswordError);
     }
   };
 
@@ -57,7 +43,17 @@ export const AuthPage = ({ setForm }) => {
       body: JSON.stringify(formData),
     })
       .then(res => res.json())
-      .then(res => console.log(res));
+      .then(res => {
+        localStorage.setItem('user', JSON.stringify(res));
+
+        const {
+          token,
+          data: { role },
+        } = res;
+
+        if (token && role === 'client') navigate('/cabinet');
+        if (token && role === 'admin') navigate('/admin');
+      });
   };
 
   return (
@@ -78,7 +74,7 @@ export const AuthPage = ({ setForm }) => {
           value={formData.email}
           name="email"
           onChange={handleChange}
-          placeholder="Email* user@test.com"
+          placeholder="Email* user@test.com или admin@test.com"
         ></input>
         {passwordError && passwordError}
         <input
@@ -123,3 +119,42 @@ export const AuthPage = ({ setForm }) => {
 //   // validateEmail(event.target.value)
 //   // validatePassword(event.target.value)
 // };
+
+// Почему проверка не нужна при записи в localStorage
+// .then(res => {setAuthData(res)
+//   const prevItem = localStorage.getItem('user');
+//   if (!prevItem) {
+//   const item = { ...authData };
+//   localStorage.setItem('user', JSON.stringify(item));
+//   return;
+//   }
+// })
+
+// Запись в localStorage д/б в .then( здесь ) где приходят данные там и записывать!
+// Если вне .then(  ) то будет задействован везде рендер попапа
+// .then(res => {
+// setAuthData(res);
+// localStorage.setItem('user', JSON.stringify(res));
+// });
+
+// //Почему запись в LS вне .then( ) происходит но пропадает при переходе на др.стр.
+// //И токен приходит происходит редирект
+// const item = { ...authData };
+// localStorage.setItem('user', JSON.stringify(item));
+
+//const {data.role} = userRole; Как достать role из объекта data?????
+// const {
+//   token,
+//   data: { role },
+// } = userRole
+
+// .then(res => {
+//   localStorage.setItem('user', JSON.stringify(res));
+//   const {
+//     token,
+//     data: { role },
+//   } = res;
+// Это только перенаправление на страницу, но авторизацию делать только через закрытие роуты
+//   if (token && role === 'client') navigate('/cabinet');
+//   if (token && role === 'admin') navigate('/admin');
+// });
