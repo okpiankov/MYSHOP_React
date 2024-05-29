@@ -5,7 +5,7 @@ export const ROUTES = {
   productsType: '/products/type',
   productID: '/product/id',
   auth: '/auth',
-  authFormik: '/authFormik',
+  // authFormik: '/authFormik',
   register: '/register',
   basket: '/basket',
   plug: '/plug',

@@ -3,9 +3,17 @@ import styles from './AuthPage.module.css';
 import { validateEmail, validatePassword } from './validate';
 import { Navigate, redirect, useNavigate } from 'react-router-dom';
 import { ROUTES } from '../../router/routes';
+import { useDispatch, useSelector } from 'react-redux';
+// import { getUserIsLoading, getUserToken } from '../../store/user/selectors';
+import { userActions, getUserToken } from '../../store/user/slice';
 
 export const AuthPage = ({ setForm }) => {
   const navigate = useNavigate();
+
+  const dispatch = useDispatch();
+  // const isLoading = useSelector(getUserIsLoading);
+  // const token = useSelector(getUserToken);
+// console.log(getUserToken)
 
   const [formData, setFormData] = useState({
     email: '',
@@ -34,6 +42,8 @@ export const AuthPage = ({ setForm }) => {
   const handleSubmit = event => {
     event.preventDefault();
 
+    dispatch(userActions.setIsLoading(true));
+
     fetch('https://8a705e193c725f80.mokky.dev/auth', {
       method: 'POST',
       headers: {
@@ -43,17 +53,18 @@ export const AuthPage = ({ setForm }) => {
       body: JSON.stringify(formData),
     })
       .then(res => res.json())
-      .then(res => {
-        localStorage.setItem('user', JSON.stringify(res));
+      .then(userData => {
+        dispatch(userActions.setUserData(userData));
 
         const {
           token,
           data: { role },
-        } = res;
-
+        } = userData;
         if (token && role === 'client') navigate('/cabinet');
         if (token && role === 'admin') navigate('/admin');
-      });
+      })
+      .catch(console.error)
+      .finally(() => dispatch(userActions.setIsLoading(false)));
   };
 
   return (

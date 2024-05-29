@@ -58,7 +58,7 @@ export const HeaderMenu = ({ setPopUpAuth }) => {
 
 const LoginButton = () => {
   const user = JSON.parse(localStorage.getItem('user'));
-  console.log(user);
+  // console.log(user);
 
   if (user?.token) {
     return <button>Выйти</button>;

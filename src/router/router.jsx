@@ -1,6 +1,6 @@
 import { createBrowserRouter, Outlet } from 'react-router-dom';
 import { AuthPage } from '../components/Auth/AuthPage';
-import { AuthPageFormik } from '../components/Auth/AuthPageFormik';
+// import { AuthPageFormik } from '../components/Auth/AuthPageFormik';
 import { RegisterPage } from '../components/Auth/RegisterPage';
 import { BasketPage } from '../components/BasketPage/BasketPage';
 import { СabinetPage } from '../components/LK/CabinetPage';

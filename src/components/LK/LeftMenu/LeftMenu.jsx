@@ -2,29 +2,23 @@ import { NavLink } from 'react-router-dom';
 import styles from './LeftMenu.module.css';
 import { ROUTES } from '../../../router/routes';
 import { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
+import { getUserAvatar, getUserFullName, getUserRole  } from '../../../store/user/slice';
 
 export const LeftMenuCabinet = () => {
   const [avatar, setAvatar] = useState('');
   const [fullName, setFullName] = useState('');
 
-  useEffect(() => {
-    const user = JSON.parse(localStorage.getItem('user'));
+  
+  // const fullNameRedux = useSelector(getUserFullName);
+  // // const roleRedux = useSelector(getUserRole);
+  // // const avatarRedux = useSelector(getUserAvatar);
 
-    if (!user) {
-      return;
-    }
+  // console.log(fullNameRedux)
 
-    const {
-      data: { role, avatar, fullName },
-    } = user;
+  // setAvatar(avatarRedux);
+  // setFullName(fullNameRedux);
 
-    if (role === 'client') {
-      setAvatar(avatar);
-      setFullName(fullName);
-    } else {
-      return;
-    }
-  }, []);
 
   return (
     <nav className={styles.leftMenuWrap}>
@@ -52,3 +46,22 @@ export const LeftMenuCabinet = () => {
     </nav>
   );
 };
+
+  // useEffect(() => {
+  //   const user = JSON.parse(localStorage.getItem('user'));
+
+  //   if (!user) {
+  //     return;
+  //   }
+
+  //   const {
+  //     data: { role, avatar, fullName },
+  //   } = user;
+
+  //   if (role === 'client') {
+  //     setAvatar(avatar);
+  //     setFullName(fullName);
+  //   } else {
+  //     return;
+  //   }
+  // }, []);
