@@ -8,3 +8,9 @@ export const rootStore = configureStore({
   devTools: true,
 });
 
+function handleChange() {
+  console.log(rootStore.getState().userData.isLoading);
+  console.log(rootStore.getState().userData.user);
+}
+
+rootStore.subscribe(handleChange);

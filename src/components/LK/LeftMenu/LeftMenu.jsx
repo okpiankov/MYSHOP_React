@@ -3,22 +3,22 @@ import styles from './LeftMenu.module.css';
 import { ROUTES } from '../../../router/routes';
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
-import { getUserAvatar, getUserFullName, getUserRole  } from '../../../store/user/slice';
+import { getUserAvatar, getUserFullName, getUserRole } from '../../../store/user/slice';
 
 export const LeftMenuCabinet = () => {
   const [avatar, setAvatar] = useState('');
   const [fullName, setFullName] = useState('');
 
-  
-  // const fullNameRedux = useSelector(getUserFullName);
-  // // const roleRedux = useSelector(getUserRole);
-  // // const avatarRedux = useSelector(getUserAvatar);
+  const fullNameRedux = useSelector(getUserFullName);
+  const roleRedux = useSelector(getUserRole);
+  const avatarRedux = useSelector(getUserAvatar);
 
-  // console.log(fullNameRedux)
+  console.log('fullNameRedux: ', fullNameRedux);
+  console.log('roleRedux: ', roleRedux);
+  console.log('avatarRedux: ', avatarRedux);
 
   // setAvatar(avatarRedux);
   // setFullName(fullNameRedux);
-
 
   return (
     <nav className={styles.leftMenuWrap}>
@@ -47,21 +47,21 @@ export const LeftMenuCabinet = () => {
   );
 };
 
-  // useEffect(() => {
-  //   const user = JSON.parse(localStorage.getItem('user'));
+// useEffect(() => {
+//   const user = JSON.parse(localStorage.getItem('user'));
 
-  //   if (!user) {
-  //     return;
-  //   }
+//   if (!user) {
+//     return;
+//   }
 
-  //   const {
-  //     data: { role, avatar, fullName },
-  //   } = user;
+//   const {
+//     data: { role, avatar, fullName },
+//   } = user;
 
-  //   if (role === 'client') {
-  //     setAvatar(avatar);
-  //     setFullName(fullName);
-  //   } else {
-  //     return;
-  //   }
-  // }, []);
+//   if (role === 'client') {
+//     setAvatar(avatar);
+//     setFullName(fullName);
+//   } else {
+//     return;
+//   }
+// }, []);

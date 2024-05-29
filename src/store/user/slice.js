@@ -1,8 +1,36 @@
 import { createSlice } from '@reduxjs/toolkit';
 
+const initialState = {
+  isLoading: false,
+  user: {
+    data: {
+      avatar: '', // здесь можно дефолную картинку вставить
+      email: '',
+      fullName: '', // здесь можно дефолное имя написать
+      id: null,
+      role: '',
+    },
+    token: '',
+  },
+};
+
+// лучше стейт вот к такому виду привести, без вложенностей, что не искать глубоко внутри нужные данные.
+// То есть будет вместо state => state.user.data.fullName - state => state.fullName
+
+// const initialState = {
+//   isLoading: false,
+//   token: '',
+//   avatar: '',
+//   email: '',
+//   fullName: '',
+//   id: null,
+//   role: '',
+// };
+
 export const userSlice = createSlice({
   name: 'userData',
-  initialState: {},
+  // initialState: {},
+  initialState,
   reducers: {
     setUserData: (state, action) => {
       state.user = action.payload;
@@ -14,10 +42,10 @@ export const userSlice = createSlice({
   },
   selectors: {
     getUserIsLoading: state => state.isLoading,
-    getUserToken: state => state.userData.token,
-    getUserAvatar: state => state.userData.avatar,
-    getUserFullName: state =>state.user.data.fullName,
-    getUserRole: state => state.userData.role,
+    getUserToken: state => state.user.data.token,
+    getUserAvatar: state => state.user.data.avatar,
+    getUserFullName: state => state.user.data.fullName,
+    getUserRole: state => state.user.data.role,
   },
 });
 
@@ -27,4 +55,4 @@ export const userActions = userSlice.actions;
 export const { getUserAvatar, getUserToken, getUserFullName, getUserRole } = userSlice.selectors;
 // console.log(getUserFullName)
 
-console.log(userActions.clearUserStore());
+// console.log(userActions.clearUserStore());

@@ -13,7 +13,7 @@ export const AuthPage = ({ setForm }) => {
   const dispatch = useDispatch();
   // const isLoading = useSelector(getUserIsLoading);
   // const token = useSelector(getUserToken);
-// console.log(getUserToken)
+  // console.log(getUserToken)
 
   const [formData, setFormData] = useState({
     email: '',
@@ -56,6 +56,8 @@ export const AuthPage = ({ setForm }) => {
       .then(userData => {
         dispatch(userActions.setUserData(userData));
 
+        console.log(userData);
+
         const {
           token,
           data: { role },
@@ -63,7 +65,7 @@ export const AuthPage = ({ setForm }) => {
         if (token && role === 'client') navigate('/cabinet');
         if (token && role === 'admin') navigate('/admin');
       })
-      .catch(console.error)
+      .catch(err => console.error(err))
       .finally(() => dispatch(userActions.setIsLoading(false)));
   };
 
