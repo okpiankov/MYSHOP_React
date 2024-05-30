@@ -2,27 +2,23 @@ import { NavLink } from 'react-router-dom';
 import styles from './LeftMenu.module.css';
 import { ROUTES } from '../../../router/routes';
 import { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
+import { getUserAvatar, getUserRole } from '../../../store/user/slice';
 
 export const LeftMenuAdmin = () => {
   const [avatar, setAvatar] = useState('');
 
+  const avatarRedux = useSelector(getUserAvatar);
+  const roleRedux = useSelector(getUserRole);
+
   useEffect(() => {
-    const user = JSON.parse(localStorage.getItem('user'));
-
-    if (!user) {
-      return;
-    }
-
-    const {
-      data: { role, avatar },
-    } = user;
-
-    if (role === 'admin') {
-      setAvatar(avatar);
+    if (roleRedux === 'admin') {
+      setAvatar(avatarRedux);
     } else {
       return;
     }
-  }, []);
+  }, [avatarRedux, roleRedux]);
+
   return (
     <nav className={styles.leftMenuWrap}>
       <img src={avatar} className={styles.avatar} alt="admin" />
@@ -52,3 +48,21 @@ export const LeftMenuAdmin = () => {
     </nav>
   );
 };
+
+// useEffect(() => {
+//   const user = JSON.parse(localStorage.getItem('user'));
+
+//   if (!user) {
+//     return;
+//   }
+
+//   const {
+//     data: { role, avatar },
+//   } = user;
+
+//   if (role === 'admin') {
+//     setAvatar(avatar);
+//   } else {
+//     return;
+//   }
+// }, []);

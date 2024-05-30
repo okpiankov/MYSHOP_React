@@ -42,7 +42,7 @@ export const userSlice = createSlice({
   },
   selectors: {
     getUserIsLoading: state => state.isLoading,
-    getUserToken: state => state.user.data.token,
+    getUserToken: state => state.user.token,
     getUserAvatar: state => state.user.data.avatar,
     getUserFullName: state => state.user.data.fullName,
     getUserRole: state => state.user.data.role,

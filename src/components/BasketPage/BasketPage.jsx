@@ -1,21 +1,26 @@
 import { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
+import { getProduct } from '../../store/basket/slice';
 import { BasketCard } from './BasketCard';
 import styles from './BasketPage.module.css';
 
 export const BasketPage = () => {
+
+  // Чтение данных карточек товаров из Redux:
   // использую useState чтобы обновлять новое состояние в []
   const [items, setItems] = useState([]);
 
+  const dataProduct = useSelector(getProduct);
+  // console.log(dataProduct);
+
   // использую useEffect чтобы не было бесконечных рендеров
   useEffect(() => {
-    const arrayCarts = localStorage.getItem('itemCart');
-
-    // Проверка нужна тк если ls пустой то map выдаст ошибку, ему нужен []:
-    if (!arrayCarts) {
-      return; // СТОП функция! и код ниже не выполнится:
+    if (!dataProduct) {
+      return;
     }
-    setItems(JSON.parse(arrayCarts));
-  }, []);
+    setItems(dataProduct);
+    
+  }, [dataProduct]);
 
   return (
     <>
@@ -25,7 +30,14 @@ export const BasketPage = () => {
           {/* Не забывай map в скобках { }  
           map возвращает компонент => (<Компонент />) */}
           {items.map(item => (
-            <BasketCard key={item.id} name={item.name} description={item.description} image={item.image} id={item.id} price={item.price} />
+            <BasketCard
+              key={item.id}
+              name={item.name}
+              description={item.description}
+              image={item.image}
+              id={item.id}
+              price={item.price}
+            />
           ))}
         </div>
         <div className={styles.buyWrap}>

@@ -4,16 +4,12 @@ import { validateEmail, validatePassword } from './validate';
 import { Navigate, redirect, useNavigate } from 'react-router-dom';
 import { ROUTES } from '../../router/routes';
 import { useDispatch, useSelector } from 'react-redux';
-// import { getUserIsLoading, getUserToken } from '../../store/user/selectors';
 import { userActions, getUserToken } from '../../store/user/slice';
 
 export const AuthPage = ({ setForm }) => {
   const navigate = useNavigate();
 
   const dispatch = useDispatch();
-  // const isLoading = useSelector(getUserIsLoading);
-  // const token = useSelector(getUserToken);
-  // console.log(getUserToken)
 
   const [formData, setFormData] = useState({
     email: '',
@@ -56,7 +52,7 @@ export const AuthPage = ({ setForm }) => {
       .then(userData => {
         dispatch(userActions.setUserData(userData));
 
-        console.log(userData);
+        // console.log(userData);
 
         const {
           token,
@@ -167,7 +163,7 @@ export const AuthPage = ({ setForm }) => {
 //     token,
 //     data: { role },
 //   } = res;
-// Это только перенаправление на страницу, но авторизацию делать только через закрытие роуты
+// Это только перенаправление на страницу, но авторизацию делать только через закрытые роуты
 //   if (token && role === 'client') navigate('/cabinet');
 //   if (token && role === 'admin') navigate('/admin');
 // });

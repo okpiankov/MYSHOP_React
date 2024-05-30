@@ -13,12 +13,18 @@ export const LeftMenuCabinet = () => {
   const roleRedux = useSelector(getUserRole);
   const avatarRedux = useSelector(getUserAvatar);
 
-  console.log('fullNameRedux: ', fullNameRedux);
-  console.log('roleRedux: ', roleRedux);
-  console.log('avatarRedux: ', avatarRedux);
+  useEffect(() => {
+    // console.log('fullNameRedux: ', fullNameRedux);
+    // console.log('roleRedux: ', roleRedux);
+    // console.log('avatarRedux: ', avatarRedux);
 
-  // setAvatar(avatarRedux);
-  // setFullName(fullNameRedux);
+    if (roleRedux === 'client') {
+      setAvatar(avatarRedux);
+      setFullName(fullNameRedux);
+    } else {
+      return;
+    }
+  }, [avatarRedux, fullNameRedux, roleRedux]);
 
   return (
     <nav className={styles.leftMenuWrap}>

@@ -1,11 +1,12 @@
 import { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
+import { getProduct, productActions } from '../../store/basket/slice';
 import styles from './ProductCardID.module.css';
 
 export const ProductCardID = () => {
   const [product, setProduct] = useState({});
   const { id } = useParams();
-  // console.log(id);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -18,27 +19,29 @@ export const ProductCardID = () => {
     fetchData();
   }, [id]);
 
-  const handleAddItem = () => {
-    const prevArrayItems = localStorage.getItem('itemCart');
+ // Запись данных карточек товаров в корзину через Redux:
+  const dispatch = useDispatch();
+  const prevArrayItems = useSelector(getProduct);
+  // console.log(prevArrayItems);
 
+  const handleAddItem = () => {
+    
     if (!prevArrayItems) {
       const item = [{ ...product, quantity: 1 }];
-      localStorage.setItem('itemCart', JSON.stringify(item));
+    
+      dispatch(productActions.setProductData(item));
       return;
     }
     console.log(prevArrayItems);
 
-    const prevArrayCarts = JSON.parse(prevArrayItems);
-
-    const ItemInPrevArray = prevArrayCarts.find(item => item.id === product.id);
+    const ItemInPrevArray = prevArrayItems.find(item => item.id === product.id);
     console.log(ItemInPrevArray);
 
     if (ItemInPrevArray) {
       return;
     }
-
-    const item = [...prevArrayCarts, { ...product, quantity: 1 }];
-    localStorage.setItem('itemCart', JSON.stringify(item));
+    const item = [...prevArrayItems, { ...product, quantity: 1 }];
+    dispatch(productActions.setProductData(item));
   };
 
   return (
@@ -83,6 +86,8 @@ export const ProductCardID = () => {
 //    либо тот тип данных который ожидается через fetch() т.е. объект  { }
 //    в fetch() через setProduct(data)  изменить состояние product
 
+
+// Запись в корзину через localStorage:
 // const handleAddItem = () => {
 //   // При записи в LS обязательно переводим в формат JSON.stringify(что записываем)
 //   // Чтение/ запись LS: ключ в ковычках ' ' getItem('ключ')
