@@ -1,10 +1,9 @@
 import { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { userActions } from '../../store/user/slice';
 import styles from './AuthPage.module.css';
 import { validateEmail, validatePassword } from './validate';
-import { Navigate, redirect, useNavigate } from 'react-router-dom';
-import { ROUTES } from '../../router/routes';
-import { useDispatch, useSelector } from 'react-redux';
-import { userActions, getUserToken } from '../../store/user/slice';
 
 export const AuthPage = ({ setForm }) => {
   const navigate = useNavigate();
@@ -49,15 +48,15 @@ export const AuthPage = ({ setForm }) => {
       body: JSON.stringify(formData),
     })
       .then(res => res.json())
-      .then(userData => {
-        dispatch(userActions.setUserData(userData));
+      .then(user => {
+        dispatch(userActions.setUser(user));
 
-        // console.log(userData);
+        // console.log(user);
 
         const {
           token,
           data: { role },
-        } = userData;
+        } = user;
         if (token && role === 'client') navigate('/cabinet');
         if (token && role === 'admin') navigate('/admin');
       })

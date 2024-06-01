@@ -1,19 +1,42 @@
-import { configureStore } from '@reduxjs/toolkit';
-
+import { combineReducers, configureStore } from '@reduxjs/toolkit';
+import { cartSlice } from './basket/slice';
 import { userSlice } from './user/slice';
-import { productSlice } from './basket/slice';
+import { FLUSH, PAUSE, PERSIST, PURGE, REGISTER, REHYDRATE, persistReducer, persistStore } from 'redux-persist';
+import storage from 'redux-persist/lib/storage';
 
-export const rootStore = configureStore({
-  reducer: {
-    [userSlice.name]: userSlice.reducer,
-    [productSlice.name]: productSlice.reducer,
-  },
-  devTools: true,
+const rootReducer = combineReducers({
+  [userSlice.name]: userSlice.reducer,
+  [cartSlice.name]: cartSlice.reducer,
 });
 
-// function handleChange() {
-//   console.log(rootStore.getState().userData.isLoading);
-//   console.log(rootStore.getState().userData.user);
-// }
+const persistConfig = {
+  key: 'root',
+  storage,
+};
 
-// rootStore.subscribe(handleChange);
+const persistedReducer = persistReducer(persistConfig, rootReducer);
+
+export const rootStore = configureStore({
+  reducer: persistedReducer,
+  // reducer: {
+  //   [userSlice.name]: userSlice.reducer,
+  //   [cartSlice.name]: cartSlice.reducer,
+  // },
+  devTools: true,
+  middleware: getDefaultMiddleware =>
+    getDefaultMiddleware({
+      serializableCheck: {
+        ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
+      },
+    }),
+});
+
+export const persistor = persistStore(rootStore);
+
+function handleChange() {
+  // console.log('productData', rootStore.getState().productData);
+  // console.log('user', rootStore.getState().user?.user);
+  console.log('redux-pesist state', rootStore.getState());
+}
+
+rootStore.subscribe(handleChange);

@@ -1,10 +1,10 @@
-import { Link, NavLink } from 'react-router-dom';
-import styles from './Header.module.css';
+import { NavLink } from 'react-router-dom';
+import CartIcon from '../../assets/icons/cart2.svg';
+import TelIcon from '../../assets/icons/tel.svg';
+import UserIcon from '../../assets/icons/user1.svg';
 import { ROUTES } from '../../router/routes';
 import { Search } from '../Search/Search';
-import CartIcon from '../../assets/icons/cart2.svg';
-import UserIcon from '../../assets/icons/user1.svg';
-import TelIcon from '../../assets/icons/tel.svg';
+import styles from './Header.module.css';
 
 export const HeaderMenu = ({ setPopUpAuth }) => {
   //передача пропса {setPopUpAuth} через скобки{}
@@ -47,6 +47,7 @@ export const HeaderMenu = ({ setPopUpAuth }) => {
         <NavLink to={ROUTES.basket}>
           <CartIcon className={styles.svgCart} />
         </NavLink>
+
         <div>
           <TelIcon className={styles.svgTel} />
           +7-777-77-77-77

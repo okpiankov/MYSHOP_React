@@ -1,6 +1,6 @@
-import { createRoot } from 'react-dom/client';
-import './global.css';
+import 'global.css';
 import 'normalize.css';
+import { createRoot } from 'react-dom/client';
 
 import { App } from './app';
 

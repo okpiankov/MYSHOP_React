@@ -28,11 +28,11 @@ const initialState = {
 // };
 
 export const userSlice = createSlice({
-  name: 'userData',
+  name: 'user',
   // initialState: {},
   initialState,
   reducers: {
-    setUserData: (state, action) => {
+    setUser: (state, action) => {
       state.user = action.payload;
     },
     setIsLoading: (state, action) => {
@@ -46,6 +46,15 @@ export const userSlice = createSlice({
     getUserAvatar: state => state.user.data.avatar,
     getUserFullName: state => state.user.data.fullName,
     getUserRole: state => state.user.data.role,
+    // {
+    // if (state) {
+    //   if (state.user) {
+    //     if (state.user.data) {
+    //       return state.user.data.role;
+    //     }
+    //   }
+    // }
+    // },
   },
 });
 
@@ -56,3 +65,5 @@ export const { getUserAvatar, getUserToken, getUserFullName, getUserRole } = use
 // console.log(getUserFullName)
 
 // console.log(userActions.clearUserStore());
+
+console.log(userSlice);

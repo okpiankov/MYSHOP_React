@@ -1,26 +1,24 @@
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
-import { getProduct } from '../../store/basket/slice';
+import { getCart } from '../../store/basket/slice';
 import { BasketCard } from './BasketCard';
 import styles from './BasketPage.module.css';
 
 export const BasketPage = () => {
-
   // Чтение данных карточек товаров из Redux:
   // использую useState чтобы обновлять новое состояние в []
   const [items, setItems] = useState([]);
 
-  const dataProduct = useSelector(getProduct);
-  // console.log(dataProduct);
+  const cartProducts = useSelector(getCart);
+  console.log(cartProducts);
 
   // использую useEffect чтобы не было бесконечных рендеров
   useEffect(() => {
-    if (!dataProduct) {
+    if (!cartProducts) {
       return;
     }
-    setItems(dataProduct);
-    
-  }, [dataProduct]);
+    setItems(cartProducts);
+  }, [cartProducts]);
 
   return (
     <>

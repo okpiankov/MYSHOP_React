@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
-import { getProduct, productActions } from '../../store/basket/slice';
+import { getCart, productActions } from '../../store/basket/slice';
 import styles from './ProductCardID.module.css';
 
 export const ProductCardID = () => {
@@ -19,17 +19,16 @@ export const ProductCardID = () => {
     fetchData();
   }, [id]);
 
- // Запись данных карточек товаров в корзину через Redux:
+  // Запись данных карточек товаров в корзину через Redux:
   const dispatch = useDispatch();
-  const prevArrayItems = useSelector(getProduct);
+  const prevArrayItems = useSelector(getCart);
   // console.log(prevArrayItems);
 
   const handleAddItem = () => {
-    
     if (!prevArrayItems) {
       const item = [{ ...product, quantity: 1 }];
-    
-      dispatch(productActions.setProductData(item));
+
+      dispatch(productActions.setCart(item));
       return;
     }
     console.log(prevArrayItems);
@@ -41,7 +40,7 @@ export const ProductCardID = () => {
       return;
     }
     const item = [...prevArrayItems, { ...product, quantity: 1 }];
-    dispatch(productActions.setProductData(item));
+    dispatch(productActions.setCart(item));
   };
 
   return (
@@ -85,7 +84,6 @@ export const ProductCardID = () => {
 //    ВАЖНО в useState(" "); указать либо null но тогда нужно прописывать проверку: {product?.name} через ?
 //    либо тот тип данных который ожидается через fetch() т.е. объект  { }
 //    в fetch() через setProduct(data)  изменить состояние product
-
 
 // Запись в корзину через localStorage:
 // const handleAddItem = () => {
