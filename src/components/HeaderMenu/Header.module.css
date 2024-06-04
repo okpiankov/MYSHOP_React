@@ -2,7 +2,10 @@
     width: 100%;
     background-color: var(--background-color-contentLight);
     font-size: 21px;
-    box-shadow:  1px 1px 1px var(--background-color-contentLarge); 
+    box-shadow:  1px 1px 1px var(--background-color-contentLarge);
+    position: sticky;
+    top: 0;
+    z-index: 55; 
 }
 .container {
     /* width: 1140px;
@@ -34,6 +37,11 @@
     color: white;
     
 }
+.LogInButton {
+    height: 30px;
+    width: 30px;
+    color: green;
+}
 .button {
     outline: none;
     border: none;
@@ -49,4 +57,12 @@
 }
 .link:hover {
     color: #FFFFFF;
+}
+.buttonLogout {
+    height: 45px;
+    width: 90px;
+    border-radius: 15px;
+    text-decoration: none;
+    background-color: var(--background-color-contentLight);
+    border: var(--border-content);
 }

@@ -13,6 +13,35 @@ export const ProductCard = () => {
       .catch(console.error);
   }, []);
 
+  const handleAddItem = id => {
+    // Ищу продукт по id  в массиве всех продуктов
+    const productID = products.find(item => item.id === id);
+
+    // Получю для проверки из localStorage []  по ключу 'itemCart' данные в формате JSON
+    const prevArrayItems = localStorage.getItem('itemCart');
+
+    // Проверяю и записываю ЕДИНОЖДЫ в LS по ключу 'itemCart'  массив с объектом найденным по id
+    if (!prevArrayItems) {
+      id;
+      const item = [{ ...productID, quantity: 1 }];
+      localStorage.setItem('itemCart', JSON.stringify(item));
+      return;
+    }
+
+    const prevArrayCarts = JSON.parse(prevArrayItems);
+
+    // Проверяю есть ли такой же объект в массиве по id
+    const ItemInPrevArray = prevArrayCarts.find(item => item.id === id);
+    console.log(ItemInPrevArray);
+
+    if (ItemInPrevArray) {
+      return;
+    }
+    // Дозаписываю  в localStorage объект которого нет в ls по id через {...productID}
+    const item = [...prevArrayCarts, { ...productID, quantity: 1 }];
+    localStorage.setItem('itemCart', JSON.stringify(item));
+  };
+
   return (
     <>
       {/*  Чтобы map 1 раз проходился по [] можно указать проверку на пустоту .length > 0 && products */}
@@ -26,10 +55,13 @@ export const ProductCard = () => {
                 <strong>{name}</strong>
                 <span className={styles.center}>{description}</span>
                 <span>
-                  <strong>{price}</strong>
+                  <strong>{price} P</strong>
                 </span>
               </NavLink>
-              <button className={styles.button}>Добавить в корзину</button>
+              {/* Передаю параметр  id в обработчик события */}
+              <button className={styles.button} onClick={() => handleAddItem(id)}>
+                Добавить в корзину
+              </button>
             </div>
           ))}
       </div>

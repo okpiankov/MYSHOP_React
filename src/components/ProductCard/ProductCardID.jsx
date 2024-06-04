@@ -60,7 +60,7 @@ export const ProductCardID = () => {
           </p>
 
           <span> Цена:</span>
-          <strong className={styles.price}>{product.price}</strong>
+          <strong className={styles.price}>{product.price} P</strong>
 
           <button className={styles.button} onClick={handleAddItem}>
             Добавить в корзину
@@ -70,6 +70,43 @@ export const ProductCardID = () => {
     </div>
   );
 };
+
+// const handleAddItem = () => {
+//   // При записи в LS обязательно перевожу в формат JSON.stringify(что записываем)
+//   // Чтение/ запись LS: ключ в ковычках ' ' getItem('ключ')
+
+//   // Получаю для проверки из localStorage []  по ключу 'cartItems' данные в формате JSON
+//   const prevArrayItems = localStorage.getItem('itemCart');
+
+//   // Проверка есть ли уже в ls запись по ключу 'cartItems'
+//   if (!prevArrayItems) {
+//     // Записываю ЕДИНОЖДЫ в localStorage в формате JSON по ключу 'cartItems' массив
+//     //  в него будут добавляться объекты, 1я запись в [] - только 1 объект
+//     //При 2й и далее записях в этот массив, запись будет происходить смотри код ниже
+//     const item = [{ ...product, quantity: 1 }];
+//     localStorage.setItem('itemCart', JSON.stringify(item));
+//     return; // пустой return - СТОП функция! Нужен только при первой записи [] в ls,
+//     // иначе скрип выполниться ниже и на find будет ошибка тк пока в [] только 1 {}
+//   }
+//   console.log(prevArrayItems);
+
+//   // Полученный []  из JSON конвектирую в js формат пересохраняю в другую переменную
+//   const prevArrayCarts = JSON.parse(prevArrayItems);
+
+//   // Проверяю есть ли такой же объект в массиве по id
+//   const ItemInPrevArray = prevArrayCarts.find(item => item.id === product.id);
+//   console.log(ItemInPrevArray); //либо объект который уже есть в [] либо undefined
+
+//   if (ItemInPrevArray) {
+//     return; // если объект по id есть - пустой return - СТОП функция! и код ниже не выполнится:
+//   }
+
+//   // Раскладываю распарсиный предыдущий массив на объекты в нем ...prevArrayCarts
+//   // И дозаписываю  в localStorage объект которого нет в ls по id через {...product}
+//   const item = [...prevArrayCarts, { ...product, quantity: 1 }];
+//   localStorage.setItem('itemCart', JSON.stringify(item));
+// };
+
 
 // Ошибки:
 // 1. Приходит по id не массив, а объект поэтому методы массива(map) не работают:
@@ -82,38 +119,3 @@ export const ProductCardID = () => {
 //    ВАЖНО в useState(" "); указать либо null но тогда нужно прописывать проверку: {product?.name} через ?
 //    либо тот тип данных который ожидается через fetch() т.е. объект  { }
 //    в fetch() через setProduct(data)  изменить состояние product
-
-// const handleAddItem = () => {
-//   // При записи в LS обязательно переводим в формат JSON.stringify(что записываем)
-//   // Чтение/ запись LS: ключ в ковычках ' ' getItem('ключ')
-
-//   // Получаем для проверки из localStorage []  по ключу 'cartItems' данные в формате JSON
-//   const prevArrayItems = localStorage.getItem('itemCart');
-
-//   // Проверка есть ли уже в ls запись по ключу 'cartItems'
-//   if (!prevArrayItems) {
-//     // Записываем ЕДИНОЖДЫ в localStorage в формате JSON по ключу 'cartItems' массив
-//     //  в него будут добавляться объекты, 1я запись в [] - только 1 объект
-//     const item = [{ ...product, quantity: 1 }];
-//     localStorage.setItem('itemCart', JSON.stringify(item));
-//     return; // пустой return - СТОП функция! Нужен только при первой записи [] в ls,
-//     // иначе скрип выполниться ниже и на find будет ошибка тк пока в [] только 1 {}
-//   }
-//   console.log(prevArrayItems);
-
-//   // Полученный []  из JSON конвектируем в js формат пересохраняем в другую переменную
-//   const prevArrayCarts = JSON.parse(prevArrayItems);
-
-//   // Проверяем есть ли такой же объект в массиве по id
-//   const ItemInPrevArray = prevArrayCarts.find(item => item.id === product.id);
-//   console.log(ItemInPrevArray); //либо объект который уже есть в [] либо undefined
-
-//   if (ItemInPrevArray) {
-//     return; // если объект по id есть - пустой return - СТОП функция! и код ниже не выполнится:
-//   }
-
-//   // Раскладываем распарсиный предыдущий массив на объекты в нем ...prevArrayCarts
-//   // И дозаписываем  в localStorage объект которого нет в ls по id через {...product}
-//   const item = [...prevArrayCarts, { ...product, quantity: 1 }];
-//   localStorage.setItem('itemCart', JSON.stringify(item));
-// };

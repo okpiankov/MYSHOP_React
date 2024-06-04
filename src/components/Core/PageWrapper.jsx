@@ -7,21 +7,20 @@ import styles from './Container.module.css';
 import { MainContent } from './MainContent';
 
 export const PageWrapper = ({ children }) => {
-const [popUpAuth, setPopUpAuth ] = useState (false)
+  // объект user нужно получать из глобального состояния типа: редакс или контекст:
+  const user = JSON.parse(localStorage.getItem('user'));
+  const [popUpAuth, setPopUpAuth] = useState(false);
 
   return (
     <div className={styles.mainWrap}>
-      <HeaderMenu setPopUpAuth={setPopUpAuth}/>
+      <HeaderMenu setPopUpAuth={setPopUpAuth} />
       <div className={`${styles.container} ${styles.innerWrap}`}>
-      <LeftMenu />
-        {/* {!"http://localhost:3000/cabinet" && <LeftMenu />} */}
+        <LeftMenu />
         <MainContent>{children}</MainContent>
       </div>
       <Footer />
-      <PopUpAuth popUpAuth={popUpAuth} setPopUpAuth={setPopUpAuth}/>
+      <PopUpAuth popUpAuth={popUpAuth} setPopUpAuth={setPopUpAuth} />
+      {/* {!user?.token && <PopUpAuth popUpAuth={popUpAuth} setPopUpAuth={setPopUpAuth} />} */}
     </div>
-    
   );
 };
-
-

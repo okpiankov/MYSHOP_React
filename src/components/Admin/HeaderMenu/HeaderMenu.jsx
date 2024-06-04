@@ -17,13 +17,7 @@ export const HeaderMenuAdmin = ({ setPopUpAuth }) => {
         <NavLink to={ROUTES.cabinet} className={styles.link}>
           Кабинет
         </NavLink>
-        <NavLink to={ROUTES.admin} className={styles.link}>
-          Админ
-        </NavLink>
-
-        <button type="button" onClick={handleVisiblePopUp} className={styles.button}>
-          <UserIcon className={styles.svgButton} />
-        </button>
+    
       </div>
     </header>
   );

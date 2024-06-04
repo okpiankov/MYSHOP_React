@@ -11,6 +11,8 @@ export const ROUTES = {
   plug: '/plug',
   delivery: '/delivery',
   order: '/order',
+  search: '/search',
+  
   // личный кабинет:
   cabinet: '/cabinet',
   // order: '/cabinet/order',

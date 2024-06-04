@@ -4,7 +4,7 @@ import BriefcaseIcon from '../../assets/icons/briefcase2.svg';
 import { useState } from 'react';
 
 export const PayPage = () => {
-  const [popUpPay_1, setpopUpPay_1] = useState(false);
+  const [popUpPay_1, setpopUpPay_1] = useState(true);
   const handlePopUp_1 = () => setpopUpPay_1(true) || setpopUpPay_2(false);
 
   const [popUpPay_2, setpopUpPay_2] = useState(false);

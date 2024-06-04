@@ -14,6 +14,31 @@ export const ProductCardType = () => {
       .then(data => setProducts(data));
   }, [search]);
 
+    const handleAddItem = id => {
+    const productID = products.find(item => item.id === id);
+    console.log(productID);
+
+    const prevArrayItems = localStorage.getItem('itemCart');
+
+    if (!prevArrayItems) {
+      const item = [{ ...productID, quantity: 1 }];
+      localStorage.setItem('itemCart', JSON.stringify(item));
+      return;
+    }
+
+    const prevArrayCarts = JSON.parse(prevArrayItems);
+
+    const ItemInPrevArray = prevArrayCarts.find(item => item.id === id);
+    console.log(ItemInPrevArray);
+
+    if (ItemInPrevArray) {
+      return;
+    }
+
+    const item = [...prevArrayCarts, { ...productID, quantity: 1 }];
+    localStorage.setItem('itemCart', JSON.stringify(item));
+  };
+
   return (
     <>
       <div className={styles.productsWrap}>
@@ -25,15 +50,55 @@ export const ProductCardType = () => {
             <span>{name}</span>
             <span className={styles.center}>{description}</span>
             <span>
-              <strong>{price}</strong>
+              <strong>{price} P</strong>
             </span>
-            <button className={styles.button}>Добавить в корзину</button>
+            <button className={styles.button} onClick={() => handleAddItem(id)}>
+              Добавить в корзину
+            </button>
           </div>
         ))}
       </div>
     </>
   );
 };
+
+
+// const handleAddItem = id => {
+//   console.log(id);
+
+//   // Ищу продукт по id  в массиве всех продуктов
+//   // в find(item=> item.id === id) а не (item=> item.id === products.id)
+//   const productID = products.find(item => item.id === id);
+//   console.log(productID);
+
+//   // Получаю для проверки из localStorage []  по ключу 'itemCart' данные в формате JSON
+//   const prevArrayItems = localStorage.getItem('itemCart');
+
+//   if (!prevArrayItems) {
+//     // Проверяю и записываю ЕДИНОЖДЫ в LS по ключу 'itemCart'  массив с объектом найденным по id
+//     // При 2й и далее записях в этот массив, запись будет происходить смотри код ниже
+//     const item = [{ ...productID, quantity: 1 }];
+//     localStorage.setItem('itemCart', JSON.stringify(item));
+//     return;
+//   }
+//   // console.log(prevArrayItems);
+
+//   // Полученный []  из JSON конвектирую в js формат пересохраняю в другую переменную чтобы  метод.find приминить
+//   const prevArrayCarts = JSON.parse(prevArrayItems);
+
+//   // Проверяю есть ли такой же объект в массиве по id
+//   // не верно find(item => item.id === products.id)
+//   // тк приходящий products - это не объект, а массив и надо сравнивать c id сразу, а id передан в эту функцию
+//   const ItemInPrevArray = prevArrayCarts.find(item => item.id === id);
+//   console.log(ItemInPrevArray);
+
+//   if (ItemInPrevArray) {
+//     return;
+//   }
+//   // Дозаписываю  в localStorage объект которого нет в ls по id через {...productID}
+//   const item = [...prevArrayCarts, { ...productID, quantity: 1 }];
+//   localStorage.setItem('itemCart', JSON.stringify(item));
+// };
 
 // useEffect(() => {
 //   const type = search.get('type');

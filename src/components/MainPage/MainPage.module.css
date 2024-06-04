@@ -29,7 +29,7 @@
     flex-direction: column;
     flex-wrap: wrap;
     align-items: center;
-    font-size: 35px;
+    font-size: 55px;
     color: rgb(83, 83, 245);
     font-weight: 700; 
     
@@ -87,7 +87,7 @@
       font-weight: 700;
       
       position: absolute;
-      margin-top: 42px;
+      margin-top: 63px;
       
   }   
   .visible {

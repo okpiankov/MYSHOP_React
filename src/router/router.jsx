@@ -22,8 +22,8 @@ import { EditProductPage } from '../components/Admin/EditProduct/EditProductPage
 import { EditUserPage } from '../components/Admin/EditUser/EditUserPage';
 import { AddUserPage } from '../components/Admin/EditUser/AddUsertPage';
 import { OrderPage } from '../components/OrderPage/OrderPage';
-
-
+import { ProtectedRoute } from './ProtectedRoute';
+import { SearchPage } from '../components/SearchPage/SearchPage';
 
 export const router = createBrowserRouter([
   {
@@ -86,17 +86,27 @@ export const router = createBrowserRouter([
         path: ROUTES.order,
         element: <OrderPage />,
       },
+      {
+        path: ROUTES.search,
+        element: <SearchPage />,
+      },
     ],
   },
 
   // отдельный layout для личного кабинета
-    {
+  {
     path: ROUTES.cabinet,
-    element: <LayoutСabinet />,
+    element: (
+      //Оборачиваем <LayoutСabinet /> а не <СabinetPage />
+      //и передаем пропс в requiredRole= "client" через кавычки, а не скобки{}
+      <ProtectedRoute requiredRole="client">
+        <LayoutСabinet />
+      </ProtectedRoute>
+    ),
     children: [
       {
         index: true,
-        element: <СabinetPage/>,
+        element: <СabinetPage />,
       },
       // {
       //   path: ROUTES.order,
@@ -107,11 +117,15 @@ export const router = createBrowserRouter([
   // отдельный layout для админки
   {
     path: ROUTES.admin,
-    element: <LayoutAdmin />,
+    element: (
+      <ProtectedRoute requiredRole="admin">
+        <LayoutAdmin />
+      </ProtectedRoute>
+    ),
     children: [
       {
         index: true,
-        element: <AdminPage/>,
+        element: <AdminPage />,
       },
       {
         path: ROUTES.addProduct,

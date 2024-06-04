@@ -9,7 +9,7 @@ export const AuthPage = ({ setForm }) => {
 
   const [formData, setFormData] = useState({
     email: '',
-    password: '',
+    password: '123',
   });
 
   const [emailError, setEmailError] = useState('');
