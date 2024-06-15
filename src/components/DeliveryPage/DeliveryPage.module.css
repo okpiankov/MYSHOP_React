@@ -50,3 +50,27 @@
     justify-content: space-between;
     color: rgb(85, 85, 249);
 }
+@media (max-width: 991px) {
+    .partnersWrap {
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+        gap: 20px;
+    }
+}
+@media (max-width: 360px) {
+    .contentBox {
+        height: auto;
+        width: 280px;
+    }
+    .partnerWrap {
+        height: auto;
+        width: 280px;
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+        
+       
+    }
+   
+}

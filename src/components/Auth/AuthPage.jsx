@@ -45,7 +45,7 @@ export const AuthPage = ({ setForm }) => {
       .then(res => res.json())
       .then(res => {
         localStorage.setItem('user', JSON.stringify(res));
-
+        
         const {
           token,
           data: { role },

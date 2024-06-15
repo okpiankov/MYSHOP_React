@@ -5,14 +5,18 @@ import styles from './ProductCard.module.css';
 
 export const ProductCard = () => {
   const [products, setProducts] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
+    setIsLoading(true);
     fetch('https://8a705e193c725f80.mokky.dev/product')
       .then(response => response.json())
       .then(data => setProducts(data))
-      .catch(console.error);
+      .catch(console.error)
+      .finally(() => setIsLoading(false));
   }, []);
-
+  
+  
   const handleAddItem = id => {
     // Ищу продукт по id  в массиве всех продуктов
     const productID = products.find(item => item.id === id);
@@ -40,14 +44,14 @@ export const ProductCard = () => {
     // Дозаписываю  в localStorage объект которого нет в ls по id через {...productID}
     const item = [...prevArrayCarts, { ...productID, quantity: 1 }];
     localStorage.setItem('itemCart', JSON.stringify(item));
-  };
+  }; 
 
   return (
     <>
       {/*  Чтобы map 1 раз проходился по [] можно указать проверку на пустоту .length > 0 && products */}
       <div className={styles.productsWrap}>
         {products.length > 0 &&
-          products.map(({ id, image, name, description, price }) => (
+          products?.map(({ id, image, name, description, price }) => (
             <div key={id} className={styles.cardWrap}>
               <NavLink to={`${ROUTES.productID}/${id}`} className={styles.link}>
                 <img src={image} className={styles.image}></img>
@@ -59,7 +63,7 @@ export const ProductCard = () => {
                 </span>
               </NavLink>
               {/* Передаю параметр  id в обработчик события */}
-              <button className={styles.button} onClick={() => handleAddItem(id)}>
+              <button className={isLoading===true ? styles.isLoadingButton : styles.button} onClick={() => handleAddItem(id)}>
                 Добавить в корзину
               </button>
             </div>

@@ -1,55 +1,47 @@
 .footer {
     width: 100%;
-    height: 310px;
+    height: 100%;
     background-color: var(--background-color-contentMedium);
     border-top: 2px var(--background-color-contentLarge) solid;
     margin-top: 3px;
-    
 }
 .container {
-    /* width: 1140px;
-    margin:  0 auto; */
-    
-    /* Лучше для адаптации через фикс. или %? */
     width: 90%;
     max-width: 1440px;
     margin: 0 auto;
 }
 .footerWrap {
-    height: 310px;
+    height: 100%;
     display: flex;
     justify-content: space-evenly;
-    align-items: center;
     background-color: var(--background-color-contentLarge);
     /* border: 1px black solid;  */
     font-size: 19px;
     box-shadow:  var(--box-shadow-content);
 }
 .blockFooter {
-    height: 310px;
-    /* Если не указать height в конкретном блоке то
-    стили ниже работать не будут */
     display: flex;
     flex-wrap: wrap;
     flex-direction: column;
     
 }
-/* Стили если через div дулать */
-/* Если не указать height в конкретном блоке то
-    стили ниже работать не будут */
-/* .blockFooter2 {
-    height: 300px;
-    display: flex;
-    flex-wrap: wrap;
-    flex-direction: column;
-    justify-content: flex-start;
-    gap: 40px;
-    margin-top: 30px;
-    border: 1px black solid; 
-} */
 .link {
      
 }
 .link:hover {
     color: #FFFFFF;
 }
+.blockFooter2 {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    
+}
+@media (max-width: 360px) {
+    .blockFooter2 {
+        opacity: 0;
+        pointer-events: none;
+        width: 0px;
+    }
+    
+} 

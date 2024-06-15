@@ -1,14 +1,21 @@
 import { useEffect, useState } from 'react';
-import { Link, NavLink, Navigate, useLocation, useNavigate } from 'react-router-dom';
-import styles from './Header.module.css';
+import { NavLink, useLocation, useNavigate } from 'react-router-dom';
+import CartIcon from '../../assets/icons/cart2.svg';
+import MenuIcon from '../../assets/icons/menu2.svg';
+import TelIcon from '../../assets/icons/tel.svg';
+import UserIcon from '../../assets/icons/user1.svg';
 import { ROUTES } from '../../router/routes';
 import { Search } from '../SearchPage/Search';
-import CartIcon from '../../assets/icons/cart2.svg';
-import UserIcon from '../../assets/icons/user1.svg';
-import TelIcon from '../../assets/icons/tel.svg';
+import styles from './Header.module.css';
+import HomeIcon from '../../assets/icons/home1.svg';
+import PayIcon from '../../assets/icons/pay2.svg';
+import DeliveryIcon from '../../assets/icons/delivery2.svg';
 
-export const HeaderMenu = ({ setPopUpAuth }) => {
+
+export const HeaderMenu = ({ setPopUpAuth, setLeftMenu, leftMenu }) => {
   const handleVisiblePopUp = () => setPopUpAuth(true);
+
+  const handleVisibleLeftMenu = () => setLeftMenu(leftMenu === false ? true : false);
 
   const { pathname } = useLocation();
   const navigate = useNavigate();
@@ -44,46 +51,103 @@ export const HeaderMenu = ({ setPopUpAuth }) => {
       navigate('/');
     }
   };
+  //Получаю значение счетчика корзины
+  const count = JSON.parse(localStorage.getItem('itemCart')).length
 
   return (
-    <header className={styles.headerMenu}>
+    <>
+    {/* Хедер для ПК и Планшетов */}
+    <header className={styles.headerMenu}> 
       <div className={`${styles.container} ${styles.headerMenuWrap}`}>
-        <NavLink to={ROUTES.root} className={styles.link}>
+        <button onClick={handleVisibleLeftMenu} className={`${styles.burger} ${styles.button} ${styles.item3}`}>
+          <MenuIcon className={styles.svgMenu} />
+        </button>
+        <NavLink to={ROUTES.root} className={`${styles.link} ${styles.item4}`}>
           О нас
         </NavLink>
-        <NavLink to={ROUTES.pay} className={styles.link}>
+        <NavLink to={ROUTES.pay} className={`${styles.link} ${styles.item5}`}>
           Оплата
         </NavLink>
         {/* <Link to={ROUTES.pay} >Оплата</Link> */}
-        <NavLink to={ROUTES.delivery} className={styles.link}>
+        <NavLink to={ROUTES.delivery} className={`${styles.link} ${styles.item6}`}>
           Доставка
         </NavLink>
-        <div>
+        <div className={styles.item1}>
           <Search />
         </div>
 
         {/* На одной кнопке  несколько  событий onClick
          и поэтому все эти действия включены в одну функцию handleUserClick */}
-        <button type="button" onClick={handleUserClick} className={styles.button}>
+        <button type="button" onClick={handleUserClick} className={`${styles.button} ${styles.item7}`}>
           {/* <UserIcon className={styles.svgButton} /> */}
           <UserIcon className={`${styles.svgButton} ${user?.token ? styles.LogInButton : ''}`} />
         </button>
 
         {user?.token && (
-          <button className={styles.buttonLogout} onClick={handleLogout}>
+          <button className={`${styles.buttonLogout} ${styles.item8}`} onClick={handleLogout}>
             Выйти
           </button>
         )}
 
-        <NavLink to={ROUTES.basket}>
+        <NavLink to={ROUTES.basket} className={`${styles.countCart} ${styles.item9}`}>
           <CartIcon className={styles.svgCart} />
+          {count!==0 && <div className={styles.count}>{count}</div>}
         </NavLink>
-        <div>
+        <div className={styles.item2}>
           <TelIcon className={styles.svgTel} />
           +7-777-77-77-77
         </div>
       </div>
     </header>
+
+{/* Хедер для мобильных устройств(адаптация (max-width: 360px)) */}
+    <header className={styles.headerMenuPhone}> 
+      <div className={`${styles.container} ${styles.headerMenuWrap}`}>
+        <button onClick={handleVisibleLeftMenu} className={`${styles.burger} ${styles.button} ${styles.item3}`}>
+          <MenuIcon className={styles.svgMenu} />
+        </button>
+
+        <NavLink to={ROUTES.root} className={`${styles.link} ${styles.item4}`}>
+          <HomeIcon className={styles.svgHome}/>
+        </NavLink>
+
+        <NavLink to={ROUTES.pay} className={`${styles.link} ${styles.item5}`}>
+        <PayIcon className={styles.svgPay}/>
+        </NavLink>
+
+        {/* <Link to={ROUTES.pay} >Оплата</Link> */}
+        <NavLink to={ROUTES.delivery} className={`${styles.link} ${styles.item6}`}>
+        <DeliveryIcon className={styles.svgDelivery}/>
+        </NavLink>
+        <div className={styles.item1}>
+          <Search />
+        </div>
+
+        {/* На одной кнопке  несколько  событий onClick
+         и поэтому все эти действия включены в одну функцию handleUserClick */}
+        <button type="button" onClick={handleUserClick} className={`${styles.button} ${styles.item7}`}>
+          {/* <UserIcon className={styles.svgButton} /> */}
+          <UserIcon className={`${styles.svgButton} ${user?.token ? styles.LogInButton : ''}`} />
+        </button>
+
+        {user?.token && (
+          <button className={`${styles.buttonLogout} ${styles.item8}`} onClick={handleLogout}>
+            Выйти
+          </button>
+        )}
+
+        <NavLink to={ROUTES.basket} className={`${styles.countCart} ${styles.item9}`}>
+          <CartIcon className={styles.svgCart} />
+          {count!==0 && <div className={styles.count}>{count}</div>}
+        </NavLink>
+        <div className={styles.item2}>
+          <TelIcon className={styles.svgTel}  />
+          +7-777-77-77-77
+        </div>
+      </div>
+    </header>  
+
+    </>
   );
 };
 
@@ -139,7 +203,8 @@ export const HeaderMenu = ({ setPopUpAuth }) => {
 //     }
 //   };
 
-{/* <NavLink to={ROUTES.cabinet} className={styles.link}>
+{
+  /* <NavLink to={ROUTES.cabinet} className={styles.link}>
 Кабинет
 </NavLink>
 <NavLink to={ROUTES.admin} className={styles.link}>
@@ -147,4 +212,5 @@ export const HeaderMenu = ({ setPopUpAuth }) => {
 </NavLink>
 
 <NavLink to={ROUTES.auth}>Войти</NavLink>
-<NavLink to={ROUTES.authFormik}>Войти</NavLink> */}
+<NavLink to={ROUTES.authFormik}>Войти</NavLink> */
+}

@@ -6,7 +6,7 @@ export const ProtectedRoute = ({ children, requiredRole }) => {
   //   console.log(user);
 
   if (!user || !user?.token || requiredRole !== user?.data?.role) {
-    return <Navigate to="/" replace />;
+    return <Navigate to="/" replace />; 
   }
   return children;
 

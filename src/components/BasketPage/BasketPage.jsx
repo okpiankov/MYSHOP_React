@@ -1,9 +1,13 @@
 import { useEffect, useState } from 'react';
 import { BasketCard } from './BasketCard';
 import styles from './BasketPage.module.css';
+import { NavLink, Navigate, useNavigate } from 'react-router-dom';
+import { ROUTES } from '../../router/routes';
 
 export const BasketPage = () => {
   const [items, setItems] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const arrayCarts = localStorage.getItem('itemCart');
@@ -48,15 +52,62 @@ export const BasketPage = () => {
   const arrayPrices = items.map(item => item.price * item.quantity).map(parseFloat);
   // console.log(arrayPrices);
   const result = arrayPrices.reduce((sum, current) => sum + current, 0);
-  // console.log(result);
+  // console.log(result)
+
+  const [formData, setFormData] = useState({
+    // id: '',
+    // fullName: '',
+    // email: '',
+    tel: '',
+    delivery: '',
+    pay: '',
+  });
+
+  //Формирую массив из объектов в которых присутствуют только необходимые поля
+  const arrayProducts = items.map(item => ({ id: item.id, name: item.name, quantity: item.quantity }));
+  // console.log(arrayProducts);
+  //arrayOrder(заказ) это объект не массив
+  const arrayOrder = {
+    ...formData,
+    total_price: result,
+    user_id: JSON.parse(localStorage.getItem('user'))?.data.id,
+    goods: [...arrayProducts],
+  };
+  console.log(arrayOrder);
+
+  const handleChange = event => {
+    // console.log(event.target.value);
+    const { name, value } = event.target;
+    setFormData(prevState => ({
+      ...prevState,
+      [name]: value,
+    }));
+  };
+
+  const handleSubmit = event => {
+    event.preventDefault();
+    setIsLoading(true);
+    fetch('https://8a705e193c725f80.mokky.dev/orders', {
+      method: 'POST',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(arrayOrder),
+    })
+    .finally(() => setIsLoading(false));
+    // .finally(navigate(ROUTES.order));
+    // .then(res => console.log(res));
+
+    // navigate(ROUTES.order);
+  };
 
   return (
     <>
+      {/* Корзина */}
       <div className={styles.basketWrap}>
         <div className={styles.cardWrap}>
           <strong className={styles.title}>Корзина</strong>
-          {/* Не забывай map в скобках { }  
-          map возвращает компонент => (<Компонент />) */}
           {items.map(item => (
             <BasketCard
               key={item.id}
@@ -71,12 +122,65 @@ export const BasketPage = () => {
             />
           ))}
         </div>
-        <div className={styles.buyWrap}>
+
+        {/* Карта оформления заказа */}
+        <div className={styles.placeOrderWrap}>
           <div className={styles.total}>
-            <span>Итого:</span>
-            <span>{result} P</span>
+            <div>Итого:</div>
+            <div>{result} P</div>
           </div>
-          <button className={styles.button}>Оформить</button>
+
+          <form   className={styles.inputWrap} onSubmit={handleSubmit}>
+            {/* <input
+              className={styles.input}
+              type="text"
+              value={formData.fullName}
+              name="fullName"
+              onChange={handleChange}
+              placeholder="Введите имя"
+            ></input> */}
+
+            {/* <input
+              className={styles.input}
+              type="text"
+              value={formData.email}
+              name="email"
+              onChange={handleChange}
+              placeholder="Введите email"
+            ></input> */}
+
+            <input
+              className={styles.input}
+              type="text"
+              value={formData.tel}
+              name="tel"
+              onChange={handleChange}
+              placeholder="Введите телефон"
+            ></input>
+
+            <input
+              className={styles.input}
+              type="text"
+              value={formData.delivery}
+              name="delivery"
+              onChange={handleChange}
+              placeholder="Введите способ доставки: СДЭК/самовывоз"
+            ></input>
+
+            <input
+              className={styles.input}
+              type="text"
+              value={formData.pay}
+              name="pay"
+              onChange={handleChange}
+              placeholder="Введите способ оплаты: карта/счет/наличные"
+            ></input>
+
+              <button type="submit" className={isLoading===true ? styles.isLoadingButton : styles.buttonSubmit}>
+                Оформить заказ
+              </button>
+            
+          </form>
         </div>
       </div>
     </>
@@ -139,3 +243,6 @@ export const BasketPage = () => {
 //   console.log(arrayPrices);
 //   const result = arrayPrices.reduce((sum, current) => sum + current, 0);
 //   console.log(result);
+
+// const { fullName, email, tel, delivery, } = formData;
+// { fullName, email, tel, delivery, name, quantity}

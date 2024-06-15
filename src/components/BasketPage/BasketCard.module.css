@@ -41,15 +41,46 @@
    border: 3px var(--background-color-contentLarge) solid;
    border-radius: 7px;
    background-color: var(--background-color-contentMedium);
-   
+}
+.button:hover {
+    background-color: var(--background-color-contentLarge);
 }
 .svgDelete {
     height: 30px;
     width: 30px;
     color: white;  
 }
+.svgDelete:hover {
+    color: var(--background-color-contentLarge);
+}
 .svgButton {
     outline: none;
     border: none;
     background: transparent;
+}
+/* Медиа запросы */
+@media (max-width: 991px) {
+    .basketCardWrap {
+        height: 170px;
+        width: 620px;
+        gap: 10px;
+    }
+    .descriptionWrap {
+        width: 200px;
+    }
+  
+}
+@media (max-width: 360px) {
+    .basketCardWrap {
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+        height: auto;
+        width: 250px;
+       
+    }
+    .descriptionWrap {
+        width: 150px;
+    }
+  
 }

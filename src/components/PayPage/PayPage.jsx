@@ -56,7 +56,7 @@ export const PayPage = () => {
           </span>
         </div>
 
-        <div className={`${styles.description} ${popUpPay_2 ? styles.description_visible : ''}`}>
+        <div className={`${styles.description} ${popUpPay_2 ? styles.description_visible : ''} ${styles.media}`}>
           <strong>Оплата счета</strong>
           <span>
             Ссылка для скачивания счета и информация о заказе будет доступна после оформления заказа на финальной

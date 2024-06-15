@@ -24,6 +24,9 @@ import { AddUserPage } from '../components/Admin/EditUser/AddUsertPage';
 import { OrderPage } from '../components/OrderPage/OrderPage';
 import { ProtectedRoute } from './ProtectedRoute';
 import { SearchPage } from '../components/SearchPage/SearchPage';
+import { PlaceOrderPage } from '../components/PlaceOrderPage/PlaceOrderPage';
+import { EditOrderPage } from '../components/Admin/EditOrder/EditOrderPage';
+import { PersonalDataPage } from '../components/LK/PersonalDataPage/PersonalDataPage';
 
 export const router = createBrowserRouter([
   {
@@ -82,10 +85,18 @@ export const router = createBrowserRouter([
       //   path: ROUTES.addProduct,
       //   element: <AddProductPage />,
       // },
-      {
-        path: ROUTES.order,
-        element: <OrderPage />,
-      },
+      //  {
+      //   path: ROUTES.placeOrder,
+      //   element: <PlaceOrderPage />,
+      // },
+      // {
+      //   path: ROUTES.order,
+      //   element: <OrderPage />,
+      // },
+      // {
+      //   path: ROUTES.personalData,
+      //   element: <PersonalDataPage />,
+      // },
       {
         path: ROUTES.search,
         element: <SearchPage />,
@@ -97,8 +108,6 @@ export const router = createBrowserRouter([
   {
     path: ROUTES.cabinet,
     element: (
-      //Оборачиваем <LayoutСabinet /> а не <СabinetPage />
-      //и передаем пропс в requiredRole= "client" через кавычки, а не скобки{}
       <ProtectedRoute requiredRole="client">
         <LayoutСabinet />
       </ProtectedRoute>
@@ -108,12 +117,17 @@ export const router = createBrowserRouter([
         index: true,
         element: <СabinetPage />,
       },
-      // {
-      //   path: ROUTES.order,
-      //   element: <OrderPage />,
-      // },
+      {
+        path: ROUTES.order,
+        element: <OrderPage />,
+      },
+      {
+        path: ROUTES.personalData,
+        element: <PersonalDataPage />,
+      },
     ],
   },
+  
   // отдельный layout для админки
   {
     path: ROUTES.admin,
@@ -146,6 +160,10 @@ export const router = createBrowserRouter([
       {
         path: ROUTES.editUser,
         element: <EditUserPage />,
+      },
+      {
+        path: ROUTES.editOrder,
+        element: <EditOrderPage />,
       },
     ],
   },

@@ -31,7 +31,7 @@ export const LeftMenuCabinet = () => {
       <img src={avatar} className={styles.avatar} alt="picture" />
       <div className={styles.user}>{fullName}</div>
 
-      <NavLink to={ROUTES.plug} className={styles.link}>
+      <NavLink to={ROUTES.personalData} className={styles.link}>
         Личная информация
       </NavLink>
       <NavLink to={ROUTES.basket} className={styles.link}>

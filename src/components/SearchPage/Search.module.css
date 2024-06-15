@@ -4,6 +4,9 @@
     height: 45px;
     background-color: var(--background-color-contentLarge);
     border-radius: 15px;
+    display: flex;
+    align-items: center;
+    padding-right: 3px;
 }
 .search {
    width: 400px;
@@ -17,6 +20,35 @@
     border-radius: 15px;
     border: 1px var(--background-color-contentLarge) solid;
     background-color: var(--background-color-contentLarge);
+}
+.button:hover {
+    background-color: var(--background-color-contentMedium);
+}
+/* Медиа запросы */
+@media (max-width: 1140px) {
+    .formWrap {
+        width: 333px;
+    }
+    
+}
+@media (max-width: 991px) {
+    .formWrap {
+        width: 370px;
+    }
+    
+}
+@media (max-width: 360px) {
+    .formWrap {
+        width: 280px;
+        height: 40px;
+    }
+    .search {
+        height: 40px;
+        border: 2px var(--background-color-contentLarge) solid;  
+    }
+    .button {
+        height: 37px;
+    }
 }
 .svgSearch {
     height: 30px;
@@ -68,6 +100,9 @@
     color: white;
     font-size: 20px;
     font-weight: 700;
+}
+.buttonCard:hover {
+    background-color: var(--background-color-contentLarge);
 }
 .center {
     text-align: center;
