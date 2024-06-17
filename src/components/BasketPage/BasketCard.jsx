@@ -13,6 +13,8 @@ export const BasketCard = ({
   handlelDeleteClick,
   handlelQuantityClick,
   quantity,
+  setItems,
+  items,
 }) => {
   return (
     <div className={styles.basketCardWrap}>

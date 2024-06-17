@@ -164,7 +164,7 @@ export const router = createBrowserRouter([
       {
         path: ROUTES.editOrder,
         element: <EditOrderPage />,
-      },
+      }, 
     ],
   },
 ]);

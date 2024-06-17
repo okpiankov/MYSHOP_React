@@ -2,6 +2,9 @@ import { useEffect, useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import { ROUTES } from '../../router/routes';
 import styles from './ProductCard.module.css';
+import { handleAddItem } from '../../services/localStorage';
+import { useDispatch, useSelector } from 'react-redux';
+import { getCart, productActions } from '../../store/basket/slice';
 
 export const ProductCard = () => {
   const [products, setProducts] = useState([]);
@@ -15,37 +18,36 @@ export const ProductCard = () => {
       .catch(console.error)
       .finally(() => setIsLoading(false));
   }, []);
-  
-  
+
+  // Запись данных карточек товаров в Redux:
+  const dispatch = useDispatch();
+  // Получю для проверки из Redux  массив товаров для проверки
+  const prevArrayItems = useSelector(getCart);
+
   const handleAddItem = id => {
     // Ищу продукт по id  в массиве всех продуктов
     const productID = products.find(item => item.id === id);
 
-    // Получю для проверки из localStorage []  по ключу 'itemCart' данные в формате JSON
-    const prevArrayItems = localStorage.getItem('itemCart');
-
-    // Проверяю и записываю ЕДИНОЖДЫ в LS по ключу 'itemCart'  массив с объектом найденным по id
+    // Проверяю и записываю ЕДИНОЖДЫ в Redux  массив с объектом найденным по id
     if (!prevArrayItems) {
-      id;
       const item = [{ ...productID, quantity: 1 }];
-      localStorage.setItem('itemCart', JSON.stringify(item));
+      dispatch(productActions.setCart(item));
       return;
     }
 
-    const prevArrayCarts = JSON.parse(prevArrayItems);
-
     // Проверяю есть ли такой же объект в массиве по id
-    const ItemInPrevArray = prevArrayCarts.find(item => item.id === id);
-    console.log(ItemInPrevArray);
+    const ItemInPrevArray = prevArrayItems.find(item => item.id === id);
+    // console.log(ItemInPrevArray);
 
     if (ItemInPrevArray) {
       return;
     }
-    // Дозаписываю  в localStorage объект которого нет в ls по id через {...productID}
-    const item = [...prevArrayCarts, { ...productID, quantity: 1 }];
-    localStorage.setItem('itemCart', JSON.stringify(item));
-  }; 
+    // Дозаписываю  в  Redux объект которого нет в  Redux по id через {...productID}
+    const item = [...prevArrayItems, { ...productID, quantity: 1 }];
+    dispatch(productActions.setCart(item));
+  };
 
+  
   return (
     <>
       {/*  Чтобы map 1 раз проходился по [] можно указать проверку на пустоту .length > 0 && products */}
@@ -63,7 +65,11 @@ export const ProductCard = () => {
                 </span>
               </NavLink>
               {/* Передаю параметр  id в обработчик события */}
-              <button className={isLoading===true ? styles.isLoadingButton : styles.button} onClick={() => handleAddItem(id)}>
+              {/* <button className={isLoading===true ? styles.isLoadingButton : styles.button} onClick={() => handleAddItem(id, products)}> */}
+              <button
+                className={isLoading === true ? styles.isLoadingButton : styles.button}
+                onClick={() => handleAddItem(id)}
+              >
                 Добавить в корзину
               </button>
             </div>

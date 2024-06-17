@@ -10,23 +10,33 @@ import styles from './Header.module.css';
 import HomeIcon from '../../assets/icons/home1.svg';
 import PayIcon from '../../assets/icons/pay2.svg';
 import DeliveryIcon from '../../assets/icons/delivery2.svg';
-
+import { useSelector, useDispatch } from 'react-redux';
+import { userActions, getUser } from '../../store/user/slice';
+import { getCart } from '../../store/basket/slice';
 
 export const HeaderMenu = ({ setPopUpAuth, setLeftMenu, leftMenu }) => {
   const handleVisiblePopUp = () => setPopUpAuth(true);
-
   const handleVisibleLeftMenu = () => setLeftMenu(leftMenu === false ? true : false);
 
   const { pathname } = useLocation();
   const navigate = useNavigate();
+  const dispatch = useDispatch ();
 
   //user - это состояние страницы (это не объект из LS)  обрабатываю через useState+useEffect
   const [user, setUser] = useState({});
 
+  //Подписка на user из Redux
+  const userRedux = useSelector(getUser);
+  // console.log( userRedux)
   useEffect(() => {
-    const userLS = JSON.parse(localStorage.getItem('user'));
-    setUser(userLS);
-  }, []);
+    setUser(userRedux);
+  }, [userRedux]);
+
+  // //Подписка на user из localStorage
+  // useEffect(() => {
+  //   const userLS = JSON.parse(localStorage.getItem('user'));
+  //   setUser(userLS);
+  // }, []);
 
   // Функция проверки роли, редиректа и смены состояния PopUp
   const handleUserClick = () => {
@@ -44,109 +54,110 @@ export const HeaderMenu = ({ setPopUpAuth, setLeftMenu, leftMenu }) => {
 
   //Функция выхода из авторизации
   const handleLogout = () => {
-    localStorage.removeItem('user');
-    setUser(prev => {});
+    // localStorage.removeItem('user');
+    // setUser(prev => {});
+    dispatch(userActions.clearUserStore());
 
     if (pathname.includes(ROUTES.admin) || pathname.includes(ROUTES.cabinet)) {
       navigate('/');
     }
   };
   //Получаю значение счетчика корзины
-  const count = JSON.parse(localStorage.getItem('itemCart')).length
+  // const count = JSON.parse(localStorage.getItem('itemCart')).length;
+  const count = useSelector(getCart).length;
 
   return (
     <>
-    {/* Хедер для ПК и Планшетов */}
-    <header className={styles.headerMenu}> 
-      <div className={`${styles.container} ${styles.headerMenuWrap}`}>
-        <button onClick={handleVisibleLeftMenu} className={`${styles.burger} ${styles.button} ${styles.item3}`}>
-          <MenuIcon className={styles.svgMenu} />
-        </button>
-        <NavLink to={ROUTES.root} className={`${styles.link} ${styles.item4}`}>
-          О нас
-        </NavLink>
-        <NavLink to={ROUTES.pay} className={`${styles.link} ${styles.item5}`}>
-          Оплата
-        </NavLink>
-        {/* <Link to={ROUTES.pay} >Оплата</Link> */}
-        <NavLink to={ROUTES.delivery} className={`${styles.link} ${styles.item6}`}>
-          Доставка
-        </NavLink>
-        <div className={styles.item1}>
-          <Search />
-        </div>
-
-        {/* На одной кнопке  несколько  событий onClick
-         и поэтому все эти действия включены в одну функцию handleUserClick */}
-        <button type="button" onClick={handleUserClick} className={`${styles.button} ${styles.item7}`}>
-          {/* <UserIcon className={styles.svgButton} /> */}
-          <UserIcon className={`${styles.svgButton} ${user?.token ? styles.LogInButton : ''}`} />
-        </button>
-
-        {user?.token && (
-          <button className={`${styles.buttonLogout} ${styles.item8}`} onClick={handleLogout}>
-            Выйти
+      {/* Хедер для ПК и Планшетов */}
+      <header className={styles.headerMenu}>
+        <div className={`${styles.container} ${styles.headerMenuWrap}`}>
+          <button onClick={handleVisibleLeftMenu} className={`${styles.burger} ${styles.button} ${styles.item3}`}>
+            <MenuIcon className={styles.svgMenu} />
           </button>
-        )}
+          <NavLink to={ROUTES.root} className={`${styles.link} ${styles.item4}`}>
+            О нас
+          </NavLink>
+          <NavLink to={ROUTES.pay} className={`${styles.link} ${styles.item5}`}>
+            Оплата
+          </NavLink>
+          {/* <Link to={ROUTES.pay} >Оплата</Link> */}
+          <NavLink to={ROUTES.delivery} className={`${styles.link} ${styles.item6}`}>
+            Доставка
+          </NavLink>
+          <div className={styles.item1}>
+            <Search />
+          </div>
 
-        <NavLink to={ROUTES.basket} className={`${styles.countCart} ${styles.item9}`}>
-          <CartIcon className={styles.svgCart} />
-          {count!==0 && <div className={styles.count}>{count}</div>}
-        </NavLink>
-        <div className={styles.item2}>
-          <TelIcon className={styles.svgTel} />
-          +7-777-77-77-77
-        </div>
-      </div>
-    </header>
-
-{/* Хедер для мобильных устройств(адаптация (max-width: 360px)) */}
-    <header className={styles.headerMenuPhone}> 
-      <div className={`${styles.container} ${styles.headerMenuWrap}`}>
-        <button onClick={handleVisibleLeftMenu} className={`${styles.burger} ${styles.button} ${styles.item3}`}>
-          <MenuIcon className={styles.svgMenu} />
-        </button>
-
-        <NavLink to={ROUTES.root} className={`${styles.link} ${styles.item4}`}>
-          <HomeIcon className={styles.svgHome}/>
-        </NavLink>
-
-        <NavLink to={ROUTES.pay} className={`${styles.link} ${styles.item5}`}>
-        <PayIcon className={styles.svgPay}/>
-        </NavLink>
-
-        {/* <Link to={ROUTES.pay} >Оплата</Link> */}
-        <NavLink to={ROUTES.delivery} className={`${styles.link} ${styles.item6}`}>
-        <DeliveryIcon className={styles.svgDelivery}/>
-        </NavLink>
-        <div className={styles.item1}>
-          <Search />
-        </div>
-
-        {/* На одной кнопке  несколько  событий onClick
+          {/* На одной кнопке  несколько  событий onClick
          и поэтому все эти действия включены в одну функцию handleUserClick */}
-        <button type="button" onClick={handleUserClick} className={`${styles.button} ${styles.item7}`}>
-          {/* <UserIcon className={styles.svgButton} /> */}
-          <UserIcon className={`${styles.svgButton} ${user?.token ? styles.LogInButton : ''}`} />
-        </button>
-
-        {user?.token && (
-          <button className={`${styles.buttonLogout} ${styles.item8}`} onClick={handleLogout}>
-            Выйти
+          <button type="button" onClick={handleUserClick} className={`${styles.button} ${styles.item7}`}>
+            {/* <UserIcon className={styles.svgButton} /> */}
+            <UserIcon className={`${styles.svgButton} ${user?.token ? styles.LogInButton : ''}`} />
           </button>
-        )}
 
-        <NavLink to={ROUTES.basket} className={`${styles.countCart} ${styles.item9}`}>
-          <CartIcon className={styles.svgCart} />
-          {count!==0 && <div className={styles.count}>{count}</div>}
-        </NavLink>
-        <div className={styles.item2}>
-          <TelIcon className={styles.svgTel}  />
-          +7-777-77-77-77
+          {user?.token && (
+            <button className={`${styles.buttonLogout} ${styles.item8}`} onClick={handleLogout}>
+              Выйти
+            </button>
+          )}
+
+          <NavLink to={ROUTES.basket} className={`${styles.countCart} ${styles.item9}`}>
+            <CartIcon className={styles.svgCart} />
+            {count !== 0 && <div className={styles.count}>{count}</div>}
+          </NavLink>
+          <div className={styles.item2}>
+            <TelIcon className={styles.svgTel} />
+            +7-777-77-77-77
+          </div>
         </div>
-      </div>
-    </header>  
+      </header>
 
+      {/* Хедер для мобильных устройств(адаптация (max-width: 360px)) */}
+      <header className={styles.headerMenuPhone}>
+        <div className={`${styles.container} ${styles.headerMenuWrap}`}>
+          <button onClick={handleVisibleLeftMenu} className={`${styles.burger} ${styles.button} ${styles.item3}`}>
+            <MenuIcon className={styles.svgMenu} />
+          </button>
+
+          <NavLink to={ROUTES.root} className={`${styles.link} ${styles.item4}`}>
+            <HomeIcon className={styles.svgHome} />
+          </NavLink>
+
+          <NavLink to={ROUTES.pay} className={`${styles.link} ${styles.item5}`}>
+            <PayIcon className={styles.svgPay} />
+          </NavLink>
+
+          {/* <Link to={ROUTES.pay} >Оплата</Link> */}
+          <NavLink to={ROUTES.delivery} className={`${styles.link} ${styles.item6}`}>
+            <DeliveryIcon className={styles.svgDelivery} />
+          </NavLink>
+          <div className={styles.item1}>
+            <Search />
+          </div>
+
+          {/* На одной кнопке  несколько  событий onClick
+         и поэтому все эти действия включены в одну функцию handleUserClick */}
+          <button type="button" onClick={handleUserClick} className={`${styles.button} ${styles.item7}`}>
+            {/* <UserIcon className={styles.svgButton} /> */}
+            <UserIcon className={`${styles.svgButton} ${user?.token ? styles.LogInButton : ''}`} />
+          </button>
+
+          {user?.token && (
+            <button className={`${styles.buttonLogout} ${styles.item8}`} onClick={handleLogout}>
+              Выйти
+            </button>
+          )}
+
+          <NavLink to={ROUTES.basket} className={`${styles.countCart} ${styles.item9}`}>
+            <CartIcon className={styles.svgCart} />
+            {count !== 0 && <div className={styles.count}>{count}</div>}
+          </NavLink>
+          <div className={styles.item2}>
+            <TelIcon className={styles.svgTel} />
+            +7-777-77-77-77
+          </div>
+        </div>
+      </header>
     </>
   );
 };

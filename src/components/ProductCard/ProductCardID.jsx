@@ -1,6 +1,9 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import styles from './ProductCardID.module.css';
+// import {handleAddItemId} from '../../services/localStorage';
+import { useDispatch, useSelector } from 'react-redux';
+import { getCart, productActions } from '../../store/basket/slice';
 
 export const ProductCardID = () => {
   const [product, setProduct] = useState({});
@@ -18,27 +21,28 @@ export const ProductCardID = () => {
     fetchData();
   }, [id]);
 
-  const handleAddItem = () => {
-    const prevArrayItems = localStorage.getItem('itemCart');
+  // Запись данных карточек товаров в Redux:
+  const dispatch = useDispatch();
+  const prevArrayItems = useSelector(getCart);
+  // console.log(prevArrayItems);
 
+  const handleAddItemId = () => {
     if (!prevArrayItems) {
       const item = [{ ...product, quantity: 1 }];
-      localStorage.setItem('itemCart', JSON.stringify(item));
+
+      dispatch(productActions.setCart(item));
       return;
     }
     console.log(prevArrayItems);
 
-    const prevArrayCarts = JSON.parse(prevArrayItems);
-
-    const ItemInPrevArray = prevArrayCarts.find(item => item.id === product.id);
+    const ItemInPrevArray = prevArrayItems.find(item => item.id === product.id);
     console.log(ItemInPrevArray);
 
     if (ItemInPrevArray) {
       return;
     }
-
-    const item = [...prevArrayCarts, { ...product, quantity: 1 }];
-    localStorage.setItem('itemCart', JSON.stringify(item));
+    const item = [...prevArrayItems, { ...product, quantity: 1 }];
+    dispatch(productActions.setCart(item));
   };
 
   return (
@@ -62,7 +66,8 @@ export const ProductCardID = () => {
           <span> Цена:</span>
           <strong className={styles.price}>{product.price} P</strong>
 
-          <button className={styles.button} onClick={handleAddItem}>
+          {/* <button className={styles.button} onClick={() => handleAddItemId(product)}> */}
+          <button className={styles.button} onClick={handleAddItemId}>
             Добавить в корзину
           </button>
         </div>
@@ -106,7 +111,6 @@ export const ProductCardID = () => {
 //   const item = [...prevArrayCarts, { ...product, quantity: 1 }];
 //   localStorage.setItem('itemCart', JSON.stringify(item));
 // };
-
 
 // Ошибки:
 // 1. Приходит по id не массив, а объект поэтому методы массива(map) не работают:

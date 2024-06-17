@@ -1,9 +1,16 @@
 import { Navigate } from 'react-router-dom';
+import {  useSelector } from 'react-redux';
+import {  getUser } from '../store/user/slice';
 
 export const ProtectedRoute = ({ children, requiredRole }) => {
-    
-  const user = JSON.parse(localStorage.getItem('user'));
-  //   console.log(user);
+   
+  // Подписка на user из Redux
+  const user = useSelector(getUser);
+  // console.log(user);
+
+  // Подписка на user из localStorage
+  // const user = JSON.parse(localStorage.getItem('user'));
+  // console.log(user);
 
   if (!user || !user?.token || requiredRole !== user?.data?.role) {
     return <Navigate to="/" replace />; 

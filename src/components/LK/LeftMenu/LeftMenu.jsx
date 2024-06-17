@@ -2,21 +2,22 @@ import { NavLink } from 'react-router-dom';
 import styles from './LeftMenu.module.css';
 import { ROUTES } from '../../../router/routes';
 import { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
+import { getUser } from '../../../store/user/slice';
 
 export const LeftMenuCabinet = () => {
   const [avatar, setAvatar] = useState('');
   const [fullName, setFullName] = useState('');
 
+  //Подписка на user из Redux
+  const userRedux = useSelector(getUser);
   useEffect(() => {
-    const user = JSON.parse(localStorage.getItem('user'));
-
-    if (!user) {
+    if (!userRedux) {
       return;
     }
-
     const {
       data: { role, avatar, fullName },
-    } = user;
+    } = userRedux;
 
     if (role === 'client') {
       setAvatar(avatar);
@@ -24,7 +25,27 @@ export const LeftMenuCabinet = () => {
     } else {
       return;
     }
-  }, []);
+  }, [userRedux]);
+
+  // //Подписка на user из localStorage
+  // useEffect(() => {
+  //     const user = JSON.parse(localStorage.getItem('user'));
+
+  //     if (!user) {
+  //       return;
+  //     }
+
+  //     const {
+  //       data: { role, avatar, fullName },
+  //     } = user;
+
+  //     if (role === 'client') {
+  //       setAvatar(avatar);
+  //       setFullName(fullName);
+  //     } else {
+  //       return;
+  //     }
+  //   }, []);
 
   return (
     <nav className={styles.leftMenuWrap}>

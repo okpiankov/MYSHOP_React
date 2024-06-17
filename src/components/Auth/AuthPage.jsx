@@ -3,8 +3,11 @@ import styles from './AuthPage.module.css';
 import { validateEmail, validatePassword } from './validate';
 import { Navigate, redirect, useNavigate } from 'react-router-dom';
 import { ROUTES } from '../../router/routes';
+import { useDispatch, useSelector } from 'react-redux';
+import { userActions, getUserToken } from '../../store/user/slice';
 
 export const AuthPage = ({ setForm }) => {
+  const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
@@ -31,8 +34,11 @@ export const AuthPage = ({ setForm }) => {
     }
   };
 
+  // Запись  user в redux:
   const handleSubmit = event => {
     event.preventDefault();
+
+    dispatch(userActions.setIsLoading(true));
 
     fetch('https://8a705e193c725f80.mokky.dev/auth', {
       method: 'POST',
@@ -43,18 +49,48 @@ export const AuthPage = ({ setForm }) => {
       body: JSON.stringify(formData),
     })
       .then(res => res.json())
-      .then(res => {
-        localStorage.setItem('user', JSON.stringify(res));
-        
+      .then(userData => {
+        dispatch(userActions.setUser(userData));
+        // console.log(userData);
+
         const {
           token,
           data: { role },
-        } = res;
+        } = userData;
 
         if (token && role === 'client') navigate('/cabinet');
         if (token && role === 'admin') navigate('/admin');
-      });
+      })
+      .catch(error => console.error(error))
+      .finally(() => dispatch(userActions.setIsLoading(false)));
   };
+
+  // // Запись  user  в localStorage:
+  // const handleSubmit = event => {
+  //   event.preventDefault();
+
+  //   fetch('https://8a705e193c725f80.mokky.dev/auth', {
+  //     method: 'POST',
+  //     headers: {
+  //       Accept: 'application/json',
+  //       'Content-Type': 'application/json',
+  //     },
+  //     body: JSON.stringify(formData),
+  //   })
+  //     .then(res => res.json())
+  //     .then(userData => {
+  //       localStorage.setItem('user', JSON.stringify(userData));
+
+  //       const {
+  //         token,
+  //         data: { role },
+  //       } = userData;
+
+  //       if (token && role === 'client') navigate('/cabinet');
+  //       if (token && role === 'admin') navigate('/admin');
+  //     })
+  //     .catch(error => console.error(error));
+  // };
 
   return (
     <div className={styles.authWrap}>

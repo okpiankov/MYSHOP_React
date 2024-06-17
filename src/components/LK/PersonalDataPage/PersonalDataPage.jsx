@@ -1,17 +1,30 @@
 import { useEffect, useState } from 'react';
 import styles from './PersonalDataPage.module.css';
+import { useSelector } from 'react-redux';
+import { getUser } from '../../../store/user/slice';
 
 export const PersonalDataPage = () => {
   const [user, setUser] = useState({});
- 
-  useEffect(() => {
-    const user = localStorage.getItem('user');
 
-    if (!user) {
+  //Подписка на user из Redux
+  const userRedux = useSelector(getUser);
+  useEffect(() => {
+
+    if (!userRedux) {
       return;
     }
-    setUser(JSON.parse(user));
-  }, []);
+    setUser(userRedux);
+  }, [userRedux]);
+
+  // //Подписка на user из localStorage
+  // useEffect(() => {
+  //   const user = localStorage.getItem('user');
+
+  //   if (!user) {
+  //     return;
+  //   }
+  //   setUser(JSON.parse(user));
+  // }, []);
 
   return (
     <div className={styles.wrap}>

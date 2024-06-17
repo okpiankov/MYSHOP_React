@@ -3,48 +3,57 @@ import { BasketCard } from './BasketCard';
 import styles from './BasketPage.module.css';
 import { NavLink, Navigate, useNavigate } from 'react-router-dom';
 import { ROUTES } from '../../router/routes';
+// import {handlelDeleteClick, handlelQuantityClick} from '../../services/localStorage';
+import { useDispatch, useSelector } from 'react-redux';
+import { getCart, productActions } from '../../store/basket/slice';
+import { getUser } from '../../store/user/slice';
 
 export const BasketPage = () => {
   const [items, setItems] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
 
+  //Подписка на arrayCarts из Redux
+  const arrayCarts = useSelector(getCart);
   useEffect(() => {
-    const arrayCarts = localStorage.getItem('itemCart');
-
     if (!arrayCarts) {
       return;
     }
-    setItems(JSON.parse(arrayCarts));
-  }, []);
+    setItems(arrayCarts);
+  }, [arrayCarts]);
 
+  // Функция удаления товара из корзины и Redux
+  const arrayItem = useSelector(getCart);
+  const dispatch = useDispatch();
   const handlelDeleteClick = id => {
-    const arrayProducts = JSON.parse(localStorage.getItem('itemCart'));
-
     //получаю новый массив исключающий объект по id, не равно в JS !=
-    const newArray = arrayProducts.filter(item => item.id != id);
+    const newArray = arrayItem.filter(item => item.id != id);
     // console.log(newArray);
 
-    //записываю новый массив товаров в LS после каждого удаления товара
-    localStorage.setItem('itemCart', JSON.stringify(newArray));
-
+    //записываю новый массив товаров в Redux после каждого удаления товара
+    dispatch(productActions.setCart(newArray));
     setItems(prev => newArray);
   };
 
+  // Функция увеличения и уменьшения колличества товара в корзине и Redux
   const handlelQuantityClick = (id, action) => {
     //Делаю копию массива
     const newArrayInCart = [...items];
+    console.log(items)
+    console.log(newArrayInCart)
 
     //Достаю объект из массива
     const product = newArrayInCart.find(item => item.id === id);
+    console.log(product)
 
     //Обращаюсь в объекте к полю quantity
     product.quantity = action === 'add' ? product.quantity + 1 : product.quantity - 1;
     if (product.quantity <= 0) {
       return handlelDeleteClick(id);
     }
-    // Записываю копию массива в LS
-    localStorage.setItem('itemCart', JSON.stringify(newArrayInCart));
+    // Записываю копию массива в Redux
+    // localStorage.setItem('itemCart', JSON.stringify(newArrayInCart));
+    dispatch(productActions.setCart(newArrayInCart));
     setItems(newArrayInCart);
   };
 
@@ -70,10 +79,10 @@ export const BasketPage = () => {
   const arrayOrder = {
     ...formData,
     total_price: result,
-    user_id: JSON.parse(localStorage.getItem('user'))?.data.id,
+    user_id: useSelector(getUser)?.data.id,
     goods: [...arrayProducts],
   };
-  console.log(arrayOrder);
+  // console.log(arrayOrder);
 
   const handleChange = event => {
     // console.log(event.target.value);
@@ -94,12 +103,11 @@ export const BasketPage = () => {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify(arrayOrder),
-    })
-    .finally(() => setIsLoading(false));
+    }).finally(() => setIsLoading(false));
     // .finally(navigate(ROUTES.order));
     // .then(res => console.log(res));
 
-    // navigate(ROUTES.order);
+    navigate(ROUTES.order);
   };
 
   return (
@@ -119,6 +127,8 @@ export const BasketPage = () => {
               quantity={item.quantity}
               handlelDeleteClick={handlelDeleteClick}
               handlelQuantityClick={handlelQuantityClick}
+              setItems={setItems}
+              items={items}
             />
           ))}
         </div>
@@ -130,7 +140,7 @@ export const BasketPage = () => {
             <div>{result} P</div>
           </div>
 
-          <form   className={styles.inputWrap} onSubmit={handleSubmit}>
+          <form className={styles.inputWrap} onSubmit={handleSubmit}>
             {/* <input
               className={styles.input}
               type="text"
@@ -176,16 +186,116 @@ export const BasketPage = () => {
               placeholder="Введите способ оплаты: карта/счет/наличные"
             ></input>
 
-              <button type="submit" className={isLoading===true ? styles.isLoadingButton : styles.buttonSubmit}>
-                Оформить заказ
-              </button>
-            
+            <button type="submit" className={isLoading === true ? styles.isLoadingButton : styles.buttonSubmit}>
+              Оформить заказ
+            </button>
           </form>
         </div>
       </div>
     </>
   );
 };
+
+// // Чтение данных для корзины из localStorage:
+// export const BasketPage = () => {
+//   const [items, setItems] = useState([]);
+//   const [isLoading, setIsLoading] = useState(false);
+//   const navigate = useNavigate();
+
+//   useEffect(() => {
+//     const arrayCarts = localStorage.getItem('itemCart');
+
+//     if (!arrayCarts) {
+//       return;
+//     }
+//     setItems(JSON.parse(arrayCarts));
+//   }, []);
+
+//   // Функция удаления товара из корзины и localStorage
+//   const handlelDeleteClick = id => {
+//     const arrayProducts = JSON.parse(localStorage.getItem('itemCart'));
+
+//     //получаю новый массив исключающий объект по id, не равно в JS !=
+//     const newArray = arrayProducts.filter(item => item.id != id);
+//     // console.log(newArray);
+
+//     //записываю новый массив товаров в LS после каждого удаления товара
+//     localStorage.setItem('itemCart', JSON.stringify(newArray));
+
+//     setItems(prev => newArray);
+//   };
+
+//   // Функция увеличения и уменьшения колличества товара в корзине и localStorage
+//   const handlelQuantityClick = (id, action) => {
+//     //Делаю копию массива
+//     const newArrayInCart = [...items];
+
+//     //Достаю объект из массива
+//     const product = newArrayInCart.find(item => item.id === id);
+
+//     //Обращаюсь в объекте к полю quantity
+//     product.quantity = action === 'add' ? product.quantity + 1 : product.quantity - 1;
+//     if (product.quantity <= 0) {
+//       return handlelDeleteClick(id);
+//     }
+//     // Записываю копию массива в LS
+//     localStorage.setItem('itemCart', JSON.stringify(newArrayInCart));
+//     setItems(newArrayInCart);
+//   };
+
+//   //Логика подсчета общей стоимости с учетом quantity
+//   const arrayPrices = items.map(item => item.price * item.quantity).map(parseFloat);
+//   // console.log(arrayPrices);
+//   const result = arrayPrices.reduce((sum, current) => sum + current, 0);
+//   // console.log(result)
+
+//   const [formData, setFormData] = useState({
+//     // id: '',
+//     // fullName: '',
+//     // email: '',
+//     tel: '',
+//     delivery: '',
+//     pay: '',
+//   });
+
+//   //Формирую массив из объектов в которых присутствуют только необходимые поля
+//   const arrayProducts = items.map(item => ({ id: item.id, name: item.name, quantity: item.quantity }));
+//   // console.log(arrayProducts);
+//   //arrayOrder(заказ) это объект не массив
+//   const arrayOrder = {
+//     ...formData,
+//     total_price: result,
+//     user_id: JSON.parse(localStorage.getItem('user'))?.data.id,
+//     goods: [...arrayProducts],
+//   };
+//   console.log(arrayOrder);
+
+//   const handleChange = event => {
+//     // console.log(event.target.value);
+//     const { name, value } = event.target;
+//     setFormData(prevState => ({
+//       ...prevState,
+//       [name]: value,
+//     }));
+//   };
+
+//   const handleSubmit = event => {
+//     event.preventDefault();
+//     setIsLoading(true);
+//     fetch('https://8a705e193c725f80.mokky.dev/orders', {
+//       method: 'POST',
+//       headers: {
+//         Accept: 'application/json',
+//         'Content-Type': 'application/json',
+//       },
+//       body: JSON.stringify(arrayOrder),
+//     })
+//     .finally(() => setIsLoading(false));
+//     // .finally(navigate(ROUTES.order));
+//     // .then(res => console.log(res));
+
+//     // navigate(ROUTES.order);
+//   };
 
 // export const BasketPage = () => {
 //   //использую useState чтобы обновлять новое состояние в []
