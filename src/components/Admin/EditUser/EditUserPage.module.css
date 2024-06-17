@@ -1,11 +1,14 @@
 .contentBox {
     display: flex;
-    margin-top: 50px;
-    justify-content: space-evenly;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 20px;
+    margin-bottom: 5px;
+    margin-left: 20px;
     font-size: 19px;
-}
+ }
 .patternWrap {
-    height: 550px;
+    height: auto;
     width: 500px;
     background-color: var(--background-color-contentLight);
     border: var(--border-content);
@@ -15,10 +18,10 @@
     justify-content: flex-start;
     align-items: flex-start;
     text-indent: 20px;
-    
+    gap: 10px;
 }
 .editProductWrap {
-    height: 550px;
+    height: 500px;
     width: 500px;
     background-color: var(--background-color-contentLight);
     border: var(--border-content);
@@ -33,7 +36,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 33px; 
+    gap: 25px; 
 }
 .input {
     background-color: var(--background-color-contentLight);
@@ -54,6 +57,13 @@
     font-size: 20px;
     font-weight: 700;
 }
+.buttonSubmit:hover {
+    background-color: var(--background-color-contentLarge);
+}
+
+
+
+
 
 
 

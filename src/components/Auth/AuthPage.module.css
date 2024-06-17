@@ -40,6 +40,9 @@
     font-size: 23px;
     font-weight: 700;
 }
+.buttonSubmit:hover {
+    background-color: var(--background-color-contentLarge);
+}
 .selectАctive {
     font-size: 25px;
     color: rgb(163, 160, 160);
@@ -61,5 +64,19 @@
     border-style: none;
     background-color: var(--background-color-contentLight);
 }
+@media (max-width: 360px) {
+    .authWrap {
+        height: 280px;
+        width: 280px;
+    }
+    .inputWrap {
+        gap: 20px;
+        width: 230px;
+    }
+    .buttonSubmit {
+        font-size: 22px;
+    }
+    
+} 
 
 

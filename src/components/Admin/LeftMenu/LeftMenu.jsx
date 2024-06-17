@@ -3,22 +3,47 @@ import styles from './LeftMenu.module.css';
 import { ROUTES } from '../../../router/routes';
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
-import { getUserAvatar, getUserRole } from '../../../store/user/slice';
+import { getUser } from '../../../store/user/slice';
 
 export const LeftMenuAdmin = () => {
   const [avatar, setAvatar] = useState('');
 
-  const avatarRedux = useSelector(getUserAvatar);
-  const roleRedux = useSelector(getUserRole);
-
+  //Подписка на user из Redux
+  const userRedux = useSelector(getUser);
   useEffect(() => {
-    if (roleRedux === 'admin') {
-      setAvatar(avatarRedux);
+    if (!userRedux) {
+      return;
+    }
+    const {
+      data: { role, avatar, fullName },
+    } = userRedux;
+
+    if (role === 'admin') {
+      setAvatar(avatar);
     } else {
       return;
     }
-  }, [avatarRedux, roleRedux]);
+  }, [userRedux]);
 
+  // //Подписка на user из localStorage
+  // useEffect(() => {
+  //   const user = JSON.parse(localStorage.getItem('user'));
+
+  //   if (!user) {
+  //     return;
+  //   }
+
+  //   const {
+  //     data: { role, avatar },
+  //   } = user;
+
+  //   if (role === 'admin') {
+  //     setAvatar(avatar);
+  //   } else {
+  //     return;
+  //   }
+  // }, []);
+  
   return (
     <nav className={styles.leftMenuWrap}>
       <img src={avatar} className={styles.avatar} alt="admin" />
@@ -48,21 +73,3 @@ export const LeftMenuAdmin = () => {
     </nav>
   );
 };
-
-// useEffect(() => {
-//   const user = JSON.parse(localStorage.getItem('user'));
-
-//   if (!user) {
-//     return;
-//   }
-
-//   const {
-//     data: { role, avatar },
-//   } = user;
-
-//   if (role === 'admin') {
-//     setAvatar(avatar);
-//   } else {
-//     return;
-//   }
-// }, []);

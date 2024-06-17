@@ -50,8 +50,8 @@ export const RegisterPage = ({ setForm }) => {
         body: JSON.stringify(formData),
       });
       const data = await res.json();
-      // console.log(res);
-      // console.log(data);
+      console.log(res);
+      console.log(data);
     };
     fetchData();
   };

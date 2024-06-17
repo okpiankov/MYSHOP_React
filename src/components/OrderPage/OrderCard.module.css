@@ -1,15 +1,16 @@
 .orderCardWrap {
-    height: 230px;
-    width: 970px;
+    height: auto;
+    width: 780px;
     display: flex;
     flex-direction: column;
     background-color: var(--background-color-contentMedium);
     border: var(--border-content);
     border-radius: 20px; 
 }
+
 .contentBox1 {
-    height: 100px;
-    width: 970px;
+    height: auto;
+    width: auto;
     background-color: var(--background-color-contentMedium);
     border-radius: 20px;
     display: flex;
@@ -19,14 +20,16 @@
    
 }
 .contentBox2 {
-    height: 130px;
-    width: 970px;
+    height: auto;
+    width: auto;
     background-color: var(--background-color-contentLight);
     border-bottom-right-radius: 20px;
     border-bottom-left-radius: 20px;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    gap: 100px;
+    padding-bottom: 5px;
     font-size: 19px;
 }
 .order {
@@ -38,8 +41,15 @@
 .name {
     display: flex;
     flex-direction: column;
+    align-items:flex-end;
     padding-right: 15px;
+    font-weight: 570;
+  
 }
+.li {
+    list-style: none;
+}
+
 .delivery {
     display: flex;
     flex-direction: column;
@@ -62,4 +72,20 @@
 }
 .date {
     font-size: 17px;
+}
+/* Медиа запросы */
+@media (max-width: 991px) {
+    .orderCardWrap {
+        width: 620px;
+    }
+}
+@media (max-width: 360px) {
+    .orderCardWrap {
+        width: 270px;
+    }
+    .contentBox2 {
+        flex-direction: column;
+        gap: 10px;
+        align-items: flex-start;  
+    }
 }

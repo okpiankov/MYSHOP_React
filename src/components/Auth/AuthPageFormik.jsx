@@ -7,7 +7,7 @@ export const AuthPageFormik = ({setForm}) => {
   // значения полей автоматически сохраняются при вводе символов в эти инпуты
   const handleSubmit = values => {
     // e.preventDefault(); не нужно
-    // console.log(values);
+    console.log(values);
     
     fetch('https://8a705e193c725f80.mokky.dev/auth', {
       method: 'POST',
@@ -18,7 +18,7 @@ export const AuthPageFormik = ({setForm}) => {
       body: JSON.stringify(values),
     })
       .then(res => res.json())
-      // .then(res => console.log(res));
+      .then(res => console.log(res));
   };
 
   return (

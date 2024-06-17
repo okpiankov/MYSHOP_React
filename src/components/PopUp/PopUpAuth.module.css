@@ -38,3 +38,12 @@
     border-style: none;
     background-color: transparent;
 }
+@media (max-width: 360px) {
+    .close {
+        left: 135px;
+    }
+    .popup_content {
+        margin-top: 150px;
+        
+    }
+} 

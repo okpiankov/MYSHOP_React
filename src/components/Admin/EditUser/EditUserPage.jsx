@@ -48,7 +48,7 @@ export const EditUserPage = () => {
             value={formData.id}
             name="id"
             onChange={handleChange}
-            placeholder="Введите id"
+            placeholder="Введите id пользователя"
           ></input>
 
           <input
@@ -57,7 +57,7 @@ export const EditUserPage = () => {
             value={formData.fullName}
             name="fullName"
             onChange={handleChange}
-            placeholder="Введите fullName"
+            placeholder="Введите имя пользователя"
           ></input>
 
           <input
@@ -66,7 +66,7 @@ export const EditUserPage = () => {
             value={formData.role}
             name="role"
             onChange={handleChange}
-            placeholder="Введите role client"
+            placeholder="Введите роль: client"
           ></input>
 
           <input
@@ -84,7 +84,7 @@ export const EditUserPage = () => {
             value={formData.password}
             name="password"
             onChange={handleChange}
-            placeholder="Введите password"
+            placeholder="Введите пароль"
           ></input>
 
           <input
@@ -93,7 +93,7 @@ export const EditUserPage = () => {
             value={formData.avatar}
             name="avatar"
             onChange={handleChange}
-            placeholder="Введите avatar"
+            placeholder="Введите ссылку на аватар"
           ></input>
           
           <input
@@ -102,7 +102,7 @@ export const EditUserPage = () => {
             value={formData.tel}
             name="tel"
             onChange={handleChange}
-            placeholder="Введите telephone"
+            placeholder="Введите телефон"
           ></input>
 
           <button type="submit" className={styles.buttonSubmit}>
@@ -111,13 +111,13 @@ export const EditUserPage = () => {
         </form>
       </div>
       <div className={styles.patternWrap}>
-        <h4>Скопируй данные отсюда:</h4>
-        <p>fullName: Владимир</p>
-        <p>role: client</p>
-        <p>email: newuser@test.com</p>
-        <p>password: 1234 </p>
-        <p>avatar: https://img.freepik.com/free-photo/view-funny-animal_23-2151098397.jpg</p>
-        <p>avatar: https://img.freepik.com/free-vector/hand-drawn-cartoon-moose-illustration_23-2150443667.jpg</p>
+      <span>Скопируйте пример данных отсюда:</span>
+        <span>имя пользователя: Владимир</span>
+        <span>роль: client</span>
+        <span>email: newuser@test.com</span>
+        <span>пароль: 1234</span>
+        <span>аватар: https://img.freepik.com/free-photo/view-funny-animal_23-2151098397.jpg</span>
+        <span>аватар: https://img.freepik.com/free-vector/hand-drawn-cartoon-moose-illustration_23-2150443667.jpg</span>
       </div>
     </div>
   );

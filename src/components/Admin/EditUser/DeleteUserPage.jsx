@@ -35,7 +35,7 @@ export const DeleteUserPage = () => {
             value={formData.id}
             name="id"
             onChange={handleChange}
-            placeholder="Введите id"
+            placeholder="Введите id пользователя"
           ></input>
 
           <button type="submit" className={styles.buttonSubmit}>

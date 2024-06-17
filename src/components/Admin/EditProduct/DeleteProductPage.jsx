@@ -35,7 +35,7 @@ export const DeleteProductPage = () => {
             value={formData.id}
             name="id"
             onChange={handleChange}
-            placeholder="Введите id"
+            placeholder="Введите id товара"
           ></input>
 
           <button type="submit" className={styles.buttonSubmit}>

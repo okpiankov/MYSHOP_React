@@ -1,10 +1,11 @@
 .contentBox {
     display: flex;
+    flex-direction: column;
     justify-content: space-evenly;
     font-size: 19px;
 }
 .editProductWrap {
-    height: 200px;
+    height: 120px;
     width: 500px;
     background-color: var(--background-color-contentLight);
     border: var(--border-content);
@@ -19,7 +20,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 33px; 
+    gap: 25px; 
 }
 .input {
     background-color: var(--background-color-contentLight);
@@ -39,6 +40,9 @@
     color: white;
     font-size: 20px;
     font-weight: 700;
+}
+.buttonSubmit:hover {
+    background-color: var(--background-color-contentLarge);
 }
 
 

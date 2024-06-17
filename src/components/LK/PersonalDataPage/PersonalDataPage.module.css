@@ -1,0 +1,14 @@
+.wrap {
+    height: 350px;
+    width: 250px;
+    border-radius: 15px;
+    margin-top: 10px;
+    padding-left: 10px;
+    margin-left: 4px;
+    box-shadow:  var(--box-shadow-content);
+    background-color: var(--background-color-contentLight);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    font-size: 19px;
+}

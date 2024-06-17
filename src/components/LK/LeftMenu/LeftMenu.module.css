@@ -6,7 +6,7 @@
     justify-content: flex-start;
     gap: 30px;
     background-color: var(--background-color-contentLight);
-    height: 777px;
+    height: auto;
     margin-top: 4px;
     padding-top: 20px;
    

@@ -39,6 +39,20 @@
     font-size: 20px;
     font-weight: 700;
 }
+.button:hover {
+    background-color: var(--background-color-contentLarge);
+}
+.isLoadingButton {
+    height: 30px;
+    width: 255px;
+    border-radius: 15px;
+    text-decoration: none;
+    background-color: rgb(255, 207, 207);
+    border: var(--border-content);
+    color: rgb(253, 137, 137);
+    font-size: 20px;
+    font-weight: 700;
+}
 .center {
     text-align: center;
 }

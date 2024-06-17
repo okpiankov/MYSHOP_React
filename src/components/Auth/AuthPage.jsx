@@ -1,18 +1,18 @@
 import { useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
-import { userActions } from '../../store/user/slice';
 import styles from './AuthPage.module.css';
 import { validateEmail, validatePassword } from './validate';
+import { Navigate, redirect, useNavigate } from 'react-router-dom';
+import { ROUTES } from '../../router/routes';
+import { useDispatch, useSelector } from 'react-redux';
+import { userActions, getUserToken } from '../../store/user/slice';
 
 export const AuthPage = ({ setForm }) => {
-  const navigate = useNavigate();
-
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
     email: '',
-    password: '',
+    password: '123',
   });
 
   const [emailError, setEmailError] = useState('');
@@ -34,6 +34,7 @@ export const AuthPage = ({ setForm }) => {
     }
   };
 
+  // Запись  user в redux:
   const handleSubmit = event => {
     event.preventDefault();
 
@@ -48,21 +49,48 @@ export const AuthPage = ({ setForm }) => {
       body: JSON.stringify(formData),
     })
       .then(res => res.json())
-      .then(user => {
-        dispatch(userActions.setUser(user));
-
-        // console.log(user);
+      .then(userData => {
+        dispatch(userActions.setUser(userData));
+        // console.log(userData);
 
         const {
           token,
           data: { role },
-        } = user;
+        } = userData;
+
         if (token && role === 'client') navigate('/cabinet');
         if (token && role === 'admin') navigate('/admin');
       })
-      .catch(err => console.error(err))
+      .catch(error => console.error(error))
       .finally(() => dispatch(userActions.setIsLoading(false)));
   };
+
+  // // Запись  user  в localStorage:
+  // const handleSubmit = event => {
+  //   event.preventDefault();
+
+  //   fetch('https://8a705e193c725f80.mokky.dev/auth', {
+  //     method: 'POST',
+  //     headers: {
+  //       Accept: 'application/json',
+  //       'Content-Type': 'application/json',
+  //     },
+  //     body: JSON.stringify(formData),
+  //   })
+  //     .then(res => res.json())
+  //     .then(userData => {
+  //       localStorage.setItem('user', JSON.stringify(userData));
+
+  //       const {
+  //         token,
+  //         data: { role },
+  //       } = userData;
+
+  //       if (token && role === 'client') navigate('/cabinet');
+  //       if (token && role === 'admin') navigate('/admin');
+  //     })
+  //     .catch(error => console.error(error));
+  // };
 
   return (
     <div className={styles.authWrap}>
@@ -162,7 +190,7 @@ export const AuthPage = ({ setForm }) => {
 //     token,
 //     data: { role },
 //   } = res;
-// Это только перенаправление на страницу, но авторизацию делать только через закрытые роуты
+// Это только перенаправление на страницу, но авторизацию делать только через закрытие роуты
 //   if (token && role === 'client') navigate('/cabinet');
 //   if (token && role === 'admin') navigate('/admin');
 // });

@@ -5,7 +5,7 @@ export const СabinetPage = () => {
     <div className={styles.cabinetPageWrap}>
       <div className={styles.contentBox}>
         <h2>Поздравляю вы находитесь в личном кабинете</h2>
-        <h3>Это закрытый endpoint</h3>
+        <h3>Это закрытый роут</h3>
       </div>
     </div>
   );

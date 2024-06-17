@@ -3,35 +3,56 @@ import styles from './LeftMenu.module.css';
 import { ROUTES } from '../../../router/routes';
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
-import { getUserAvatar, getUserFullName, getUserRole } from '../../../store/user/slice';
+import { getUser } from '../../../store/user/slice';
 
 export const LeftMenuCabinet = () => {
   const [avatar, setAvatar] = useState('');
   const [fullName, setFullName] = useState('');
 
-  const fullNameRedux = useSelector(getUserFullName);
-  const roleRedux = useSelector(getUserRole);
-  const avatarRedux = useSelector(getUserAvatar);
-
+  //Подписка на user из Redux
+  const userRedux = useSelector(getUser);
   useEffect(() => {
-    // console.log('fullNameRedux: ', fullNameRedux);
-    // console.log('roleRedux: ', roleRedux);
-    // console.log('avatarRedux: ', avatarRedux);
+    if (!userRedux) {
+      return;
+    }
+    const {
+      data: { role, avatar, fullName },
+    } = userRedux;
 
-    if (roleRedux === 'client') {
-      setAvatar(avatarRedux);
-      setFullName(fullNameRedux);
+    if (role === 'client') {
+      setAvatar(avatar);
+      setFullName(fullName);
     } else {
       return;
     }
-  }, [avatarRedux, fullNameRedux, roleRedux]);
+  }, [userRedux]);
+
+  // //Подписка на user из localStorage
+  // useEffect(() => {
+  //     const user = JSON.parse(localStorage.getItem('user'));
+
+  //     if (!user) {
+  //       return;
+  //     }
+
+  //     const {
+  //       data: { role, avatar, fullName },
+  //     } = user;
+
+  //     if (role === 'client') {
+  //       setAvatar(avatar);
+  //       setFullName(fullName);
+  //     } else {
+  //       return;
+  //     }
+  //   }, []);
 
   return (
     <nav className={styles.leftMenuWrap}>
       <img src={avatar} className={styles.avatar} alt="picture" />
       <div className={styles.user}>{fullName}</div>
 
-      <NavLink to={ROUTES.plug} className={styles.link}>
+      <NavLink to={ROUTES.personalData} className={styles.link}>
         Личная информация
       </NavLink>
       <NavLink to={ROUTES.basket} className={styles.link}>
@@ -52,22 +73,3 @@ export const LeftMenuCabinet = () => {
     </nav>
   );
 };
-
-// useEffect(() => {
-//   const user = JSON.parse(localStorage.getItem('user'));
-
-//   if (!user) {
-//     return;
-//   }
-
-//   const {
-//     data: { role, avatar, fullName },
-//   } = user;
-
-//   if (role === 'client') {
-//     setAvatar(avatar);
-//     setFullName(fullName);
-//   } else {
-//     return;
-//   }
-// }, []);

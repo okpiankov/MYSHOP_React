@@ -1,6 +1,6 @@
 import { createBrowserRouter, Outlet } from 'react-router-dom';
 import { AuthPage } from '../components/Auth/AuthPage';
-// import { AuthPageFormik } from '../components/Auth/AuthPageFormik';
+import { AuthPageFormik } from '../components/Auth/AuthPageFormik';
 import { RegisterPage } from '../components/Auth/RegisterPage';
 import { BasketPage } from '../components/BasketPage/BasketPage';
 import { СabinetPage } from '../components/LK/CabinetPage';
@@ -22,8 +22,11 @@ import { EditProductPage } from '../components/Admin/EditProduct/EditProductPage
 import { EditUserPage } from '../components/Admin/EditUser/EditUserPage';
 import { AddUserPage } from '../components/Admin/EditUser/AddUsertPage';
 import { OrderPage } from '../components/OrderPage/OrderPage';
-
-
+import { ProtectedRoute } from './ProtectedRoute';
+import { SearchPage } from '../components/SearchPage/SearchPage';
+import { PlaceOrderPage } from '../components/PlaceOrderPage/PlaceOrderPage';
+import { EditOrderPage } from '../components/Admin/EditOrder/EditOrderPage';
+import { PersonalDataPage } from '../components/LK/PersonalDataPage/PersonalDataPage';
 
 export const router = createBrowserRouter([
   {
@@ -82,36 +85,61 @@ export const router = createBrowserRouter([
       //   path: ROUTES.addProduct,
       //   element: <AddProductPage />,
       // },
+      //  {
+      //   path: ROUTES.placeOrder,
+      //   element: <PlaceOrderPage />,
+      // },
+      // {
+      //   path: ROUTES.order,
+      //   element: <OrderPage />,
+      // },
+      // {
+      //   path: ROUTES.personalData,
+      //   element: <PersonalDataPage />,
+      // },
       {
-        path: ROUTES.order,
-        element: <OrderPage />,
+        path: ROUTES.search,
+        element: <SearchPage />,
       },
     ],
   },
 
   // отдельный layout для личного кабинета
-    {
+  {
     path: ROUTES.cabinet,
-    element: <LayoutСabinet />,
+    element: (
+      <ProtectedRoute requiredRole="client">
+        <LayoutСabinet />
+      </ProtectedRoute>
+    ),
     children: [
       {
         index: true,
-        element: <СabinetPage/>,
+        element: <СabinetPage />,
       },
-      // {
-      //   path: ROUTES.order,
-      //   element: <OrderPage />,
-      // },
+      {
+        path: ROUTES.order,
+        element: <OrderPage />,
+      },
+      {
+        path: ROUTES.personalData,
+        element: <PersonalDataPage />,
+      },
     ],
   },
+  
   // отдельный layout для админки
   {
     path: ROUTES.admin,
-    element: <LayoutAdmin />,
+    element: (
+      <ProtectedRoute requiredRole="admin">
+        <LayoutAdmin />
+      </ProtectedRoute>
+    ),
     children: [
       {
         index: true,
-        element: <AdminPage/>,
+        element: <AdminPage />,
       },
       {
         path: ROUTES.addProduct,
@@ -133,6 +161,10 @@ export const router = createBrowserRouter([
         path: ROUTES.editUser,
         element: <EditUserPage />,
       },
+      {
+        path: ROUTES.editOrder,
+        element: <EditOrderPage />,
+      }, 
     ],
   },
 ]);

@@ -5,15 +5,21 @@ export const ROUTES = {
   productsType: '/products/type',
   productID: '/product/id',
   auth: '/auth',
-  // authFormik: '/authFormik',
+  authFormik: '/authFormik',
   register: '/register',
   basket: '/basket',
   plug: '/plug',
   delivery: '/delivery',
-  order: '/order',
+  // order: '/order',
+  // placeOrder: '/placeOrder',
+  // addProduct: '/addProduct',
+  // personalData: '/personalData',
+  search: '/search',
+
   // личный кабинет:
   cabinet: '/cabinet',
-  // order: '/cabinet/order',
+  order: '/cabinet/order',
+  personalData: '/cabinet/personalData',
  
   // админка:
   admin: '/admin',
@@ -23,4 +29,5 @@ export const ROUTES = {
   editProduct: '/admin/editProduct',
   addUser: '/admin/addUser',
   editUser: '/admin/editUser',
+  editOrder: '/admin/editOrder',
 };

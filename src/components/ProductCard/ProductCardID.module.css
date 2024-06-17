@@ -41,6 +41,42 @@
     font-size: 23px;
     font-weight: 700;
 }
+.button:hover {
+    background-color: var(--background-color-contentLarge);
+}
 .price {
     font-size: 21px;
+}
+/* Медиа запросы */
+@media (max-width: 991px) {
+    .cardWrapID {
+        height: 950px;
+        width: 500px;
+        display: flex;
+        flex-wrap: wrap;
+        flex-direction: column;
+        text-indent: 10px;
+    }
+    .productsWrap {
+        margin-top: 20px;
+    }
+   
+}
+@media (max-width: 360px) {
+    .cardWrapID {
+        height: auto;
+        width: 280px; 
+    }
+    .image {
+        height: 280px;
+        width: 280px;  
+    }
+    .button {
+        height: 40px;
+        width: 200px;
+        font-size: 19px;
+    }
+    .productsWrap {
+        margin-top: 10px;
+    }
 }

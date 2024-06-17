@@ -62,3 +62,37 @@
 .h2 {
     text-indent: 10px;
 }
+/* Медиа запросы */
+@media (max-width: 991px) {
+    .payWrap {
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+        gap: 20px;
+    }
+    .media {
+        position: absolute;
+        margin-top: 240px;
+    }
+}
+@media (max-width: 360px) {
+    .payWrap {
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+        gap: 20px;
+        width: 270px;
+    }
+    .media {
+        position: absolute;
+        margin-top: 240px;
+    }
+    .personWrap {
+        width: 270px;
+    }
+    .description {
+        width: 270px;
+        height: auto;
+        margin-bottom: 5px; 
+    }
+}
