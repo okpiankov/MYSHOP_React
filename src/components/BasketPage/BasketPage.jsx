@@ -38,21 +38,19 @@ export const BasketPage = () => {
   // Функция увеличения и уменьшения колличества товара в корзине и Redux
   const handlelQuantityClick = (id, action) => {
     //Делаю копию массива
-    const newArrayInCart = [...items];
-    console.log(items)
-    console.log(newArrayInCart)
+    const newArrayInCart = items.map(item => ({ ...item }));
 
     //Достаю объект из массива
     const product = newArrayInCart.find(item => item.id === id);
-    console.log(product)
 
     //Обращаюсь в объекте к полю quantity
     product.quantity = action === 'add' ? product.quantity + 1 : product.quantity - 1;
     if (product.quantity <= 0) {
       return handlelDeleteClick(id);
     }
+
     // Записываю копию массива в Redux
-    // localStorage.setItem('itemCart', JSON.stringify(newArrayInCart));
+    localStorage.setItem('itemCart', JSON.stringify(newArrayInCart));
     dispatch(productActions.setCart(newArrayInCart));
     setItems(newArrayInCart);
   };
