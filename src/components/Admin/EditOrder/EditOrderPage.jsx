@@ -1,123 +1,96 @@
-import { DeleteProductOrder } from './DeleteProductOrder';
+import { NavLink } from 'react-router-dom';
+import { ROUTES } from '../../../router/routes';
+import { useEffect, useState } from 'react';
 import styles from './EditOrderPage.module.css';
-import { useState } from 'react';
+
+const getOrders = async () => {
+  try {
+    const res = await fetch(`https://8a705e193c725f80.mokky.dev/orders`);
+    const orders = await res.json();
+
+    return orders.sort((a, b) => b.id - a.id);
+  } catch (error) {
+    console.log(error);
+  }
+};
 
 export const EditOrderPage = () => {
-  const [formData, setFormData] = useState({
-    id_order: '',
-    goods: [{ id: '', name: '', quantity: '' }],
-  });
+  const [orders, setOrders] = useState([
+    {
+      id: '',
+      tel: '',
+      delivery: '',
+      pay: '',
+      total_price: null,
+      user_id: null,
+      goods: [],
+    },
+  ]);
 
-  const arrayName = formData.goods?.map(item => item.name);
-  const name = arrayName[0];
-  const arrayQuantity = formData.goods?.map(item => item.quantity);
-  const quantity = arrayQuantity[0];
-  const arrayId = formData.goods?.map(item => item.id);
-  const id = arrayId[0];
-  // const obj = formData.goods?.find(item => item.id===id);
-  // console.log(obj)
-  // const{name, quantity, id}= obj
+  useEffect(() => {
+    const res = getOrders();
+    res.then(data => setOrders(data));
+  }, []);
 
-  const handleChange = event => {
-    // console.log(event.target.value);
-    const { name, value } = event.target;
-    setFormData(prevState => ({
-      ...prevState,
-      [name]: value,
-      goods: [
-        {
-          ...prevState,
-          [name]: value,
-        },
-      ],
-    }));
-  };
+  // console.log(orders);
 
-  const handleSubmit = event => {
-    event.preventDefault();
+  //Функция удаления заказа по id
+  const deleteOrder = id => {
+    fetch(`https://8a705e193c725f80.mokky.dev/orders/${id}`, {
+      method: 'DELETE',
+    }).then(res => {
+      console.log(res);
 
-    fetch(`https://8a705e193c725f80.mokky.dev/orders/${formData.id_order}`, {
-      method: 'PATCH',
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ goods: [{ id: id, name: name, quantity: quantity }] }),
-      // body: JSON.stringify({   name,  quantity}),
-    }).then(res => res.json());
-    // .then(res => console.log(res));
+      if (res.ok) {
+        setOrders(prev => prev.filter(order => order.id !== id));
+      } else {
+        console.log('Error', res);
+      }
+    });
   };
 
   return (
-    <div className={styles.contentBox}>
-      <div className={styles.editProductWrap}>
-        <form className={styles.inputWrap} onSubmit={handleSubmit}>
-          <input
-            className={styles.input}
-            type="numder"
-            value={formData.id_order}
-            name="id_order"
-            onChange={handleChange}
-            placeholder="Введите id заказа"
-          ></input>
+    <div className={styles.wrap}>
+      <ul className={styles.list}>
+        <p className={styles.wrap2}>
+          Для редактирования оформите заказы в корзине
+          <strong>Список всех заказов:</strong>
+        </p>
+        {orders?.length > 0 &&
+          orders?.map(order => (
+            <li key={order.id} className={styles.item}>
+              <NavLink to={`${ROUTES.orderID}/${order.id}`}>
+                {' '}
+                <strong className={styles.title}>Заказ номер - {order.id}</strong>
+              </NavLink>
+              <div className={styles.details}>
+                <p>
+                  <strong>Сумма:</strong> {order.total_price?.toLocaleString()} руб.
+                </p>
+                <p>
+                  <strong>Кол-во товаров:</strong> {order.goods?.length}
+                </p>
+                <p>
+                  <strong>Телефон:</strong> {order?.tel}
+                </p>
+                <p>
+                  <strong>Доставка:</strong> {order?.delivery}
+                </p>
+                <p>
+                  <strong>Оплата:</strong> {order?.pay}
+                </p>
 
-          <input
-            className={styles.input}
-            type="numder"
-            value={formData.goods?.map(item => item.id)}
-            name="id"
-            onChange={handleChange}
-            placeholder="Введите id товара"
-          ></input>
+                <button type="button" className={styles.button1} onClick={() => deleteOrder(order?.id)}>
+                  удалить
+                </button>
 
-          <input
-            className={styles.input}
-            type="text"
-            value={formData.goods?.map(item => item.name)}
-            name="name"
-            onChange={handleChange}
-            placeholder="Введите название товара"
-          ></input>
-
-          <input
-            className={styles.input}
-            type="text"
-            value={formData.goods?.map(item => item.quantity)}
-            name="quantity"
-            onChange={handleChange}
-            placeholder="Введите количество товара"
-          ></input>
-
-          {/* <input
-            className={styles.input}
-            type="numder"
-            value={formData.id_user}
-            name="id_user"
-            onChange={handleChange}
-            placeholder="Введите id пользователя"
-          ></input>
-
-          <input
-            className={styles.input}
-            type="text"
-            value={formData.fullName}
-            name="fullName"
-            onChange={handleChange}
-            placeholder="Введите имя пользователя"
-          ></input> */}
-
-          <button type="submit" className={styles.buttonSubmit}>
-            Редактировать заказ
-          </button>
-        </form>
-      </div>
-
-      {/* <DeleteProductOrder/> */}
-
-      <div className={styles.patternWrap}>
-        <span>Скопируйте пример данных отсюда:</span>
-        <span>название: Смартфон Apple iPhone 15</span>
-      </div>
+                <NavLink to={`${ROUTES.orderID}/${order.id}`} className={styles.button2}>
+                  редактировать
+                </NavLink>
+              </div>
+            </li>
+          ))}
+      </ul>
     </div>
   );
 };

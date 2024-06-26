@@ -13,7 +13,7 @@
     padding-left: 10px;
     box-shadow:  var(--box-shadow-content);
 }
-@media (max-width: 360px) {
+@media (max-width: 430px) {
     .contentBox {
         width: 135px;
         font-size: 15px;

@@ -113,7 +113,7 @@ export const HeaderMenu = ({ setPopUpAuth, setLeftMenu, leftMenu }) => {
         </div>
       </header>
 
-      {/* Хедер для мобильных устройств(адаптация (max-width: 360px)) */}
+      {/* Хедер для мобильных устройств(адаптация (max-width: 430px)) */}
       <header className={styles.headerMenuPhone}>
         <div className={`${styles.container} ${styles.headerMenuWrap}`}>
           <button onClick={handleVisibleLeftMenu} className={`${styles.burger} ${styles.button} ${styles.item3}`}>

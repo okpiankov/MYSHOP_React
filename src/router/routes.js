@@ -11,14 +11,16 @@ export const ROUTES = {
   plug: '/plug',
   delivery: '/delivery',
   // order: '/order',
-  // placeOrder: '/placeOrder',
   // addProduct: '/addProduct',
   // personalData: '/personalData',
+  // editOrder: '/editOrder',
+  // orderID: '/id',
   search: '/search',
 
   // личный кабинет:
   cabinet: '/cabinet',
   order: '/cabinet/order',
+  mybasket: '/cabinet/basket',
   personalData: '/cabinet/personalData',
  
   // админка:
@@ -30,4 +32,5 @@ export const ROUTES = {
   addUser: '/admin/addUser',
   editUser: '/admin/editUser',
   editOrder: '/admin/editOrder',
+  orderID: '/admin/editOrder/id',
 };

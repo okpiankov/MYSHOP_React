@@ -43,3 +43,16 @@
 .link:hover {
     color: #FFFFFF;
 }
+.buttonLogout {
+    height: 45px;
+    width: 90px;
+    border-radius: 15px;
+    text-decoration: none;
+    background-color: var(--background-color-contentLight);
+    border: var(--border-content);
+}
+.buttonLogout:hover {
+    /* background-color: var(--background-color-contentLarge); */
+    background-color: rgb(201, 131, 0);
+    color: white;
+}

@@ -9,12 +9,15 @@
     height: auto;
     margin-top: 4px;
     padding-top: 20px;
+    padding-bottom: 20px;
     /* border: 1px black solid; */
     box-shadow:  var(--box-shadow-content); 
     font-size: 21px;
-    
-
+    position: relative;
 }
+
+
+
 .popUpMenu {
     height: 100%;
     width: 150px;
@@ -25,12 +28,13 @@
     flex-direction: column;
     justify-content: flex-start;
     margin-left: 5px;
-    padding-top: 20px;
+    /* padding-top: 20px; */
     gap: 50px;
     
     
     position: absolute;
-    top: 84px;
+    /* top: 84px; */
+    top: 0;
     
     
     opacity: 0;
@@ -67,15 +71,19 @@
     box-shadow: inset 3px -3px 2px var(--background-color-contentLarge),
     inset 3px 3px 2px var(--background-color-contentLarge);
 }
+.popUpMenu .all{
+
+    margin-top: 20px;
+}
 @media (max-width: 991px) {
-    .popUpMenu {
+    /* .popUpMenu {
         top: 144px;
-    }
+    } */
 }
 @media (max-width: 360px) {
-    .popUpMenu {  
+    /* .popUpMenu {  
         top: 124px;
-    }
+    } */
     .popUpMenu {
         transform: translateX(150%);
     }

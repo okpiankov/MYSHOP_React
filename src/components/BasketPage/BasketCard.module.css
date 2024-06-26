@@ -70,7 +70,7 @@
     }
   
 }
-@media (max-width: 360px) {
+@media (max-width: 430px) {
     .basketCardWrap {
         display: flex;
         flex-direction: column;

@@ -5,7 +5,8 @@ export const cartSlice = createSlice({
   initialState: [],
   reducers: {
     setCart: (state, action) => {
-      return [...action.payload];
+      return state = action.payload;
+      // return [...action.payload];
     },
   },
   selectors: {
@@ -19,19 +20,16 @@ export const { getCart } = cartSlice.selectors;
 // console.log(getCart)
 
 
-// import { createSlice } from '@reduxjs/toolkit';
-
 // export const cartSlice = createSlice({
 //   name: 'cart',
-//   initialState: { product: '' },
+//   initialState: { products: [] },
 //   reducers: {
-//     //Анализ  state = action.payload;
 //     setCart: (state, action) => {
-//       state.product = action.payload;
+//       state.products = action.payload;
 //     },
 //   },
 //   selectors: {
-//     getCart: state => state.product,
+//     getCart: state => state.products,
 //   },
 // });
 

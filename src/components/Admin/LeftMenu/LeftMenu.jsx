@@ -61,7 +61,7 @@ export const LeftMenuAdmin = () => {
       <NavLink to={ROUTES.editUser} className={styles.link}>
         Редактировать данные пользователя
       </NavLink>
-      <NavLink to={ROUTES.plug} className={styles.link}>
+      <NavLink to={ROUTES.editOrder} className={styles.link}>
         Редактировать заказ
       </NavLink>
       <NavLink to={ROUTES.plug} className={styles.link}>

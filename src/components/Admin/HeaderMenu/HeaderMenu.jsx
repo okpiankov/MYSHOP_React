@@ -1,23 +1,36 @@
-import { NavLink } from 'react-router-dom';
+import { NavLink, useLocation, useNavigate } from 'react-router-dom';
 import styles from './Header.module.css';
 import { ROUTES } from '../../../router/routes';
 import UserIcon from '../../../assets/icons/user1.svg';
+import { useDispatch } from 'react-redux';
+import { userActions } from '../../../store/user/slice';
 
 export const HeaderMenuAdmin = ({ setPopUpAuth }) => {
   //передача пропса {setPopUpAuth} через скобки{}
   const handleVisiblePopUp = () => setPopUpAuth(true);
 
+  const { pathname } = useLocation();
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  //Функция выхода из авторизации
+  const handleLogout = () => {
+    dispatch(userActions.clearUserStore());
+
+    if (pathname.includes(ROUTES.admin)) {
+      navigate('/');
+    }
+  };
   return (
     <header className={styles.headerMenu}>
       <div className={`${styles.container} ${styles.headerMenuWrap}`}>
         <NavLink to={ROUTES.root} className={styles.link}>
-          Главная
+          На сайт
         </NavLink>
 
-        <NavLink to={ROUTES.cabinet} className={styles.link}>
-          Кабинет
-        </NavLink>
-    
+        <button className={styles.buttonLogout} onClick={handleLogout}>
+          Выйти
+        </button>
       </div>
     </header>
   );

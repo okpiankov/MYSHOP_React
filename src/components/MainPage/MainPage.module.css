@@ -50,7 +50,7 @@
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
-    font-size: 19px;
+    font-size: 20px;
     
 }
 .image {
@@ -125,13 +125,16 @@
     }
 
 }
-@media (max-width: 360px) {
+@media (max-width: 430px) {
     .bannerWrap, .banner1, .banner2 {
         font-size: 28px;
         
     }
     .banner2 {
         margin-top: 33px;
+    }
+    .privilege {
+        font-size: 19px;
     }
 
 }

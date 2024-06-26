@@ -22,7 +22,7 @@ export const ProductCard = () => {
   // Запись данных карточек товаров в Redux:
   const dispatch = useDispatch();
   // Получю для проверки из Redux  массив товаров для проверки
-  const prevArrayItems = useSelector(getCart);
+  const prevArrayItems = useSelector(getCart); 
 
   const handleAddItem = id => {
     // Ищу продукт по id  в массиве всех продуктов

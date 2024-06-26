@@ -33,10 +33,10 @@ export const ProductCardID = () => {
       dispatch(productActions.setCart(item));
       return;
     }
-    console.log(prevArrayItems);
+    // console.log(prevArrayItems);
 
     const ItemInPrevArray = prevArrayItems.find(item => item.id === product.id);
-    console.log(ItemInPrevArray);
+    // console.log(ItemInPrevArray);
 
     if (ItemInPrevArray) {
       return;

@@ -24,9 +24,9 @@ import { AddUserPage } from '../components/Admin/EditUser/AddUsertPage';
 import { OrderPage } from '../components/OrderPage/OrderPage';
 import { ProtectedRoute } from './ProtectedRoute';
 import { SearchPage } from '../components/SearchPage/SearchPage';
-import { PlaceOrderPage } from '../components/PlaceOrderPage/PlaceOrderPage';
 import { EditOrderPage } from '../components/Admin/EditOrder/EditOrderPage';
 import { PersonalDataPage } from '../components/LK/PersonalDataPage/PersonalDataPage';
+import { OrderID } from '../components/Admin/EditOrder/OrderID';
 
 export const router = createBrowserRouter([
   {
@@ -85,10 +85,6 @@ export const router = createBrowserRouter([
       //   path: ROUTES.addProduct,
       //   element: <AddProductPage />,
       // },
-      //  {
-      //   path: ROUTES.placeOrder,
-      //   element: <PlaceOrderPage />,
-      // },
       // {
       //   path: ROUTES.order,
       //   element: <OrderPage />,
@@ -96,6 +92,18 @@ export const router = createBrowserRouter([
       // {
       //   path: ROUTES.personalData,
       //   element: <PersonalDataPage />,
+      // },
+      // {
+      //   path: ROUTES.editOrder,
+      //   element: <EditOrderPage />,
+      // },
+      // {
+      //   path: `${ROUTES.orderID}/:id`,
+      //   element: <OrderID />,
+      // },
+      // {
+      //   path: ROUTES.orderID,
+      //   element: <OrderID />,
       // },
       {
         path: ROUTES.search,
@@ -120,6 +128,10 @@ export const router = createBrowserRouter([
       {
         path: ROUTES.order,
         element: <OrderPage />,
+      },
+      {
+        path: ROUTES.mybasket,
+        element: <BasketPage />,
       },
       {
         path: ROUTES.personalData,
@@ -164,6 +176,10 @@ export const router = createBrowserRouter([
       {
         path: ROUTES.editOrder,
         element: <EditOrderPage />,
+      },
+      {
+        path: `${ROUTES.orderID}/:id`,
+        element: <OrderID />,
       }, 
     ],
   },

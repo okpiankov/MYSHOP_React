@@ -1,26 +1,26 @@
 import { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { NavLink, useLocation, useNavigate } from 'react-router-dom';
 import CartIcon from '../../assets/icons/cart2.svg';
+import DeliveryIcon from '../../assets/icons/delivery2.svg';
+import HomeIcon from '../../assets/icons/home1.svg';
 import MenuIcon from '../../assets/icons/menu2.svg';
+import PayIcon from '../../assets/icons/pay2.svg';
 import TelIcon from '../../assets/icons/tel.svg';
 import UserIcon from '../../assets/icons/user1.svg';
 import { ROUTES } from '../../router/routes';
+import { getCart } from '../../store/basket/slice';
+import { getUser, userActions } from '../../store/user/slice';
 import { Search } from '../SearchPage/Search';
 import styles from './Header.module.css';
-import HomeIcon from '../../assets/icons/home1.svg';
-import PayIcon from '../../assets/icons/pay2.svg';
-import DeliveryIcon from '../../assets/icons/delivery2.svg';
-import { useSelector, useDispatch } from 'react-redux';
-import { userActions, getUser } from '../../store/user/slice';
-import { getCart } from '../../store/basket/slice';
 
 export const HeaderMenu = ({ setPopUpAuth, setLeftMenu, leftMenu }) => {
   const handleVisiblePopUp = () => setPopUpAuth(true);
-  const handleVisibleLeftMenu = () => setLeftMenu(leftMenu === false ? true : false);
+  const handleVisibleLeftMenu = () => setLeftMenu(!leftMenu);
 
   const { pathname } = useLocation();
   const navigate = useNavigate();
-  const dispatch = useDispatch ();
+  const dispatch = useDispatch();
 
   //user - это состояние страницы (это не объект из LS)  обрабатываю через useState+useEffect
   const [user, setUser] = useState({});
@@ -64,7 +64,7 @@ export const HeaderMenu = ({ setPopUpAuth, setLeftMenu, leftMenu }) => {
   };
   //Получаю значение счетчика корзины
   // const count = JSON.parse(localStorage.getItem('itemCart')).length;
-  const count = useSelector(getCart).length;
+  const count = useSelector(getCart)?.length;
 
   return (
     <>
@@ -112,7 +112,7 @@ export const HeaderMenu = ({ setPopUpAuth, setLeftMenu, leftMenu }) => {
         </div>
       </header>
 
-      {/* Хедер для мобильных устройств(адаптация (max-width: 360px)) */}
+      {/* Хедер для мобильных устройств(адаптация (max-width: 430px)) */}
       <header className={styles.headerMenuPhone}>
         <div className={`${styles.container} ${styles.headerMenuWrap}`}>
           <button onClick={handleVisibleLeftMenu} className={`${styles.burger} ${styles.button} ${styles.item3}`}>

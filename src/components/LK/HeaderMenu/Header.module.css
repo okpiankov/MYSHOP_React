@@ -123,7 +123,7 @@
 }
 .buttonLogout {
     height: 45px;
-    width: 90px;
+    width: 80px;
     border-radius: 15px;
     text-decoration: none;
     background-color: var(--background-color-contentLight);
@@ -203,7 +203,7 @@
     }
    
 }
-@media (max-width: 360px) {
+@media (max-width: 430px) {
   .headerMenu {
     opacity: 0;
     pointer-events: none;
@@ -217,10 +217,11 @@
   .headerMenuWrap {
     height: 120px;
     display: grid;
+    width: auto;
     grid-template-columns: repeat(6,1fr);
     grid-template-rows: 40px 40px 40px;
-    padding-left: 7px;
-    padding-right: 57px;
+    /* padding-left: 7px;
+    padding-right: 57px; */
     box-sizing: border-box;
     row-gap: 1px;
     column-gap: 7px;
@@ -239,6 +240,7 @@
     grid-area: телефон;
     grid-column: span 4;
     grid-row: 1;
+    font-size: 19px;
   }
   .item3 {
     grid-area: бургер;
@@ -315,7 +317,8 @@
   }
   .buttonLogout {
     height: 35px;
-    width: 63px;
+    width: 70px;
+    font-size: 19px;
   }
 
 }

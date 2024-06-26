@@ -31,8 +31,8 @@
     box-sizing: border-box;
 }
  .button {
-    height: 50px;
-    width: 270px;
+    height: 45px;
+    width: 250px;
     border-radius: 15px;
     align-self: center;
     background-color: var(--background-color-contentMedium);
@@ -62,7 +62,7 @@
     }
    
 }
-@media (max-width: 360px) {
+@media (max-width: 430px) {
     .cardWrapID {
         height: auto;
         width: 280px; 

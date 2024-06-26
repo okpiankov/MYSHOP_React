@@ -79,7 +79,7 @@
         width: 620px;
     }
 }
-@media (max-width: 360px) {
+@media (max-width: 430px) {
     .orderCardWrap {
         width: 270px;
     }

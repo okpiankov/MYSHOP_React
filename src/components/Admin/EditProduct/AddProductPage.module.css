@@ -73,7 +73,7 @@
 .buttonSubmit:hover {
     background-color: var(--background-color-contentLarge);
 }
-.isLoadingButton {
+.disabled {
     background-color: rgb(255, 207, 207);
     color: rgb(253, 137, 137);
     height: 40px;

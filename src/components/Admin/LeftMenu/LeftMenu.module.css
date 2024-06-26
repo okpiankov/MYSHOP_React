@@ -10,6 +10,7 @@
     height: auto;
     margin-top: 4px;
     padding-top: 20px;
+    padding-bottom: 30px;
    
     border-radius: 15px;
     box-shadow:  var(--box-shadow-content); 

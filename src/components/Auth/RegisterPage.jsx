@@ -8,6 +8,7 @@ export const RegisterPage = ({ setForm }) => {
     email: '',
     password: '',
     tel: '',
+    role: 'client',
   });
 
   const [emailError, setEmailError] = useState('');
@@ -24,18 +25,18 @@ export const RegisterPage = ({ setForm }) => {
 
     // Передаю функции setState как параметры в функции валидации в другой модуль
     if (name === 'fullName' && value !== ' ') {
-       validateName(value, setNameError);
+      validateName(value, setNameError);
     }
     if (name === 'email' && value !== ' ') {
-       validateEmail(value, setEmailError);
+      validateEmail(value, setEmailError);
     }
     if (name === 'password' && value !== ' ') {
-       validatePassword(value, setPasswordError);
+      validatePassword(value, setPasswordError);
     }
     if (name === 'tel' && value !== ' ') {
-       validateTel(value, setTelError);
+      validateTel(value, setTelError);
     }
-  }; 
+  };
 
   const handleSubmit = event => {
     event.preventDefault();
@@ -66,7 +67,6 @@ export const RegisterPage = ({ setForm }) => {
       </div>
 
       <form className={styles.inputWrap} onSubmit={handleSubmit} noValidate>
-
         {nameError && nameError}
         <input
           className={styles.input}

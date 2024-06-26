@@ -27,7 +27,7 @@
     border-style: none;
     border-bottom: 1px red solid;
     outline:none;
-    font-size: 17px;
+    font-size: 20px;
 }
 .buttonSubmit {
     height: 40px;
@@ -64,7 +64,7 @@
     border-style: none;
     background-color: var(--background-color-contentLight);
 }
-@media (max-width: 360px) {
+@media (max-width: 430px) {
     .authWrap {
         height: 280px;
         width: 280px;
@@ -75,6 +75,9 @@
     }
     .buttonSubmit {
         font-size: 22px;
+    }
+    .input {
+        font-size: 18px;
     }
     
 } 

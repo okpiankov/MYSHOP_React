@@ -38,13 +38,14 @@ export const BasketPage = () => {
   // Функция увеличения и уменьшения колличества товара в корзине и Redux
   const handlelQuantityClick = (id, action) => {
     //Делаю копию массива
-    const newArrayInCart = [...items];
-    console.log(items)
-    console.log(newArrayInCart)
+    // const newArrayInCart = [...items];
+    const newArrayInCart = items.map(item => ({ ...item }));
+    // console.log(items)
+    // console.log(newArrayInCart);
 
     //Достаю объект из массива
     const product = newArrayInCart.find(item => item.id === id);
-    console.log(product)
+    // console.log(product)
 
     //Обращаюсь в объекте к полю quantity
     product.quantity = action === 'add' ? product.quantity + 1 : product.quantity - 1;
@@ -96,6 +97,9 @@ export const BasketPage = () => {
   const handleSubmit = event => {
     event.preventDefault();
     setIsLoading(true);
+    // Здесь можно прописать еще один fetch для регистрации пользователя
+    // если заказ оформил неавторизованый пользователь
+
     fetch('https://8a705e193c725f80.mokky.dev/orders', {
       method: 'POST',
       headers: {
@@ -103,11 +107,11 @@ export const BasketPage = () => {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify(arrayOrder),
-    }).finally(() => setIsLoading(false));
-    // .finally(navigate(ROUTES.order));
+    })
+      .then(res => navigate(ROUTES.order))
+      .finally(() => setIsLoading(false));
+    // .finally() => navigate(ROUTES.order));
     // .then(res => console.log(res));
-
-    navigate(ROUTES.order);
   };
 
   return (
@@ -141,6 +145,29 @@ export const BasketPage = () => {
           </div>
 
           <form className={styles.inputWrap} onSubmit={handleSubmit}>
+            <input
+              className={styles.input}
+              type="text"
+              value={formData.tel}
+              name="tel"
+              onChange={handleChange}
+              placeholder="Введите телефон"
+            ></input>
+
+            <select name="pay" value={formData.pay} onChange={handleChange} className={styles.select}>
+              <option>Выберите способ оплаты:</option>
+              <option>Карта</option>
+              <option>Наличные</option>
+              <option>Счет</option>
+            </select>
+
+            <select name="delivery" value={formData.delivery} onChange={handleChange} className={styles.select}>
+              <option>Выберите способ доставки:</option>
+              <option>Самовывоз</option>
+              <option>СДЭК</option>
+              <option>ОЗОН</option>
+            </select>
+
             {/* <input
               className={styles.input}
               type="text"
@@ -159,34 +186,11 @@ export const BasketPage = () => {
               placeholder="Введите email"
             ></input> */}
 
-            <input
-              className={styles.input}
-              type="text"
-              value={formData.tel}
-              name="tel"
-              onChange={handleChange}
-              placeholder="Введите телефон"
-            ></input>
-
-            <input
-              className={styles.input}
-              type="text"
-              value={formData.delivery}
-              name="delivery"
-              onChange={handleChange}
-              placeholder="Введите способ доставки: СДЭК/самовывоз"
-            ></input>
-
-            <input
-              className={styles.input}
-              type="text"
-              value={formData.pay}
-              name="pay"
-              onChange={handleChange}
-              placeholder="Введите способ оплаты: карта/счет/наличные"
-            ></input>
-
-            <button type="submit" className={isLoading === true ? styles.isLoadingButton : styles.buttonSubmit}>
+            <button
+              disabled={isLoading}
+              type="submit"
+              className={isLoading === true ? styles.disabled : styles.buttonSubmit}
+            >
               Оформить заказ
             </button>
           </form>
@@ -290,13 +294,12 @@ export const BasketPage = () => {
 //       },
 //       body: JSON.stringify(arrayOrder),
 //     })
+//     .then(res => navigate(ROUTES.order))
 //     .finally(() => setIsLoading(false));
-//     // .finally(navigate(ROUTES.order));
 //     // .then(res => console.log(res));
-
-//     // navigate(ROUTES.order);
 //   };
 
+//разные коментарии к коду
 // export const BasketPage = () => {
 //   //использую useState чтобы обновлять новое состояние в []
 //   //использую один и тотже useState для чтения товаров из LS и функций handlelDeleteClick handlelQuantityClick

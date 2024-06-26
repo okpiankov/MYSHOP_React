@@ -8,12 +8,14 @@ export const OrderPage = () => {
   useEffect(() => {
     fetch('https://8a705e193c725f80.mokky.dev/orders?_relations=users')
       .then(response => response.json())
-      .then(data => setOrder(data))
+      .then(data => {
+        console.log(data);
+        setOrder(data);
+      })
       // .then(data => console.log(data))
       .catch(console.error);
-      
   }, []);
- 
+
   return (
     <>
       <div className={styles.orderWrap}>

@@ -44,7 +44,8 @@ export const AddProductPage = () => {
     // console.log(resJson)
 
     const { url } = await resJson;
-    console.log(url);
+    // console.log(url);
+
     setIsLoading(false)
   };
 
@@ -83,7 +84,7 @@ export const AddProductPage = () => {
             placeholder="Введите URL image"
           ></input>
 
-          <button type="submit" className={isLoading===true ? styles.isLoadingButton : styles.buttonSubmit}>
+          <button type="submit" disabled={isLoading} className={isLoading===true ? styles.disabled : styles.buttonSubmit}>
             Добавить картинку
           </button>
         </form>

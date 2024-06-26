@@ -110,7 +110,7 @@ export const AuthPage = ({ setForm }) => {
           value={formData.email}
           name="email"
           onChange={handleChange}
-          placeholder="Email* user@test.com или admin@test.com"
+          placeholder="Email* user@test.com / admin@test.com"
         ></input>
         {passwordError && passwordError}
         <input
