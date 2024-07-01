@@ -4,9 +4,9 @@ import styles from './BasketPage.module.css';
 import { NavLink, Navigate, useNavigate } from 'react-router-dom';
 import { ROUTES } from '../../router/routes';
 // import {handlelDeleteClick, handlelQuantityClick} from '../../services/localStorage';
-import { useDispatch, useSelector } from 'react-redux';
 import { getCart, productActions } from '../../store/basket/slice';
 import { getUser } from '../../store/user/slice';
+import { useDispatch, useSelector } from 'react-redux';
 
 export const BasketPage = () => {
   const [items, setItems] = useState([]);
@@ -141,7 +141,7 @@ export const BasketPage = () => {
         <div className={styles.placeOrderWrap}>
           <div className={styles.total}>
             <div>Итого:</div>
-            <div>{result} P</div>
+            <div>{result} руб.</div>
           </div>
 
           <form className={styles.inputWrap} onSubmit={handleSubmit}>

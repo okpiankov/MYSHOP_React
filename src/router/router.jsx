@@ -78,20 +78,8 @@ export const router = createBrowserRouter([
         element: <BasketPage />,
       },
       // {
-      // path: ROUTES.cabinet,
-      //   element: <СabinetPage/>,
-      // },
-      // {
       //   path: ROUTES.addProduct,
       //   element: <AddProductPage />,
-      // },
-      // {
-      //   path: ROUTES.order,
-      //   element: <OrderPage />,
-      // },
-      // {
-      //   path: ROUTES.personalData,
-      //   element: <PersonalDataPage />,
       // },
       // {
       //   path: ROUTES.editOrder,
@@ -157,10 +145,6 @@ export const router = createBrowserRouter([
         path: ROUTES.addProduct,
         element: <AddProductPage />,
       },
-      // {
-      //   path: ROUTES.deleteProduct,
-      //   element: <DeleteProductPage />,
-      // },
       {
         path: ROUTES.editProduct,
         element: <EditProductPage />,

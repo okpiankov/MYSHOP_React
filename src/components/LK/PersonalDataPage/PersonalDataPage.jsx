@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import styles from './PersonalDataPage.module.css';
-import { useSelector } from 'react-redux';
 import { getUser } from '../../../store/user/slice';
+import { useSelector } from 'react-redux';
 
 export const PersonalDataPage = () => {
   const [user, setUser] = useState({});

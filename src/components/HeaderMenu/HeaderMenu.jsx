@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
 import { NavLink, useLocation, useNavigate } from 'react-router-dom';
 import CartIcon from '../../assets/icons/cart2.svg';
 import DeliveryIcon from '../../assets/icons/delivery2.svg';
@@ -13,6 +12,7 @@ import { getCart } from '../../store/basket/slice';
 import { getUser, userActions } from '../../store/user/slice';
 import { Search } from '../SearchPage/Search';
 import styles from './Header.module.css';
+import { useDispatch, useSelector } from 'react-redux';
 
 export const HeaderMenu = ({ setPopUpAuth, setLeftMenu, leftMenu }) => {
   const handleVisiblePopUp = () => setPopUpAuth(true);

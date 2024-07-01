@@ -1,8 +1,21 @@
 import { useState } from 'react';
 import styles from './RegisterPage.module.css';
 import { validateEmail, validateName, validatePassword, validateTel } from './validate';
+import axios from 'axios';
 
 export const RegisterPage = ({ setForm }) => {
+  const [registration, setRegistration] = useState({
+    user: {
+      data: {
+        avatar: '',
+        email: '',
+        fullName: '',
+        id: null,
+        role: '',
+      },
+      token: '',
+    },
+  })
   const [formData, setFormData] = useState({
     fullName: '',
     email: '',
@@ -42,23 +55,16 @@ export const RegisterPage = ({ setForm }) => {
     event.preventDefault();
 
     const fetchData = async () => {
-      const res = await fetch('https://8a705e193c725f80.mokky.dev/register', {
-        method: 'POST',
-        headers: {
-          Accept: 'application/json',
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(formData),
-      });
-      const data = await res.json();
-      console.log(res);
-      console.log(data);
+      const res = await axios.post('https://8a705e193c725f80.mokky.dev/register', formData);
+      // console.log(res.data);
+      setRegistration(res.data)
     };
     fetchData();
   };
 
   return (
     <div className={styles.authWrap}>
+      {registration.token && <div className={styles.registration}>Вы зарегистрированны!</div>}
       <div>
         <button className={styles.selectАctive} onClick={() => setForm('login')}>
           Вход /{' '}
@@ -120,3 +126,22 @@ export const RegisterPage = ({ setForm }) => {
     </div>
   );
 };
+
+// const handleSubmit = event => {
+//   event.preventDefault();
+
+//   const fetchData = async () => {
+//     const res = await fetch('https://8a705e193c725f80.mokky.dev/register', {
+//       method: 'POST',
+//       headers: {
+//         Accept: 'application/json',
+//         'Content-Type': 'application/json',
+//       },
+//       body: JSON.stringify(formData),
+//     });
+//     const data = await res.json();
+//     console.log(res);
+//     console.log(data);
+//   };
+//   fetchData();
+// };

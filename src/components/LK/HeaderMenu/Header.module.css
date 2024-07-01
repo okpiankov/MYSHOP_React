@@ -7,6 +7,7 @@
     top: 0;
     z-index: 55; 
 }
+
 .container {
     /* width: 1140px;
     margin: 0 auto; */
@@ -138,6 +139,10 @@
   opacity: 0;
   pointer-events: none;
   position: absolute;
+  width: 100%;
+  background-color: var(--background-color-contentLight);
+  box-shadow:  1px 1px 1px var(--background-color-contentLarge);
+
 }
 /* Медиа запросы */
 @media (max-width: 991px) {
@@ -213,6 +218,7 @@
     pointer-events: all;
     position: absolute;
     margin-top: 0px;
+    width: 100%;
   }
   .headerMenuWrap {
     height: 120px;
@@ -231,6 +237,10 @@
     "бургер главная  доставка иконка корзина";
     
   }
+  .container {
+    width: 90%;
+  }
+  
   .item1 {
     grid-area: поиск;
     grid-column: span 6;

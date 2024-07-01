@@ -42,5 +42,11 @@
     font-weight: 700;
     color: blue;
 }
-
+@media (max-width: 991px) {
+    .avatar {
+        height: 100px;
+        width: 100px;
+        border-radius: 50px;
+    }
+}
 

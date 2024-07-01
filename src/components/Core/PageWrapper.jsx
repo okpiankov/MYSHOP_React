@@ -5,8 +5,8 @@ import { LeftMenu } from '../LeftMenu/LeftMenu';
 import { PopUpAuth } from '../PopUp/PopUpAuth';
 import styles from './Container.module.css';
 import { MainContent } from './MainContent';
-import { useSelector } from 'react-redux';
 import { getUser } from '../../store/user/slice';
+import { useSelector } from 'react-redux';
 
 export const PageWrapper = ({ children }) => {
   // объект user нужно получать из глобального состояния типа: редакс или контекст:

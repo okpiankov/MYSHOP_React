@@ -3,8 +3,9 @@ import styles from './ProductCard.module.css';
 import { useSearchParams, Link, NavLink } from 'react-router-dom';
 import { ROUTES } from '../../router/routes';
 import { handleAddItem } from '../../services/localStorage';
-import { useDispatch, useSelector } from 'react-redux';
 import { getCart, productActions } from '../../store/basket/slice';
+import { useDispatch, useSelector } from 'react-redux';
+import axios from 'axios';
 
 export const ProductCardType = () => {
   const [products, setProducts] = useState(null);
@@ -12,9 +13,8 @@ export const ProductCardType = () => {
 
   useEffect(() => {
     const type = search.get('type');
-    fetch(`https://8a705e193c725f80.mokky.dev/product?type=${type}`)
-      .then(response => response.json())
-      .then(data => setProducts(data));
+    axios.get(`https://8a705e193c725f80.mokky.dev/product?type=${type}`)
+      .then(data => setProducts(data.data));
   }, [search]);
 
   // Запись данных карточек товаров в Redux:
@@ -57,7 +57,7 @@ export const ProductCardType = () => {
             <span>{name}</span>
             <span className={styles.center}>{description}</span>
             <span>
-              <strong>{price} P</strong>
+              <strong>{price} руб.</strong>
             </span>
             {/* <button className={styles.button} onClick={() => handleAddItem(id,products)}> */}
             <button className={styles.button} onClick={() => handleAddItem(id)}>
@@ -69,6 +69,13 @@ export const ProductCardType = () => {
     </>
   );
 };
+
+// useEffect(() => {
+//   const type = search.get('type');
+//   fetch(`https://8a705e193c725f80.mokky.dev/product?type=${type}`)
+//     .then(response => response.json())
+//     .then(data => setProducts(data));
+// }, [search]);
 
 // const handleAddItem = id => {
 //   console.log(id);

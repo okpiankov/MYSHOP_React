@@ -74,8 +74,6 @@
     font-size: 20px;
     font-family: "Times New Roman", Times, serif; 
 }
-
-
 .buttonSubmit {
     height: 40px;
     width: 250px;
@@ -109,9 +107,9 @@
        flex-wrap: wrap;
        flex-direction: column;
        gap: 20px;
-       margin: 20px;
        width: 800px;
-    }   
+    }
+     
 }
 @media (max-width: 991px) {
     .basketWrap {
@@ -119,10 +117,11 @@
        flex-wrap: wrap;
        flex-direction: column;
        gap: 20px;
-       margin: 10px;
-       width: 640px;
+       width: 600px;
+       margin-left: 8px;
+       margin-top: 20px;
     }
-
+    
 }
 @media (max-width: 430px) {
     .basketWrap {
@@ -130,17 +129,19 @@
        flex-wrap: wrap;
        flex-direction: column;
        gap: 15px;
-       margin: 5px;
        width: 300px;
        height: auto;
        align-items: flex-start;
+       margin: 15px;
+       margin-left: 5px;
+       
     }
     .cardWrap{
-        width: 280px;
+        width: 250px;
     }
     .placeOrderWrap {
         height: 300px;
-        width: 280px;
+        width: 250px;
     }
     .input {
         width: 222px;

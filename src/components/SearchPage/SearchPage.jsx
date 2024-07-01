@@ -3,8 +3,9 @@ import { NavLink, useSearchParams } from 'react-router-dom';
 import styles from './Search.module.css';
 import { ROUTES } from '../../router/routes';
 import { handleAddItem } from '../../services/localStorage';
-import { useDispatch, useSelector } from 'react-redux';
 import { getCart, productActions } from '../../store/basket/slice';
+import { useDispatch, useSelector } from 'react-redux';
+import axios from 'axios';
 
 export const SearchPage = () => {
   const [products, setProducts] = useState([]);
@@ -14,11 +15,10 @@ export const SearchPage = () => {
   console.log(search.get('title'));
 
   useEffect(() => {
-    fetch(`https://8a705e193c725f80.mokky.dev/product?name=*${title}`)
-      .then(res => res.json())
+    axios.get(`https://8a705e193c725f80.mokky.dev/product?name=*${title}`)
       .then(res => {
-        console.log(res);
-        setProducts(res);
+        console.log(res.data);
+        setProducts(res.data);
       });
   }, [title]);
 
@@ -67,7 +67,7 @@ export const SearchPage = () => {
                 <span>{name}</span>
                 <span className={styles.center}>{description}</span>
                 <span>
-                  <strong>{price} P</strong>
+                  <strong>{price} руб.</strong>
                 </span>
                 {/* <button className={styles.buttonCard} onClick={() => handleAddItem(id, products)}> */}
                 <button className={styles.buttonCard} onClick={() => handleAddItem(id)}>
@@ -81,3 +81,12 @@ export const SearchPage = () => {
     </>
   );
 };
+
+// useEffect(() => {
+//   fetch(`https://8a705e193c725f80.mokky.dev/product?name=*${title}`)
+//     .then(res => res.json())
+//     .then(res => {
+//       console.log(res);
+//       setProducts(res);
+//     });
+// }, [title]);

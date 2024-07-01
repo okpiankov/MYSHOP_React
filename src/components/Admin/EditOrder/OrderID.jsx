@@ -45,7 +45,7 @@ export const OrderID = () => {
       ...prevState,
       [name]: value,
     }));
-  };
+  }; 
 
   // const [quantity, setQuantity] = useState({ quantity: '', });
   const handleChangeGoodQuantity = (event, id) => {};
@@ -56,7 +56,7 @@ export const OrderID = () => {
     setOrder(prevState => ({
       ...prevState,
       total_price: newGoodsList.reduce((acc, curr) => {
-        return acc + curr.quantity * +curr.price;
+        return acc + +curr.quantity * +curr.price;
       }, 0),
       goods: newGoodsList,
     }));

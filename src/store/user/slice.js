@@ -1,4 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
+// import { AuthData } from './effects';
 
 const initialState = {
   isLoading: false,
@@ -26,6 +27,20 @@ export const userSlice = createSlice({
     },
     clearUserStore: () => initialState,
   },
+  // extraReducers: builder => {
+  //   builder
+  //     .addCase(AuthData.pending, state => {
+  //       state.isLoading = true;
+  //     })
+  //     .addCase(AuthData.fulfilled, (state, action) => {
+  //       state.isLoading = false;
+  //       state.user = action.payload;
+  //     })
+  //     .addCase(AuthData.rejected, (state, action) => {
+  //       state.isLoading = false;
+  //       state.error = action.error.message || 'Что-то пошло не так';
+  //     });
+  // },
   selectors: {
     getUser: state => state.user,
     getUserIsLoading: state => state.isLoading,

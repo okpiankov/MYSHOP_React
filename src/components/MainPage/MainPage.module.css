@@ -3,7 +3,9 @@
     flex-direction: column;
     flex-wrap: wrap;
     gap: 7px;
-    margin-left: 4px;    
+    margin-top: 10px;
+    margin-left: 20px;
+    margin-bottom: 10px;
 }
 .contentBox{
     width: 100%;
@@ -123,11 +125,16 @@
     .banner2 {
         margin-top: 50px;
     }
+    .mainPageWrap {
+       margin-top: 10px;
+       margin-left: 8px;
+       margin-bottom: 10px;
+    }
 
 }
 @media (max-width: 430px) {
     .bannerWrap, .banner1, .banner2 {
-        font-size: 28px;
+        font-size: 30px;
         
     }
     .banner2 {
@@ -136,6 +143,9 @@
     .privilege {
         font-size: 19px;
     }
+    .mainPageWrap {
+        margin: 5px;
+     }
 
 }
 

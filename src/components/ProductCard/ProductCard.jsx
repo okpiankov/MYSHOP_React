@@ -3,8 +3,9 @@ import { NavLink } from 'react-router-dom';
 import { ROUTES } from '../../router/routes';
 import styles from './ProductCard.module.css';
 import { handleAddItem } from '../../services/localStorage';
-import { useDispatch, useSelector } from 'react-redux';
 import { getCart, productActions } from '../../store/basket/slice';
+import { useDispatch, useSelector } from 'react-redux';
+import axios from 'axios';
 
 export const ProductCard = () => {
   const [products, setProducts] = useState([]);
@@ -12,16 +13,15 @@ export const ProductCard = () => {
 
   useEffect(() => {
     setIsLoading(true);
-    fetch('https://8a705e193c725f80.mokky.dev/product')
-      .then(response => response.json())
-      .then(data => setProducts(data))
+    axios.get('https://8a705e193c725f80.mokky.dev/product')
+      .then(data => setProducts(data.data))
       .catch(console.error)
       .finally(() => setIsLoading(false));
   }, []);
 
   // Запись данных карточек товаров в Redux:
   const dispatch = useDispatch();
-  // Получю для проверки из Redux  массив товаров для проверки
+  // Получаю для проверки из Redux  массив товаров для проверки
   const prevArrayItems = useSelector(getCart); 
 
   const handleAddItem = id => {
@@ -47,7 +47,6 @@ export const ProductCard = () => {
     dispatch(productActions.setCart(item));
   };
 
-  
   return (
     <>
       {/*  Чтобы map 1 раз проходился по [] можно указать проверку на пустоту .length > 0 && products */}
@@ -61,7 +60,7 @@ export const ProductCard = () => {
                 <strong>{name}</strong>
                 <span className={styles.center}>{description}</span>
                 <span>
-                  <strong>{price} P</strong>
+                  <strong>{price} руб.</strong>
                 </span>
               </NavLink>
               {/* Передаю параметр  id в обработчик события */}
@@ -78,6 +77,16 @@ export const ProductCard = () => {
     </>
   );
 };
+
+// useEffect(() => {
+//   setIsLoading(true);
+//   fetch('https://8a705e193c725f80.mokky.dev/product')
+//     .then(response => response.json())
+//     .then(data => setProducts(data))
+//     .catch(console.error)
+//     .finally(() => setIsLoading(false));
+// }, []);
+
 
 // 3й вариант:
 // useEffect(() => {

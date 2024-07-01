@@ -138,6 +138,9 @@
   opacity: 0;
   pointer-events: none;
   position: absolute;
+  width: 100%;
+  background-color: var(--background-color-contentLight);
+  box-shadow:  1px 1px 1px var(--background-color-contentLarge);
 }
 /* Медиа запросы */
 @media (max-width: 991px) {

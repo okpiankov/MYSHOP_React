@@ -1,6 +1,6 @@
 import { Navigate } from 'react-router-dom';
-import {  useSelector } from 'react-redux';
 import {  getUser } from '../store/user/slice';
+import { useSelector } from 'react-redux';
 
 export const ProtectedRoute = ({ children, requiredRole }) => {
    

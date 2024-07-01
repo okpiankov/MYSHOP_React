@@ -2,8 +2,8 @@ import { NavLink, useLocation, useNavigate } from 'react-router-dom';
 import styles from './Header.module.css';
 import { ROUTES } from '../../../router/routes';
 import UserIcon from '../../../assets/icons/user1.svg';
-import { useDispatch } from 'react-redux';
 import { userActions } from '../../../store/user/slice';
+import { useDispatch } from 'react-redux';
 
 export const HeaderMenuAdmin = ({ setPopUpAuth }) => {
   //передача пропса {setPopUpAuth} через скобки{}

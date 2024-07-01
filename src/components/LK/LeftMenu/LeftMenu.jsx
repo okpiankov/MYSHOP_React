@@ -2,8 +2,8 @@ import { NavLink } from 'react-router-dom';
 import styles from './LeftMenu.module.css';
 import { ROUTES } from '../../../router/routes';
 import { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
 import { getUser } from '../../../store/user/slice';
+import { useSelector } from 'react-redux';
 
 export const LeftMenuCabinet = () => {
   const [avatar, setAvatar] = useState('');

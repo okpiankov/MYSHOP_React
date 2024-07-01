@@ -3,8 +3,10 @@ import styles from './AuthPage.module.css';
 import { validateEmail, validatePassword } from './validate';
 import { Navigate, redirect, useNavigate } from 'react-router-dom';
 import { ROUTES } from '../../router/routes';
+import { userActions, getUserToken, getUser } from '../../store/user/slice';
 import { useDispatch, useSelector } from 'react-redux';
-import { userActions, getUserToken } from '../../store/user/slice';
+import axios from 'axios';
+import { AuthData } from '../../store/user/effects';
 
 export const AuthPage = ({ setForm }) => {
   const dispatch = useDispatch();
@@ -33,30 +35,27 @@ export const AuthPage = ({ setForm }) => {
       validatePassword(value, setPasswordError);
     }
   };
-
+   
   // Запись  user в redux:
   const handleSubmit = event => {
     event.preventDefault();
-
+    // dispatch(AuthData(formData)); // При использовании AsyncThunk
+   
     dispatch(userActions.setIsLoading(true));
 
-    fetch('https://8a705e193c725f80.mokky.dev/auth', {
-      method: 'POST',
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(formData),
-    })
-      .then(res => res.json())
+    axios
+      .post(
+        'https://8a705e193c725f80.mokky.dev/auth',
+        formData
+      )
       .then(userData => {
-        dispatch(userActions.setUser(userData));
-        // console.log(userData);
+        dispatch(userActions.setUser(userData.data));
+        // console.log(userData.data);
 
         const {
           token,
           data: { role },
-        } = userData;
+        } = userData.data;
 
         if (token && role === 'client') navigate('/cabinet');
         if (token && role === 'admin') navigate('/admin');
@@ -64,33 +63,6 @@ export const AuthPage = ({ setForm }) => {
       .catch(error => console.error(error))
       .finally(() => dispatch(userActions.setIsLoading(false)));
   };
-
-  // // Запись  user  в localStorage:
-  // const handleSubmit = event => {
-  //   event.preventDefault();
-
-  //   fetch('https://8a705e193c725f80.mokky.dev/auth', {
-  //     method: 'POST',
-  //     headers: {
-  //       Accept: 'application/json',
-  //       'Content-Type': 'application/json',
-  //     },
-  //     body: JSON.stringify(formData),
-  //   })
-  //     .then(res => res.json())
-  //     .then(userData => {
-  //       localStorage.setItem('user', JSON.stringify(userData));
-
-  //       const {
-  //         token,
-  //         data: { role },
-  //       } = userData;
-
-  //       if (token && role === 'client') navigate('/cabinet');
-  //       if (token && role === 'admin') navigate('/admin');
-  //     })
-  //     .catch(error => console.error(error));
-  // };
 
   return (
     <div className={styles.authWrap}>
@@ -130,6 +102,61 @@ export const AuthPage = ({ setForm }) => {
   );
 };
 
+// const data = useSelector(getUser);
+
+//Обычный fetch
+// fetch('https://8a705e193c725f80.mokky.dev/auth', {
+//   method: 'POST',
+//   headers: {
+//     Accept: 'application/json',
+//     'Content-Type': 'application/json',
+//   },
+//   body: JSON.stringify(formData),
+// })
+//   .then(res => res.json())
+//   .then(userData => {
+//     dispatch(userActions.setUser(userData));
+//     // console.log(userData);
+
+//     const {
+//       token,
+//       data: { role },
+//     } = userData;
+
+//     if (token && role === 'client') navigate('/cabinet');
+//     if (token && role === 'admin') navigate('/admin');
+//   })
+//   .catch(error => console.error(error))
+//   .finally(() => dispatch(userActions.setIsLoading(false)));
+
+
+// // Запись  user  в localStorage:
+// const handleSubmit = event => {
+//   event.preventDefault();
+
+//   fetch('https://8a705e193c725f80.mokky.dev/auth', {
+//     method: 'POST',
+//     headers: {
+//       Accept: 'application/json',
+//       'Content-Type': 'application/json',
+//     },
+//     body: JSON.stringify(formData),
+//   })
+//     .then(res => res.json())
+//     .then(userData => {
+//       localStorage.setItem('user', JSON.stringify(userData));
+
+//       const {
+//         token,
+//         data: { role },
+//       } = userData;
+
+//       if (token && role === 'client') navigate('/cabinet');
+//       if (token && role === 'admin') navigate('/admin');
+//     })
+//     .catch(error => console.error(error));
+// };
+
 // // Тип данных в State и setState д/б одинаковый
 // const [emailError, setEmailError] = useState('');
 
@@ -146,26 +173,6 @@ export const AuthPage = ({ setForm }) => {
 //   // За место [name] подставляется конкретное имя(идинтификатор) инпута
 //   // За место value подставляется динамически меняющееся значение в поле инпута
 
-//   if (name === 'email' && event.target.value !== ' ') {
-//     return validateEmail(event.target.value);
-//   }
-//   if (name === 'password' && event.target.value !== ' ') {
-//     return validatePassword(event.target.value);
-//   }
-//   // validateEmail(event.target.value)
-//   // validatePassword(event.target.value)
-// };
-
-// Почему проверка не нужна при записи в localStorage
-// .then(res => {setAuthData(res)
-//   const prevItem = localStorage.getItem('user');
-//   if (!prevItem) {
-//   const item = { ...authData };
-//   localStorage.setItem('user', JSON.stringify(item));
-//   return;
-//   }
-// })
-
 // Запись в localStorage д/б в .then( здесь ) где приходят данные там и записывать!
 // Если вне .then(  ) то будет задействован везде рендер попапа
 // .then(res => {
@@ -173,24 +180,7 @@ export const AuthPage = ({ setForm }) => {
 // localStorage.setItem('user', JSON.stringify(res));
 // });
 
-// //Почему запись в LS вне .then( ) происходит но пропадает при переходе на др.стр.
-// //И токен приходит происходит редирект
-// const item = { ...authData };
-// localStorage.setItem('user', JSON.stringify(item));
-
-//const {data.role} = userRole; Как достать role из объекта data?????
-// const {
-//   token,
-//   data: { role },
-// } = userRole
-
-// .then(res => {
-//   localStorage.setItem('user', JSON.stringify(res));
-//   const {
-//     token,
-//     data: { role },
-//   } = res;
-// Это только перенаправление на страницу, но авторизацию делать только через закрытие роуты
+// Это только перенаправление на страницу, но авторизацию нужно делать только через закрытие роуты
 //   if (token && role === 'client') navigate('/cabinet');
 //   if (token && role === 'admin') navigate('/admin');
 // });

@@ -16,8 +16,6 @@
     position: relative;
 }
 
-
-
 .popUpMenu {
     height: 100%;
     width: 150px;
@@ -79,6 +77,15 @@
     /* .popUpMenu {
         top: 144px;
     } */
+    .popUpMenu {
+        width: 120px;
+    }
+    .link:hover ~ .popUpMenu {
+        transform: translateX(120px);
+    }
+    .popUpMenu:hover {
+        transform: translateX(120px);
+    }
 }
 @media (max-width: 360px) {
     /* .popUpMenu {  

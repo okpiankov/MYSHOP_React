@@ -2,8 +2,9 @@ import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import styles from './ProductCardID.module.css';
 // import {handleAddItemId} from '../../services/localStorage';
-import { useDispatch, useSelector } from 'react-redux';
 import { getCart, productActions } from '../../store/basket/slice';
+import { useDispatch, useSelector } from 'react-redux';
+import axios from 'axios';
 
 export const ProductCardID = () => {
   const [product, setProduct] = useState({});
@@ -12,9 +13,8 @@ export const ProductCardID = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const respons = await fetch(`https://8a705e193c725f80.mokky.dev/product/${id}`);
-      const data = await respons.json();
-      setProduct(data);
+      const respons = await axios.get(`https://8a705e193c725f80.mokky.dev/product/${id}`);
+      setProduct(respons.data);
       // console.log(respons);
       // console.log(data);
     };
@@ -64,7 +64,7 @@ export const ProductCardID = () => {
           </p>
 
           <span> Цена:</span>
-          <strong className={styles.price}>{product.price} P</strong>
+          <strong className={styles.price}>{product.price} руб.</strong>
 
           {/* <button className={styles.button} onClick={() => handleAddItemId(product)}> */}
           <button className={styles.button} onClick={handleAddItemId}>
@@ -75,6 +75,18 @@ export const ProductCardID = () => {
     </div>
   );
 };
+
+// useEffect(() => {
+//   const fetchData = async () => {
+//     const respons = await fetch(`https://8a705e193c725f80.mokky.dev/product/${id}`);
+//     const data = await respons.json();
+//     setProduct(data);
+//     // console.log(respons);
+//     // console.log(data);
+//   };
+//   fetchData();
+// }, [id]);
+
 
 // const handleAddItem = () => {
 //   // При записи в LS обязательно перевожу в формат JSON.stringify(что записываем)

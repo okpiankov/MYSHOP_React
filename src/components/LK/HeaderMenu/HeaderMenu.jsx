@@ -10,9 +10,9 @@ import styles from './Header.module.css';
 import HomeIcon from '../../../assets/icons/home1.svg';
 import PayIcon from '../../../assets/icons/pay2.svg';
 import DeliveryIcon from '../../../assets/icons/delivery2.svg';
-import { useSelector, useDispatch } from 'react-redux';
 import { userActions, getUser } from '../../../store/user/slice';
 import { getCart } from '../../../store/basket/slice';
+import { useDispatch, useSelector } from 'react-redux';
 
 export const HeaderMenu = ({ setPopUpAuth, setLeftMenu, leftMenu }) => {
   const handleVisiblePopUp = () => setPopUpAuth(true);
@@ -21,7 +21,7 @@ export const HeaderMenu = ({ setPopUpAuth, setLeftMenu, leftMenu }) => {
 
   const { pathname } = useLocation();
   const navigate = useNavigate();
-  const dispatch = useDispatch ()
+  const dispatch = useDispatch()
 
   //user - это состояние страницы (это не объект из LS)  обрабатываю через useState+useEffect
   const [user, setUser] = useState({});

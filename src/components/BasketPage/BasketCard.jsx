@@ -25,7 +25,7 @@ export const BasketCard = ({
         <span>{name}</span>
         <span>{description}</span>
       </div>
-      <strong>{price} Р</strong>
+      <strong>{price} руб.</strong>
 
       <div className={styles.counter}>
         {/* параметры для вызова функций: id приходит как пропс из компонента BasketPage,
