@@ -2,8 +2,7 @@
 ### Деплой: https://myshop-react-coral.vercel.app/
 
 ###  Используемые технологии при разработке: html, css, JavaScript, React, Redux
-### Сервер:
-https://mokky.dev
+### Сервер: https://mokky.dev
 
 ### Функционал:
 - Роутинг- react-router-dom. Отдельный layout для личного кабинета и админки,
