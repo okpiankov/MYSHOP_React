@@ -43,7 +43,7 @@
    display: flex;
    flex-direction: column;
    justify-content: space-between;
-   height: 84px;
+   height: auto;
 }
 .textWrap {
     width: 270px;
@@ -72,10 +72,6 @@
    
 }
 @media (max-width: 430px) {
-    .contentBox {
-        height: auto;
-        width: 280px;
-    }
     .partnerWrap {
         height: auto;
         width: 280px;
@@ -83,8 +79,17 @@
         flex-direction: column;
         flex-wrap: wrap;
     }
+    .contentBox {
+        height: auto;
+        width: 280px;
+    }
     .deliveryWrap {
         margin: 5px;
+    }
+    .textWrap {
+        font-size: 17px;
+        display: flex;
+        flex-direction: column;
     }
    
 }

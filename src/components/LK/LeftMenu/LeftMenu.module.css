@@ -21,7 +21,7 @@
     border: var(--border-content);
     border-radius: 60px;
     align-self: center;
-   background-color: var(--background-color-contentMedium);
+    background-color: var(--background-color-contentMedium);
 }
 
 .link {
@@ -29,6 +29,7 @@
     border-radius: 10px;
     box-shadow: inset 3px -3px 2px var(--background-color-contentLarge),
     inset 3px 3px 2px var(--background-color-contentLarge);
+    
 }
 .link:hover {
     background-color: var(--background-color-contentLarge);
@@ -47,6 +48,10 @@
         height: 100px;
         width: 100px;
         border-radius: 50px;
+    }
+    .link {
+        width: 120px;
+        
     }
 }
 

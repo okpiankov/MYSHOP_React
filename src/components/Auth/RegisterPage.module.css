@@ -81,7 +81,7 @@
         }
         .buttonSubmit {
             width: 240px;
-            font-size: 22px;
+            font-size: 20px;
             
         }
         .input {
@@ -91,6 +91,9 @@
             color: blue;
             font-size: 21px;
             font-weight: 700;
+        }
+        .select, .selectАctive {
+            font-size: 23px;
         } 
 
 }

@@ -25,7 +25,7 @@ export const DeliveryPage = () => {
               <NavLink to={ROUTES.plug}>Отследить груз</NavLink>
             </div>
           </div>
-        </div>
+        </div> 
 
         <div className={styles.partnerWrap}>
           <img src={Ozon} className={styles.img} alt="picture" />
