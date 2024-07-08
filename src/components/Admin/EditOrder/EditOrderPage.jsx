@@ -65,10 +65,10 @@ export const EditOrderPage = () => {
               </NavLink>
               <div className={styles.details}>
                 <p>
-                  <strong>Сумма:</strong> {order.total_price?.toLocaleString()} руб.
+                  <strong>Сумма:</strong> {order.total_price?.toLocaleString()}_руб.
                 </p>
                 <p>
-                  <strong>Кол-во товаров:</strong> {order.goods?.length}
+                  <strong>Кол-во товаров:</strong>_{order.goods?.length}
                 </p>
                 <p>
                   <strong>Телефон:</strong> {order?.tel}

@@ -53,7 +53,7 @@ export const LeftMenuCabinet = () => {
       <div className={styles.user}>{fullName}</div>
 
       <NavLink to={ROUTES.personalData} className={styles.link}>
-        Личная информация
+        Личные данные
       </NavLink>
       <NavLink to={ROUTES.mybasket} className={styles.link}>
         Моя корзина
